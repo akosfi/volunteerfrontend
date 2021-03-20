@@ -1,7 +1,6 @@
 import { Reducer } from "redux";
 import { produce } from "immer";
-import {EventActionConstants} from "~redux/events/actions";
-
+import { EventActionConstants } from "redux/events/actions";
 
 export type EventState = {
     events: any[]; //TODO TYPE
