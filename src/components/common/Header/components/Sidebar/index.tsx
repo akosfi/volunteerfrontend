@@ -13,10 +13,10 @@ const useStyles = makeStyles({
         position: "absolute",
         top: "64px",
         left: 0,
-        background: "white",
-        "&-enter-active": {
-            background: "red"
-        }
+        background: "white"
+    },
+    enter: {
+        background: "red"
     }
 });
 
@@ -25,10 +25,12 @@ const Sidebar: FC = () => {
 
     const isSideBarOpen = useSelector(getIsSidebarOpen);
 
-    if (!isSideBarOpen) return null;
-
     return (
-        <CSSTransition in={isSideBarOpen} timeout={200} classNames={classes.root}>
+        <CSSTransition
+            in={isSideBarOpen}
+            timeout={200}
+            classNames={{ appear: classes.enter, appearActive: classes.enter }}
+        >
             <div className={classes.root}>asd</div>
         </CSSTransition>
     );
