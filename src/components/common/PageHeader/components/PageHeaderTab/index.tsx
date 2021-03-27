@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { makeStyles } from "@material-ui/core";
 import classnames from "classnames";
+import { noop } from "lodash";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -22,11 +23,16 @@ const useStyles = makeStyles(() => ({
 export type Props = {
     title: string;
     isActive?: boolean;
+    onClick?: (args: any) => void;
 };
 
-const PageHeaderTab: FC<Props> = ({ title, isActive = false }) => {
+const PageHeaderTab: FC<Props> = ({ title, isActive = false, onClick = noop }) => {
     const classes = useStyles();
-    return <div className={classnames(classes.root, { [classes.active]: isActive })}>{title}</div>;
+    return (
+        <div className={classnames(classes.root, { [classes.active]: isActive })} onClick={onClick}>
+            {title}
+        </div>
+    );
 };
 
 export default PageHeaderTab;

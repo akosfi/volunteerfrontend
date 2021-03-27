@@ -44,11 +44,9 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-export type Props = {
-    eventId: number;
-};
-
-const EventDetails: FC<Props> = ({ eventId }) => {
+const EventDetails: FC = () => {
+    //TODO FROM redux
+    const eventId = 1;
     const classes = useStyles();
 
     const event = useSelector((state: StoreState) => getEventById(state, eventId));

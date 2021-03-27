@@ -2,7 +2,6 @@ import { FC } from "react";
 import { makeStyles, Button as MuiButton, CircularProgress } from "@material-ui/core";
 import classnames from "classnames";
 import { noop } from "lodash";
-import classNames from "classnames";
 
 export enum ButtonType {
     BASIC,
@@ -115,7 +114,7 @@ const Button: FC<Props> = ({
     const circularProgressSize = buttonSize === ButtonSize.NORMAL ? 20 : 25;
 
     return (
-        <div className={classNames(buttonSizeMap[buttonSize], classes.root)}>
+        <div className={classnames(buttonSizeMap[buttonSize], classes.root)}>
             <MuiButton onClick={onClick} className={classnames(classes.button, buttonTypeMap[buttonType])}>
                 <span className={classnames({ [classes.titleHidden]: isLoading })}>{title}</span>
 
