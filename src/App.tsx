@@ -9,6 +9,7 @@ import { CardActions } from "@material-ui/core";
 import Badge from "./components/common/Badge";
 import PageHeader from "./components/common/PageHeader";
 import PageHeaderTab from "./components/common/PageHeader/components/PageHeaderTab";
+import Header from "./components/common/Header";
 
 const App: FC = () => {
     const theme = createMuiTheme({
@@ -28,6 +29,7 @@ const App: FC = () => {
             <Router>
                 <Switch>
                     <Route path="/" exact>
+                        <Header />
                         <PageHeader title="Események">
                             {{
                                 upperAction: <></>,
