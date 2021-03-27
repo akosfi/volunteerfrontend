@@ -1,17 +1,30 @@
 import { Reducer } from "redux";
 import { produce } from "immer";
 import { EventActionConstants } from "redux/events/actions";
+import { Event } from "redux/events/types";
 
 export type EventState = {
-    events: any[]; //TODO TYPE
+    events: Event[];
     isLoading: boolean;
     error: string;
+    eventJoinedIds: number[];
+    eventJoin: {
+        eventId: number | null;
+        isJoining: boolean;
+        error: string;
+    };
 };
 
 export const initialState: EventState = {
     events: [],
     isLoading: false,
-    error: ""
+    error: "",
+    eventJoinedIds: [],
+    eventJoin: {
+        eventId: null,
+        isJoining: false,
+        error: ""
+    }
 };
 
 const reducer: Reducer<EventState> = (state = initialState, action): EventState => {
@@ -33,6 +46,29 @@ const reducer: Reducer<EventState> = (state = initialState, action): EventState 
                 const { error } = action.payload;
                 draft.isLoading = false;
                 draft.error = error;
+            });
+        }
+        //
+        case EventActionConstants.JOIN_EVENT: {
+            return produce(state, draft => {
+                const { eventId } = action.payload;
+                draft.eventJoin.eventId = eventId;
+                draft.eventJoin.isJoining = true;
+            });
+        }
+        case EventActionConstants.JOIN_EVENT_SUCCESS: {
+            return produce(state, draft => {
+                //TODO SET JOINED EVENT IDS
+                draft.eventJoin.eventId = null;
+                draft.eventJoin.isJoining = false;
+            });
+        }
+        case EventActionConstants.JOIN_EVENT_ERROR: {
+            return produce(state, draft => {
+                const { error } = action.payload;
+                draft.eventJoin.eventId = null;
+                draft.eventJoin.isJoining = false;
+                draft.eventJoin.error = error;
             });
         }
         default: {
