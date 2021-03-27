@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 //
@@ -6,6 +6,9 @@ import "assets/styles/global.scss";
 import Button, { ButtonSize, ButtonType } from "./components/common/Button";
 import EventList from "./components/events/EventList";
 import { CardActions } from "@material-ui/core";
+import Badge from "./components/common/Badge";
+import PageHeader from "./components/common/PageHeader";
+import PageHeaderTab from "./components/common/PageHeader/components/PageHeaderTab";
 
 const App: FC = () => {
     const theme = createMuiTheme({
@@ -25,6 +28,26 @@ const App: FC = () => {
             <Router>
                 <Switch>
                     <Route path="/" exact>
+                        <PageHeader title="Események">
+                            {{
+                                upperAction: <></>,
+                                actionButtons: (
+                                    <>
+                                        <Button
+                                            title="Esemény felvétel"
+                                            buttonType={ButtonType.POSITIVE_ACTION}
+                                            buttonSize={ButtonSize.BIG}
+                                        />
+                                    </>
+                                ),
+                                tabButtons: (
+                                    <>
+                                        <PageHeaderTab title="Összes" isActive />
+                                        <PageHeaderTab title="Aktív" />{" "}
+                                    </>
+                                )
+                            }}
+                        </PageHeader>
                         <EventList eventIds={[2, 3, 4]} />
                     </Route>
                 </Switch>

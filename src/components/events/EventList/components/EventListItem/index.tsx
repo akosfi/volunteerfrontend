@@ -1,6 +1,8 @@
-import { FC, useState } from "react";
+import React, { FC, useState } from "react";
 import { Card, CardActions, CardContent, CardMedia, makeStyles, Typography } from "@material-ui/core";
 import Button, { ButtonSize, ButtonType } from "components/common/Button";
+import Badge from "../../../../common/Badge";
+import { Route } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -37,10 +39,6 @@ const useStyles = makeStyles(() => ({
         fontSize: "12px",
         color: "#000000"
     },
-    actions: {
-        display: "block",
-        "text-align": "center"
-    },
     button: {
         background: "#FFB775",
         color: "black",
@@ -49,6 +47,10 @@ const useStyles = makeStyles(() => ({
     selectFormControl: {
         minWidth: 120,
         padding: "8px 0"
+    },
+    actions: {
+        display: "flex",
+        justifyContent: "space-between"
     }
 }));
 
@@ -62,11 +64,7 @@ const EventListItem: FC<Props> = ({ eventId }) => {
 
     return (
         <Card className={classes.root}>
-            <CardMedia
-                className={classes.image}
-                image="http://hellogyor.hu/wp-content/uploads/2020/09/Gyorkoc.jpg"
-                title="Contemplative Reptile"
-            />
+            <CardMedia className={classes.image} image="http://hellogyor.hu/wp-content/uploads/2020/09/Gyorkoc.jpg" />
             <CardContent className={classes.content}>
                 <Typography className={classes.title}>14. Győrkőcfesztivál</Typography>
                 <Typography className={classes.details}>
@@ -81,7 +79,8 @@ const EventListItem: FC<Props> = ({ eventId }) => {
                     2021.07.04. 19:00
                 </Typography>
             </CardContent>
-            <CardActions>
+            <CardActions className={classes.actions}>
+                <Badge title="Fesztivál" />
                 <Button
                     title="Jelentkezés"
                     buttonType={ButtonType.POSITIVE_ACTION}

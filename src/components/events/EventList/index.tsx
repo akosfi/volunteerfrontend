@@ -2,6 +2,8 @@ import { FC, useEffect } from "react";
 import { makeStyles } from "@material-ui/core";
 import { map } from "lodash";
 import classNames from "classnames";
+import { useLocation } from "react-router-dom";
+
 //
 import EventListItem from "./components/EventListItem";
 //
@@ -11,7 +13,7 @@ const useStyles = makeStyles(() => ({
     root: {},
     container: {
         width: "75vw",
-        margin: "0 auto",
+        margin: "22px auto 0 auto",
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "flex-start"
@@ -37,23 +39,17 @@ export type Props = {
 
 const EventList: FC<Props> = ({ eventIds }) => {
     const classes = useStyles();
-    //TODO FIX ME
-    //const router = useHistory();
-    const router = {
-        asPath: "fix"
-    };
+    const { pathname } = useLocation();
 
     const saveScrollPosition = () => (scrollProperties.scrollY = window.scrollY);
 
     useEffect(() => {
         window.addEventListener("scroll", saveScrollPosition);
-
         window.scrollTo(0, scrollProperties.scrollY);
-
         return () => {
             window.removeEventListener("scroll", saveScrollPosition);
         };
-    }, [router.asPath]);
+    }, [pathname]);
 
     return (
         <div className={classNames(classes.root, css["EventList"])}>

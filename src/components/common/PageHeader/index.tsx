@@ -9,7 +9,7 @@ const useStyles = makeStyles(() => ({
         background: "#F6F6F6"
     },
     rows: {
-        width: "1080px",
+        width: "75%",
         margin: "0 auto",
         background: "#F6F6F6",
         display: "flex",

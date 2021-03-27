@@ -14,15 +14,22 @@
       }
 
       @include tablet() {
-        &:nth-child(n) {
-          $side-margin: calc((75vw - 2 * 320px) / 4);
-          margin: 0 $side-margin 64px $side-margin;
+        &:nth-child(2n) {
+          $side-margin: calc(75vw - 2 * 320px);
+          margin: 0 $side-margin 64px 0;
         }
       }
 
       @include desktop() {
-        &:nth-child(n) {
-          $side-margin: calc((75vw - 3 * 320px) / 6);
+        &:nth-child(2n) {
+          $side-margin: calc((75vw - 3 * 320px) / 2);
+          margin: 0 $side-margin 64px $side-margin;
+        }
+      }
+
+      @include large() {
+        &:nth-child(2n) {
+          $side-margin: calc((75vw - 4 * 320px) / 2);
           margin: 0 $side-margin 64px $side-margin;
         }
       }
