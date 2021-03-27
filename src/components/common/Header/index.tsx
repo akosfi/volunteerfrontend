@@ -7,7 +7,7 @@ import { AccountCircle } from "@material-ui/icons";
 
 const useStyles = makeStyles({
     root: {
-        width: "100vw"
+        width: "100%"
     },
     appbar: {
         height: "64px",

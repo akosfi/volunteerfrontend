@@ -7,4 +7,5 @@ export type Event = {
     location: string;
     contact: string;
     category: string;
+    coverUrl: string;
 };

@@ -31,6 +31,7 @@ const reducer: Reducer<EventState> = (state = initialState, action): EventState 
     switch (action.type) {
         case EventActionConstants.LOAD_EVENTS: {
             return produce(state, draft => {
+                draft.events = [];
                 draft.isLoading = true;
             });
         }

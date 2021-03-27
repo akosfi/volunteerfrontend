@@ -1,10 +1,12 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { useDispatch } from "react-redux";
 //
 import Header from "components/common/Header";
 import EventsPage from "components/pages/events/EventsPage";
-import EventPage from "./components/pages/events/EventPage";
+import EventPage from "components/pages/events/EventPage";
+import { loadEventsAction } from "redux/events/actions";
 //
 import "assets/styles/global.scss";
 
@@ -20,6 +22,13 @@ const App: FC = () => {
             }
         }
     });
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        //TODO INIT APP HANDLER OR SMTH
+        dispatch(loadEventsAction());
+    }, []);
 
     return (
         <ThemeProvider theme={theme}>

@@ -1,11 +1,12 @@
 import { FC, useEffect } from "react";
-import { makeStyles } from "@material-ui/core";
+import { CircularProgress, makeStyles } from "@material-ui/core";
 import { map } from "lodash";
 import classNames from "classnames";
 import { useLocation } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 //
 import EventListItem from "./components/EventListItem";
+import { getIsEventsLoading } from "redux/events/selectors";
 //
 import css from "./style.module.scss";
 
@@ -22,6 +23,13 @@ const useStyles = makeStyles(() => ({
         flex: "0 0 320px",
         marginBottom: "72px",
         maxWidth: "320px"
+    },
+    loadingWrapper: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "400px",
+        width: "100%"
     }
 }));
 
@@ -40,6 +48,7 @@ export type Props = {
 const EventList: FC<Props> = ({ eventIds }) => {
     const classes = useStyles();
     const { pathname } = useLocation();
+    const isEventsLoading = useSelector(getIsEventsLoading);
 
     const saveScrollPosition = () => (scrollProperties.scrollY = window.scrollY);
 
@@ -54,8 +63,13 @@ const EventList: FC<Props> = ({ eventIds }) => {
     return (
         <div className={classNames(classes.root, css["EventList"])}>
             <div className={classNames(classes.container, css["container"])}>
+                {isEventsLoading ? (
+                    <div className={classes.loadingWrapper}>
+                        <CircularProgress />
+                    </div>
+                ) : null}
                 {map(eventIds, eventId => (
-                    <div className={classNames(classes.containerItem, css["container-item"])}>
+                    <div key={eventId} className={classNames(classes.containerItem, css["container-item"])}>
                         <EventListItem key={eventId} eventId={eventId} />
                     </div>
                 ))}

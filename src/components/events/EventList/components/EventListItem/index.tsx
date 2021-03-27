@@ -4,6 +4,9 @@ import { useHistory } from "react-router-dom";
 import { Card, CardActions, CardContent, CardMedia, makeStyles, Typography } from "@material-ui/core";
 import Button, { ButtonSize, ButtonType } from "components/common/Button";
 import Badge from "components/common/Badge";
+import { useSelector } from "react-redux";
+import { StoreState } from "../../../../../redux/state";
+import { getEventById } from "../../../../../redux/events/selectors";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -64,31 +67,28 @@ const EventListItem: FC<Props> = ({ eventId }) => {
     const history = useHistory();
     const [isLoading, setIsLoading] = useState(false);
 
+    const event = useSelector((state: StoreState) => getEventById(state, eventId));
+
     const navigateToEvent = () => history.push(`/events/${eventId}`);
+
+    if (!event) return null;
 
     return (
         <Card className={classes.root}>
-            <CardMedia
-                className={classes.image}
-                image="http://hellogyor.hu/wp-content/uploads/2020/09/Gyorkoc.jpg"
-                onClick={navigateToEvent}
-            />
+            <CardMedia className={classes.image} image={event.coverUrl} onClick={navigateToEvent} />
             <CardContent className={classes.content} onClick={navigateToEvent}>
-                <Typography className={classes.title}>14. Győrkőcfesztivál</Typography>
-                <Typography className={classes.details}>
-                    A Vaskakas Bábszínház társulata, a fesztivál szervezői csalódottak voltak, hogy a 13.
-                    Győrkőcfesztivált le kelle...
-                </Typography>
+                <Typography className={classes.title}>{event.name}</Typography>
+                <Typography className={classes.details}>{event.details}</Typography>
                 <Typography className={classes.timeHeader}>
                     <b>Időpont</b>
                 </Typography>
                 <Typography className={classes.timeDetails}>
-                    2021.07.02. 17:00 <br />
-                    2021.07.04. 19:00
+                    {event.startDate} <br />
+                    {event.endDate}
                 </Typography>
             </CardContent>
             <CardActions className={classes.actions}>
-                <Badge title="Fesztivál" />
+                <Badge title={event.category} />
                 <Button
                     title="Jelentkezés"
                     buttonType={ButtonType.POSITIVE_ACTION}
