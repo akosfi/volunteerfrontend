@@ -25,6 +25,8 @@ const Sidebar: FC = () => {
 
     const isSideBarOpen = useSelector(getIsSidebarOpen);
 
+    if (!isSideBarOpen) return null;
+
     return (
         <CSSTransition
             in={isSideBarOpen}
