@@ -6,10 +6,12 @@ import { UiActionConstants } from "redux/ui/actions";
 
 export type UiState = {
     snackbarQueue: SnackbarRedux[];
+    isSidebarOpen: boolean;
 };
 
 export const initialState: UiState = {
-    snackbarQueue: []
+    snackbarQueue: [],
+    isSidebarOpen: false
 };
 
 //TODO do better solution, maybe redux
@@ -27,6 +29,12 @@ const reducer: Reducer<UiState> = (state = initialState, action): UiState => {
                 const { snackbarText, snackbarSeverity } = action.payload;
                 draft.snackbarQueue.push({ id: snackbarId, text: snackbarText, severity: snackbarSeverity });
                 snackbarId++;
+            });
+        }
+        case UiActionConstants.SET_IS_SIDEBAR_OPEN: {
+            return produce(state, draft => {
+                const { isOpen } = action.payload;
+                draft.isSidebarOpen = isOpen;
             });
         }
         default: {

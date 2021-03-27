@@ -1,12 +1,15 @@
 import { FC, ReactNode } from "react";
 import { makeStyles } from "@material-ui/core";
-import classnames from "classnames";
+import classNames from "classnames";
 
 const useStyles = makeStyles(() => ({
     root: {
         width: "100%",
         height: "162px",
         background: "#F6F6F6"
+    },
+    hasTopMargin: {
+        marginTop: "64px"
     },
     rows: {
         width: "75%",
@@ -44,10 +47,10 @@ export type Props = {
 const PageHeader: FC<Props> = ({ title, children }) => {
     const classes = useStyles();
     return (
-        <div className={classes.root}>
+        <div className={classNames(classes.root, { [classes.hasTopMargin]: true })}>
             <div className={classes.rows}>
                 <div className={classes.row}>{children?.upperAction}</div>
-                <div className={classnames(classes.row, classes.actionButtons)}>
+                <div className={classNames(classes.row, classes.actionButtons)}>
                     <span className={classes.title}>{title}</span>
                     <div>{children?.actionButtons}</div>
                 </div>
