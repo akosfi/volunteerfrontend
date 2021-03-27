@@ -1,0 +1,31 @@
+@import "src/assets/styles/mixins";
+
+.EventList {
+  .container {
+    @include mobile() {
+      width: 100vw;
+    }
+    &-item {
+      @include mobile() {
+        &:nth-child(n) {
+          $side-margin: calc((100vw - 1 * 320px) / 2);
+          margin: 0 $side-margin 64px $side-margin;
+        };
+      }
+
+      @include tablet() {
+        &:nth-child(n) {
+          $side-margin: calc((75vw - 2 * 320px) / 4);
+          margin: 0 $side-margin 64px $side-margin;
+        }
+      }
+
+      @include desktop() {
+        &:nth-child(n) {
+          $side-margin: calc((75vw - 3 * 320px) / 6);
+          margin: 0 $side-margin 64px $side-margin;
+        }
+      }
+    }
+  }
+}

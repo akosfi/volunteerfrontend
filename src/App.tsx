@@ -4,6 +4,8 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 //
 import "assets/styles/global.scss";
 import Button, { ButtonSize, ButtonType } from "./components/common/Button";
+import EventList from "./components/events/EventList";
+import { CardActions } from "@material-ui/core";
 
 const App: FC = () => {
     const theme = createMuiTheme({
@@ -23,9 +25,7 @@ const App: FC = () => {
             <Router>
                 <Switch>
                     <Route path="/" exact>
-                        <div>
-                            <Button title={"Hey"} buttonSize={ButtonSize.BIG} buttonType={ButtonType.PRIMARY} />
-                        </div>
+                        <EventList eventIds={[2, 3, 4]} />
                     </Route>
                 </Switch>
             </Router>

@@ -21,15 +21,21 @@ const useStyles = makeStyles(() => ({
         borderRadius: "5px",
         fontWeight: "bold",
         position: "relative",
-        padding: "0 32px"
+        textTransform: "none"
     },
-    normalSize: {
+    buttonWrapperNormal: {
         height: "25px",
         fontSize: "12px"
     },
-    bigSize: {
+    buttonWrapperBig: {
         height: "36px",
         fontSize: "16px"
+    },
+    button: {
+        height: "100%",
+        fontWeight: "bold",
+        padding: "0 32px",
+        textTransform: "none"
     },
     titleHidden: {
         opacity: 0
@@ -43,7 +49,7 @@ const useStyles = makeStyles(() => ({
     },
     positiveType: {
         background: "#5AC66B",
-        color: "#000000",
+        color: "#ffffff",
         "&:hover": {
             backgroundColor: "#5AC66B"
         }
@@ -64,10 +70,16 @@ const useStyles = makeStyles(() => ({
     },
     loadingWrapper: {
         position: "absolute",
-        display: "inline-block",
         top: "50%",
         left: "50%",
-        transform: "translate(50%, 50%)"
+        transform: "translate(-50%, -50%)",
+        display: "inline-flex",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    loading: {
+        color: "#ffffff",
+        height: "100%"
     }
 }));
 
@@ -96,19 +108,24 @@ const Button: FC<Props> = ({
     };
 
     const buttonSizeMap = {
-        [ButtonSize.NORMAL]: classes.normalSize,
-        [ButtonSize.BIG]: classes.bigSize
+        [ButtonSize.NORMAL]: classes.buttonWrapperNormal,
+        [ButtonSize.BIG]: classes.buttonWrapperBig
     };
 
-    return (
-        <MuiButton
-            onClick={onClick}
-            className={classnames(classes.root, buttonSizeMap[buttonSize], buttonTypeMap[buttonType])}
-        >
-            <span className={classnames({ [classes.titleHidden]: isLoading })}>{title}</span>
+    const circularProgressSize = buttonSize === ButtonSize.NORMAL ? 20 : 25;
 
-            {isLoading ? <div className={classes.loadingWrapper}>X</div> : null}
-        </MuiButton>
+    return (
+        <div className={classNames(buttonSizeMap[buttonSize], classes.root)}>
+            <MuiButton onClick={onClick} className={classnames(classes.button, buttonTypeMap[buttonType])}>
+                <span className={classnames({ [classes.titleHidden]: isLoading })}>{title}</span>
+
+                {isLoading ? (
+                    <div className={classes.loadingWrapper}>
+                        <CircularProgress className={classes.loading} size={circularProgressSize} />
+                    </div>
+                ) : null}
+            </MuiButton>
+        </div>
     );
 };
 
