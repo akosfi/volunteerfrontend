@@ -7,6 +7,7 @@ import Header from "components/common/Header";
 import EventsPage from "components/pages/events/EventsPage";
 import EventPage from "components/pages/events/EventPage";
 import { loadEventsAction } from "redux/events/actions";
+import SnackbarQueueHandler from "components/common/SnackbarQueueHandler";
 //
 import "assets/styles/global.scss";
 
@@ -33,6 +34,7 @@ const App: FC = () => {
     return (
         <ThemeProvider theme={theme}>
             <Router>
+                <SnackbarQueueHandler />
                 <Header />
                 <Switch>
                     <Route path="/" exact>
