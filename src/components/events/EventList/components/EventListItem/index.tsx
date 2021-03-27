@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { StoreState } from "../../../../../redux/state";
 import { getEventById } from "../../../../../redux/events/selectors";
 import { pushSnackbarToQueueAction } from "../../../../../redux/ui/actions";
+import EllipsedText from "../../../../common/EllipsedText";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -85,7 +86,9 @@ const EventListItem: FC<Props> = ({ eventId }) => {
             <CardMedia className={classes.image} image={event.coverUrl} onClick={navigateToEvent} />
             <CardContent className={classes.content} onClick={navigateToEvent}>
                 <Typography className={classes.title}>{event.name}</Typography>
-                <Typography className={classes.details}>{event.details}</Typography>
+                <Typography className={classes.details}>
+                    <EllipsedText text={event.details} maxCharacters={120} />
+                </Typography>
                 <Typography className={classes.timeHeader}>
                     <b>Időpont</b>
                 </Typography>

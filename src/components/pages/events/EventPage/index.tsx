@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 //
@@ -12,12 +12,13 @@ const EventPage: FC = () => {
     const { id } = useParams<{ id: string }>();
     const event = useSelector((state: StoreState) => getEventById(state, Number(id)));
 
-    const tabs: PageHeaderTabType[] = [
-        { id: 1, name: "Részletek", content: <EventDetails /> },
-        { id: 2, name: "Szerkesztés", content: <span>Szerkesztés</span> }
-    ];
+    const tabs: PageHeaderTabType[] = useMemo(() => {
+        return [
+            { id: 1, name: "Részletek", content: <EventDetails /> },
+            { id: 2, name: "Szerkesztés", content: <span>Szerkesztés</span> }
+        ];
+    }, [id]);
 
-    //TODO PLS refact me
     return (
         <PageLayout title={event?.name || ""} tabs={tabs}>
             {{
