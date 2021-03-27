@@ -1,8 +1,9 @@
 import React, { FC, useState } from "react";
+import { useHistory } from "react-router-dom";
+//
 import { Card, CardActions, CardContent, CardMedia, makeStyles, Typography } from "@material-ui/core";
 import Button, { ButtonSize, ButtonType } from "components/common/Button";
-import Badge from "../../../../common/Badge";
-import { Route } from "react-router-dom";
+import Badge from "components/common/Badge";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -60,12 +61,19 @@ export type Props = {
 
 const EventListItem: FC<Props> = ({ eventId }) => {
     const classes = useStyles();
+    const history = useHistory();
     const [isLoading, setIsLoading] = useState(false);
+
+    const navigateToEvent = () => history.push(`/events/${eventId}`);
 
     return (
         <Card className={classes.root}>
-            <CardMedia className={classes.image} image="http://hellogyor.hu/wp-content/uploads/2020/09/Gyorkoc.jpg" />
-            <CardContent className={classes.content}>
+            <CardMedia
+                className={classes.image}
+                image="http://hellogyor.hu/wp-content/uploads/2020/09/Gyorkoc.jpg"
+                onClick={navigateToEvent}
+            />
+            <CardContent className={classes.content} onClick={navigateToEvent}>
                 <Typography className={classes.title}>14. Győrkőcfesztivál</Typography>
                 <Typography className={classes.details}>
                     A Vaskakas Bábszínház társulata, a fesztivál szervezői csalódottak voltak, hogy a 13.
