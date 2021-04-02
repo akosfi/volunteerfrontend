@@ -3,6 +3,7 @@ import { filter, find, get, map } from "lodash";
 //
 import PageHeader from "components/common/PageHeader";
 import PageHeaderTab from "components/common/PageHeader/components/PageHeaderTab";
+import { CircularProgress, makeStyles } from "@material-ui/core";
 
 export type PageHeaderTabType = {
     id: number;
@@ -11,6 +12,20 @@ export type PageHeaderTabType = {
     disabled?: boolean;
 };
 
+const useStyles = makeStyles(() => ({
+    root: {
+        width: "100%",
+        height: "100%"
+    },
+    loadingWrapper: {
+        width: "100%",
+        height: "400px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    }
+}));
+
 export type Props = {
     title: string;
     children?: {
@@ -18,9 +33,12 @@ export type Props = {
         actionButtons?: ReactNode;
     };
     tabs: PageHeaderTabType[];
+    isLoading?: boolean;
 };
 
-const PageLayout: FC<Props> = ({ title, children, tabs }) => {
+const PageLayout: FC<Props> = ({ title, children, tabs, isLoading = false }) => {
+    const classes = useStyles();
+
     //TODO url param?
     const initialTabId = get(tabs, "[0].id", null);
     const [activeTabId, setActiveTabId] = useState(initialTabId);
@@ -35,7 +53,7 @@ const PageLayout: FC<Props> = ({ title, children, tabs }) => {
 
     return (
         <>
-            <PageHeader title={title}>
+            <PageHeader title={title} isLoading={isLoading}>
                 {{
                     upperAction: children?.upperAction,
                     actionButtons: children?.actionButtons,
@@ -44,7 +62,15 @@ const PageLayout: FC<Props> = ({ title, children, tabs }) => {
                     ))
                 }}
             </PageHeader>
-            {activeTabContent}
+            <div className={classes.root}>
+                {isLoading ? (
+                    <div className={classes.loadingWrapper}>
+                        <CircularProgress />
+                    </div>
+                ) : (
+                    activeTabContent
+                )}
+            </div>
         </>
     );
 };

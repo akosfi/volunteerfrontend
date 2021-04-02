@@ -76,7 +76,7 @@ const EventListItem: FC<Props> = ({ eventId }) => {
 
     const handleEventJoin = () => {
         setIsLoading(true);
-        dispatch(pushSnackbarToQueueAction("Event join successful!"));
+        dispatch(pushSnackbarToQueueAction("Sikeres jelentkezés!"));
     };
 
     if (!event) return null;

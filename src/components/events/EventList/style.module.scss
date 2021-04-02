@@ -28,9 +28,13 @@
       }
 
       @include large() {
-        &:nth-child(2n) {
-          $side-margin: calc((75vw - 4 * 320px) / 2);
+        &:nth-child(4n+2) {
+          $side-margin: calc((75vw - 4 * 320px) / 3);
           margin: 0 $side-margin 64px $side-margin;
+        }
+        &:nth-child(4n+3) {
+          $side-margin: calc((75vw - 4 * 320px) / 3);
+          margin: 0 $side-margin 64px 0;
         }
       }
     }

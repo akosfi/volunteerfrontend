@@ -7,6 +7,7 @@ import { StoreState } from "redux/state";
 import { getEventById } from "redux/events/selectors";
 import PageLayout, { PageHeaderTabType } from "components/common/PageLayout";
 import Button, { ButtonSize, ButtonType } from "components/common/Button";
+import PageHeaderUpperAction from "../../../common/PageHeader/components/PageHeaderUpperAction";
 
 const EventPage: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -20,15 +21,9 @@ const EventPage: FC = () => {
     }, [id]);
 
     return (
-        <PageLayout title={event?.name || ""} tabs={tabs}>
+        <PageLayout title={event?.name || ""} tabs={tabs} isLoading={false}>
             {{
-                upperAction: (
-                    <>
-                        <Link to={"/"}>
-                            <span>{"< Események"}</span>
-                        </Link>
-                    </>
-                ),
+                upperAction: <PageHeaderUpperAction title="Események" href="/" />,
                 actionButtons: (
                     <>
                         <Button

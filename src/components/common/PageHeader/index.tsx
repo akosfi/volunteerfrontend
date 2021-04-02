@@ -1,5 +1,5 @@
 import { FC, ReactNode } from "react";
-import { makeStyles } from "@material-ui/core";
+import { CircularProgress, makeStyles } from "@material-ui/core";
 import classNames from "classnames";
 
 const useStyles = makeStyles(() => ({
@@ -32,6 +32,13 @@ const useStyles = makeStyles(() => ({
     },
     tabButtons: {
         display: "flex"
+    },
+    loadingWrapper: {
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
     }
 }));
 
@@ -42,20 +49,27 @@ export type Props = {
         actionButtons?: ReactNode;
         tabButtons?: ReactNode;
     };
+    isLoading?: boolean;
 };
 
-const PageHeader: FC<Props> = ({ title, children }) => {
+const PageHeader: FC<Props> = ({ title, children, isLoading = false }) => {
     const classes = useStyles();
     return (
         <div className={classNames(classes.root, { [classes.hasTopMargin]: true })}>
-            <div className={classes.rows}>
-                <div className={classes.row}>{children?.upperAction}</div>
-                <div className={classNames(classes.row, classes.actionButtons)}>
-                    <span className={classes.title}>{title}</span>
-                    <div>{children?.actionButtons}</div>
+            {isLoading ? (
+                <div className={classes.loadingWrapper}>
+                    <CircularProgress />
                 </div>
-                <div className={classes.row}>{children?.tabButtons}</div>
-            </div>
+            ) : (
+                <div className={classes.rows}>
+                    <div className={classes.row}>{children?.upperAction}</div>
+                    <div className={classNames(classes.row, classes.actionButtons)}>
+                        <span className={classes.title}>{title}</span>
+                        <div>{children?.actionButtons}</div>
+                    </div>
+                    <div className={classes.row}>{children?.tabButtons}</div>
+                </div>
+            )}
         </div>
     );
 };
