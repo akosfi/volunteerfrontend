@@ -1,16 +1,13 @@
 import React, { FC, ReactNode, useState } from "react";
 import { filter, find, get, map } from "lodash";
-//
-import PageHeader from "components/common/PageHeader";
-import PageHeaderTab from "components/common/PageHeader/components/PageHeaderTab";
 import { CircularProgress, makeStyles } from "@material-ui/core";
-
-export type PageHeaderTabType = {
-    id: number;
-    name: string;
-    content: ReactNode;
-    disabled?: boolean;
-};
+//
+import PageHeader, {
+    PageHeaderActionButtonType,
+    PageHeaderTabType,
+    PageHeaderUpperActionType
+} from "components/common/PageHeader";
+import PageHeaderTab from "components/common/PageHeader/components/PageHeaderTab";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -28,15 +25,13 @@ const useStyles = makeStyles(() => ({
 
 export type Props = {
     title: string;
-    children?: {
-        upperAction?: ReactNode;
-        actionButtons?: ReactNode;
-    };
     tabs: PageHeaderTabType[];
+    actionButtons: PageHeaderActionButtonType[];
+    upperAction?: PageHeaderUpperActionType;
     isLoading?: boolean;
 };
 
-const PageLayout: FC<Props> = ({ title, children, tabs, isLoading = false }) => {
+const PageLayout: FC<Props> = ({ title, tabs, isLoading = false, actionButtons, upperAction }) => {
     const classes = useStyles();
 
     const initialTabId = get(tabs, "[0].id", null);
@@ -50,12 +45,21 @@ const PageLayout: FC<Props> = ({ title, children, tabs, isLoading = false }) => 
         null
     );
 
+    const enabledActionButton = filter(
+        actionButtons,
+        actionButton =>
+            !actionButton.tabsOnly || (!!actionButton.tabsOnly && !!actionButton.tabsOnly.includes(activeTabId))
+    );
+
     return (
         <>
-            <PageHeader title={title} isLoading={isLoading}>
+            <PageHeader
+                title={title}
+                isLoading={isLoading}
+                actionButtons={enabledActionButton}
+                upperAction={upperAction}
+            >
                 {{
-                    upperAction: children?.upperAction,
-                    actionButtons: children?.actionButtons,
                     tabButtons: map(enabledTabs, ({ name, id }) => (
                         <PageHeaderTab title={name} isActive={id === activeTabId} onClick={() => setActiveTabId(id)} />
                     ))

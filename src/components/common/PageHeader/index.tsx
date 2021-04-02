@@ -2,6 +2,30 @@ import * as React from "react";
 import { FC, ReactNode } from "react";
 import { CircularProgress, makeStyles } from "@material-ui/core";
 import classNames from "classnames";
+import { map } from "lodash";
+import Button, { ButtonSize, ButtonType } from "../Button";
+import PageHeaderUpperAction from "./components/PageHeaderUpperAction";
+
+export type PageHeaderTabType = {
+    id: string;
+    name: string;
+    content: ReactNode;
+    disabled?: boolean;
+    actionButtons?: ReactNode[];
+};
+
+export type PageHeaderActionButtonType = {
+    id: number;
+    title: string;
+    tabsOnly?: string[];
+    buttonType: ButtonType;
+    disabled?: boolean;
+};
+
+export type PageHeaderUpperActionType = {
+    title: string;
+    href: string;
+};
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -29,7 +53,12 @@ const useStyles = makeStyles(() => ({
         fontSize: "40px"
     },
     actionButtons: {
+        display: "flex",
+        flexDirection: "row",
         justifyContent: "space-between"
+    },
+    actionButtonWrapper: {
+        marginLeft: "20px"
     },
     tabButtons: {
         display: "flex"
@@ -46,31 +75,49 @@ const useStyles = makeStyles(() => ({
 export type Props = {
     title: string;
     children?: {
-        upperAction?: ReactNode;
-        actionButtons?: ReactNode;
         tabButtons?: ReactNode;
     };
     isLoading?: boolean;
+    actionButtons?: PageHeaderActionButtonType[];
+    upperAction?: PageHeaderUpperActionType;
 };
 
-const PageHeader: FC<Props> = ({ title, children, isLoading = false }) => {
+const PageHeader: FC<Props> = ({ title, children, isLoading = false, actionButtons, upperAction }) => {
     const classes = useStyles();
-    return (
-        <div className={classNames(classes.root, { [classes.hasTopMargin]: true })}>
-            {isLoading ? (
+
+    if (isLoading) {
+        return (
+            <div className={classNames(classes.root, { [classes.hasTopMargin]: true })}>
                 <div className={classes.loadingWrapper}>
                     <CircularProgress />
                 </div>
-            ) : (
-                <div className={classes.rows}>
-                    <div className={classes.row}>{children?.upperAction}</div>
-                    <div className={classNames(classes.row, classes.actionButtons)}>
-                        <span className={classes.title}>{title}</span>
-                        <div>{children?.actionButtons}</div>
-                    </div>
-                    <div className={classes.row}>{children?.tabButtons}</div>
+            </div>
+        );
+    }
+
+    return (
+        <div className={classNames(classes.root, { [classes.hasTopMargin]: true })}>
+            <div className={classes.rows}>
+                <div className={classes.row}>
+                    {!!upperAction ? <PageHeaderUpperAction title={upperAction.title} href={upperAction.href} /> : null}
                 </div>
-            )}
+
+                <div className={classNames(classes.row, classes.actionButtons)}>
+                    <span className={classes.title}>{title}</span>
+                    <div className={classes.actionButtons}>
+                        {map(actionButtons, button => (
+                            <div className={classes.actionButtonWrapper}>
+                                <Button
+                                    title={button.title}
+                                    buttonType={button.buttonType}
+                                    buttonSize={ButtonSize.BIG}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className={classes.row}>{children?.tabButtons}</div>
+            </div>
         </div>
     );
 };
