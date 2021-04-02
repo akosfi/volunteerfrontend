@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { StoreState } from "redux/state";
-import { getEventById } from "redux/events/selectors";
+import EventSelectors from "redux/events/selectors";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -49,9 +49,7 @@ const EventDetails: FC = () => {
     const eventId = 1;
     const classes = useStyles();
 
-    const event = useSelector((state: StoreState) => getEventById(state, eventId));
-
-    console.log(event);
+    const event = useSelector((state: StoreState) => EventSelectors.getEventById(state, eventId));
 
     if (!event) return null;
 

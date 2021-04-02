@@ -5,11 +5,11 @@ export enum UiActionConstants {
     SET_IS_SIDEBAR_OPEN = "UI/SET_IS_SIDEBAR_OPEN"
 }
 
-export const popSnackbarFromQueueAction = () => ({
+const popSnackbarFromQueueAction = () => ({
     type: UiActionConstants.POP_SNACKBAR_FROM_QUEUE
 });
 
-export const pushSnackbarToQueueAction = (
+const pushSnackbarToQueueAction = (
     snackbarText: string,
     snackbarSeverity: "error" | "info" | "success" | "warning" = "success"
 ) => ({
@@ -17,9 +17,17 @@ export const pushSnackbarToQueueAction = (
     payload: { snackbarText, snackbarSeverity }
 });
 
-export const setIsSidebarOpenAction = (isOpen: boolean = true) => ({
+const setIsSidebarOpenAction = (isOpen: boolean = true) => ({
     type: UiActionConstants.SET_IS_SIDEBAR_OPEN,
     payload: {
         isOpen
     }
 });
+
+const UiActions = {
+    popSnackbarFromQueueAction,
+    pushSnackbarToQueueAction,
+    setIsSidebarOpenAction
+};
+
+export default UiActions;

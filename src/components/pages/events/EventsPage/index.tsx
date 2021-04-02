@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 //
 import Button, { ButtonSize, ButtonType } from "components/common/Button";
 import EventList from "components/events/EventList";
-import { getEventIds } from "redux/events/selectors";
+import EventSelectors from "redux/events/selectors";
 import PageLayout, { PageHeaderTabType } from "components/common/PageLayout";
 
 const EventsPage: FC = () => {
-    const eventIds = useSelector(getEventIds);
+    const eventIds = useSelector(EventSelectors.getEventIds);
 
     const tabs: PageHeaderTabType[] = [
         { id: 1, name: "Összes", content: <EventList eventIds={eventIds} /> },

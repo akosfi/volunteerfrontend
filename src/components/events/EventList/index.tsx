@@ -5,8 +5,8 @@ import classNames from "classnames";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 //
-import EventListItem from "./components/EventListItem";
-import { getIsEventsLoading } from "redux/events/selectors";
+import EventListItem from "components/events/EventList/components/EventListItem";
+import EventSelectors from "redux/events/selectors";
 //
 import css from "./style.module.scss";
 
@@ -48,7 +48,7 @@ export type Props = {
 const EventList: FC<Props> = ({ eventIds }) => {
     const classes = useStyles();
     const { pathname } = useLocation();
-    const isEventsLoading = useSelector(getIsEventsLoading);
+    const isEventsLoading = useSelector(EventSelectors.getIsEventsLoading);
 
     const saveScrollPosition = () => (scrollProperties.scrollY = window.scrollY);
 

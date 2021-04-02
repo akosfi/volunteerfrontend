@@ -1,17 +1,17 @@
 import React, { FC, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 //
 import EventDetails from "components/events/EventDetails";
 import { StoreState } from "redux/state";
-import { getEventById } from "redux/events/selectors";
+import EventSelectors from "redux/events/selectors";
 import PageLayout, { PageHeaderTabType } from "components/common/PageLayout";
 import Button, { ButtonSize, ButtonType } from "components/common/Button";
-import PageHeaderUpperAction from "../../../common/PageHeader/components/PageHeaderUpperAction";
+import PageHeaderUpperAction from "components/common/PageHeader/components/PageHeaderUpperAction";
 
 const EventPage: FC = () => {
     const { id } = useParams<{ id: string }>();
-    const event = useSelector((state: StoreState) => getEventById(state, Number(id)));
+    const event = useSelector((state: StoreState) => EventSelectors.getEventById(state, Number(id)));
 
     const tabs: PageHeaderTabType[] = useMemo(() => {
         return [

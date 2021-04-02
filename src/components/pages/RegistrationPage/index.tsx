@@ -1,14 +1,14 @@
 import React, { FC } from "react";
 import { Card, CardContent, makeStyles } from "@material-ui/core";
-import TextInput from "../../common/TextInput";
 import { FormProvider, useForm } from "react-hook-form";
-import Button, { ButtonType } from "../../common/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { LoginFormFields, LoginFormTypes } from "../../../utils/forms/types/login";
-import UserSelectors from "../../../redux/user/selectors";
-import UserActions from "../../../redux/user/actions";
-import { RegisterFormFields, RegisterFormTypes } from "../../../utils/forms/types/register";
 import { useHistory } from "react-router-dom";
+//
+import TextInput from "components/common/TextInput";
+import Button, { ButtonType } from "components/common/Button";
+import UserSelectors from "redux/user/selectors";
+import UserActions from "redux/user/actions";
+import { RegisterFormFields, RegisterFormTypes } from "utils/forms/types/register";
 
 const useStyles = makeStyles(() => ({
     root: {

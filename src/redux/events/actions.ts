@@ -10,36 +10,47 @@ export enum EventActionConstants {
     JOIN_EVENT_ERROR = "EVENTS/JOIN_EVENT_ERROR"
 }
 
-export const loadEventsAction = () => ({
+const loadEventsAction = () => ({
     type: EventActionConstants.LOAD_EVENTS
 });
 
-export const loadEventsSuccessAction = (events: Event[]) => ({
+const loadEventsSuccessAction = (events: Event[]) => ({
     type: EventActionConstants.LOAD_EVENTS_SUCCESS,
     payload: {
         events
     }
 });
 
-export const loadEventsErrorAction = (error: string) => ({
+const loadEventsErrorAction = (error: string) => ({
     type: EventActionConstants.LOAD_EVENTS_ERROR,
     payload: {
         error
     }
 });
 
-export const joinEventsAction = (eventId: number) => ({
+const joinEventsAction = (eventId: number) => ({
     type: EventActionConstants.JOIN_EVENT,
     payload: {
         eventId
     }
 });
 
-export const joinEventsSuccessAction = () => ({
+const joinEventsSuccessAction = () => ({
     type: EventActionConstants.JOIN_EVENT_SUCCESS
 });
 
-export const joinEventsErrorAction = (error: string) => ({
+const joinEventsErrorAction = (error: string) => ({
     type: EventActionConstants.JOIN_EVENT_ERROR,
     payload: { error }
 });
+
+const EventActions = {
+    loadEventsAction,
+    loadEventsSuccessAction,
+    loadEventsErrorAction,
+    joinEventsAction,
+    joinEventsSuccessAction,
+    joinEventsErrorAction
+};
+
+export default EventActions;

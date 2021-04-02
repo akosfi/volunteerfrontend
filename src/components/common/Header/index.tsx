@@ -2,11 +2,12 @@ import { FC } from "react";
 import { AppBar, makeStyles, Toolbar } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { AccountCircle } from "@material-ui/icons";
-import Sidebar from "./components/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsSidebarOpenAction } from "../../../redux/ui/actions";
-import { getIsSidebarOpen } from "../../../redux/ui/selectors";
 import { useLocation } from "react-router-dom";
+//
+import Sidebar from "./components/Sidebar";
+import UiActions from "redux/ui/actions";
+import UiSelectors from "redux/ui/selectors";
 
 //
 
@@ -52,15 +53,15 @@ const useStyles = makeStyles({
 });
 
 const Header: FC = () => {
+    const isSidebarOpen = useSelector(UiSelectors.getIsSidebarOpen);
+    const dispatch = useDispatch();
+
     const classes = useStyles();
     const { pathname } = useLocation();
 
-    const isSidebarOpen = useSelector(getIsSidebarOpen);
-    const dispatch = useDispatch();
-
     const excludedPaths = ["/login", "/register"];
 
-    const handleToggleSidebar = () => dispatch(setIsSidebarOpenAction(!isSidebarOpen));
+    const handleToggleSidebar = () => dispatch(UiActions.setIsSidebarOpenAction(!isSidebarOpen));
 
     if (excludedPaths.includes(pathname)) return null;
 

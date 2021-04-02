@@ -6,12 +6,12 @@ import { useDispatch } from "react-redux";
 import Header from "components/common/Header";
 import EventsPage from "components/pages/events/EventsPage";
 import EventPage from "components/pages/events/EventPage";
-import { loadEventsAction } from "redux/events/actions";
+import EventActions from "redux/events/actions";
 import SnackbarQueueHandler from "components/common/SnackbarQueueHandler";
+import LoginPage from "components/pages/LoginPage";
+import RegistrationPage from "components/pages/RegistrationPage";
 //
 import "assets/styles/global.scss";
-import LoginPage from "./components/pages/LoginPage";
-import RegistrationPage from "./components/pages/RegistrationPage";
 
 const App: FC = () => {
     const theme = createMuiTheme({
@@ -30,7 +30,7 @@ const App: FC = () => {
 
     useEffect(() => {
         //TODO INIT APP HANDLER OR SMTH
-        dispatch(loadEventsAction());
+        dispatch(EventActions.loadEventsAction());
     }, []);
 
     return (
