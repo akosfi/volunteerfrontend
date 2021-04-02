@@ -11,8 +11,10 @@ import PageHeaderUpperAction from "components/common/PageHeader/components/PageH
 
 const EventPage: FC = () => {
     const { id } = useParams<{ id: string }>();
+    //
     const event = useSelector((state: StoreState) => EventSelectors.getEventById(state, Number(id)));
-
+    const isEventsLoading = useSelector((state: StoreState) => EventSelectors.getIsEventsLoading(state));
+    //
     const tabs: PageHeaderTabType[] = useMemo(() => {
         return [
             { id: 1, name: "Részletek", content: <EventDetails /> },
@@ -21,7 +23,7 @@ const EventPage: FC = () => {
     }, [id]);
 
     return (
-        <PageLayout title={event?.name || ""} tabs={tabs} isLoading={false}>
+        <PageLayout title={event?.name || ""} tabs={tabs} isLoading={isEventsLoading}>
             {{
                 upperAction: <PageHeaderUpperAction title="Események" href="/" />,
                 actionButtons: (
