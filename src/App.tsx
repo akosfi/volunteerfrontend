@@ -6,10 +6,10 @@ import { useDispatch } from "react-redux";
 import Header from "components/common/Header";
 import EventsPage from "components/pages/events/EventsPage";
 import EventPage from "components/pages/events/EventPage";
-import EventActions from "redux/events/actions";
 import SnackbarQueueHandler from "components/common/SnackbarQueueHandler";
 import LoginPage from "components/pages/LoginPage";
 import RegistrationPage from "components/pages/RegistrationPage";
+import AppActions from "redux/app/actions";
 //
 import "assets/styles/global.scss";
 
@@ -30,7 +30,7 @@ const App: FC = () => {
 
     useEffect(() => {
         //TODO INIT APP HANDLER OR SMTH
-        dispatch(EventActions.loadEventsAction());
+        dispatch(AppActions.initializeAppAction());
     }, []);
 
     return (

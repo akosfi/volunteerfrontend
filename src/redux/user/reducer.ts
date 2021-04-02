@@ -6,6 +6,7 @@ import { UserActionConstants } from "./actions";
 //
 export type UserState = {
     user: User | null;
+    isLoggedIn: boolean;
     registration: {
         //TODO ERRORS?
         error: string;
@@ -19,6 +20,7 @@ export type UserState = {
 
 export const initialState: UserState = {
     user: null,
+    isLoggedIn: false,
     registration: {
         error: "",
         isLoading: false

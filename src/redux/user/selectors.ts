@@ -5,6 +5,8 @@ const getState = (state: StoreState) => state.user;
 
 const getUser = (state: StoreState) => getState(state).user;
 
+const getIsLoggedIn = (state: StoreState) => !!getState(state).user && getState(state).isLoggedIn;
+
 const getLoginError = (state: StoreState) => getState(state).login.error;
 
 const getIsLoginLoading = (state: StoreState) => getState(state).login.isLoading;
@@ -18,7 +20,8 @@ const UserSelectors = {
     getLoginError,
     getIsLoginLoading,
     getRegistrationError,
-    getIsRegistrationLoading
+    getIsRegistrationLoading,
+    getIsLoggedIn
 };
 
 export default UserSelectors;
