@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import * as React from "react";
+import { FC } from "react";
 import { makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
 

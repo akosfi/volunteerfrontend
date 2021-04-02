@@ -1,4 +1,5 @@
-import React, { FC, useState } from "react";
+import * as React from "react";
+import { FC, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Card, CardActions, CardContent, CardMedia, makeStyles, Typography } from "@material-ui/core";

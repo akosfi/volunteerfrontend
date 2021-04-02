@@ -10,10 +10,13 @@ export const getNextSnackbarInQueue = (state: StoreState) => head(getSnackBars(s
 
 export const getIsSidebarOpen = (state: StoreState) => getState(state).isSidebarOpen;
 
+export const getIsMobileWindow = (state: StoreState): boolean => getState(state).isMobileWindow;
+
 const UiSelectors = {
     getSnackBars,
     getNextSnackbarInQueue,
-    getIsSidebarOpen
+    getIsSidebarOpen,
+    getIsMobileWindow
 };
 
 export default UiSelectors;

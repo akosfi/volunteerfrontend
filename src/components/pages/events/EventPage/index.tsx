@@ -1,4 +1,5 @@
-import React, { FC, useMemo } from "react";
+import * as React from "react";
+import { FC, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 //

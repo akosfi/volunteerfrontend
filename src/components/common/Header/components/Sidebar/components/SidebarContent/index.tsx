@@ -1,4 +1,5 @@
-import React, { FC, useEffect, useState } from "react";
+import * as React from "react";
+import { FC, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import classNames from "classnames";
 import { get, map, find } from "lodash";

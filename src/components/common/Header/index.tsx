@@ -1,3 +1,4 @@
+import * as React from "react";
 import { FC } from "react";
 import { AppBar, makeStyles, Toolbar } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";

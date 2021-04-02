@@ -1,5 +1,6 @@
 import { Reducer } from "redux";
 import { produce } from "immer";
+import { get } from "lodash";
 //
 import { SnackbarRedux } from "redux/ui/types";
 import { UiActionConstants } from "redux/ui/actions";
@@ -7,11 +8,13 @@ import { UiActionConstants } from "redux/ui/actions";
 export type UiState = {
     snackbarQueue: SnackbarRedux[];
     isSidebarOpen: boolean;
+    isMobileWindow: boolean;
 };
 
 export const initialState: UiState = {
     snackbarQueue: [],
-    isSidebarOpen: false
+    isSidebarOpen: false,
+    isMobileWindow: get(window, "innerWidth", 0) <= 900
 };
 
 //TODO do better solution, maybe redux
@@ -35,6 +38,12 @@ const reducer: Reducer<UiState> = (state = initialState, action): UiState => {
             return produce(state, draft => {
                 const { isOpen } = action.payload;
                 draft.isSidebarOpen = isOpen;
+            });
+        }
+        case UiActionConstants.SET_IS_MOBILE_WINDOW: {
+            return produce(state, draft => {
+                const { isMobileWindow } = action.payload;
+                draft.isMobileWindow = isMobileWindow;
             });
         }
         default: {
