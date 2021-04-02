@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { Transition } from "react-transition-group";
 import classNames from "classnames";
-import { enableBodyScroll, disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
+import { enableBodyScroll, disableBodyScroll, BodyScrollOptions } from "body-scroll-lock";
 //
 import { getIsSidebarOpen } from "redux/ui/selectors";
 import SidebarContent from "components/common/Header/components/Sidebar/components/SidebarContent";
@@ -81,16 +81,20 @@ const Sidebar: FC<Props> = ({ appbarRef }) => {
     const sidebarRef = useRef<HTMLDivElement>(null);
     const previousIsSideBarOpen = usePrevious(isSideBarOpen);
 
+    const options: BodyScrollOptions = {
+        reserveScrollBarGap: true
+    };
+
     useEffect(() => {
         if (!previousIsSideBarOpen && isSideBarOpen && sidebarRef?.current) {
-            disableBodyScroll(sidebarRef?.current);
+            disableBodyScroll(sidebarRef?.current, options);
         } else if (previousIsSideBarOpen && !isSideBarOpen && sidebarRef?.current) {
             enableBodyScroll(sidebarRef?.current);
         }
 
-        return () => {
-            if (previousIsSideBarOpen && !isSideBarOpen) clearAllBodyScrollLocks();
-        };
+        /*return () => {
+            if (previousIsSideBarOpen && !isSideBarOpen && sidebarRef?.current) enableBodyScroll(sidebarRef?.current);
+        };*/
     }, [isSideBarOpen]);
 
     const closeSidebar = () => dispatch(UiActions.setIsSidebarOpenAction(false));

@@ -5,6 +5,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { AccountCircle } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import ClearIcon from "@material-ui/icons/Clear";
 //
 import Sidebar from "./components/Sidebar";
 import UiActions from "redux/ui/actions";
@@ -34,8 +35,20 @@ const useStyles = makeStyles({
         "justify-content": "space-between"
     },
     leftMenu: {
-        display: "flex",
-        cursor: "pointer"
+        display: "block",
+        cursor: "pointer",
+        width: "24px",
+        height: "24px",
+        position: "relative"
+    },
+    clickOverlay: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        zIndex: 10,
+        width: "24px",
+        height: "24px",
+        opacity: 0
     },
     mobileMenuIcon: {
         paddingRight: "16px"
@@ -72,7 +85,8 @@ const Header: FC = () => {
             <AppBar position="static" className={classes.appbar} ref={appbarRef}>
                 <Toolbar className={classes.rootMenu}>
                     <div className={classes.leftMenu}>
-                        <MenuIcon onClick={handleToggleSidebar} />
+                        {isSidebarOpen ? <ClearIcon /> : <MenuIcon />}
+                        <div className={classes.clickOverlay} onClick={handleToggleSidebar} />
                     </div>
                     <div>
                         <AccountCircle />

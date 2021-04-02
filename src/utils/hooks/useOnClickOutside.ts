@@ -3,6 +3,7 @@ import { find } from "lodash";
 
 const useOnClickOutside = (refObjects: RefObject<HTMLElement>[], callback: Function, isEnabled: boolean) => {
     const handleClickOutside = (e: any) => {
+        console.log(e.target);
         const hasClickedInside = find(refObjects, ref => ref?.current && !!ref?.current.contains(e.target));
 
         if (!hasClickedInside) callback();
