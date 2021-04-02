@@ -12,7 +12,12 @@ import { RegisterFormFields, RegisterFormTypes } from "utils/forms/types/registe
 
 const useStyles = makeStyles(() => ({
     root: {
-        marginTop: "84px",
+        width: "100%",
+        height: "100vh",
+        background: "#F6F6F6"
+    },
+    container: {
+        paddingTop: "84px",
         display: "flex",
         alignItems: "center",
         flexDirection: "column"
@@ -71,69 +76,71 @@ const RegistrationPage: FC = () => {
 
     return (
         <div className={classes.root}>
-            <p className={classes.title}>SportLogisztik</p>
+            <div className={classes.container}>
+                <p className={classes.title}>SportLogisztik</p>
 
-            <Card className={classes.card}>
-                <CardContent className={classes.cardContent}>
-                    <FormProvider {...methods}>
-                        <form className={classes.form} onSubmit={methods.handleSubmit(handleRegistration)}>
-                            <TextInput
-                                name={RegisterFormFields.EMAIL}
-                                placeholder="Email cím"
-                                label="Email cím"
-                                className={classes.input}
-                            />
-                            <TextInput
-                                name={RegisterFormFields.USERNAME}
-                                placeholder="Felhasználónév"
-                                label="Felhasználónév"
-                                className={classes.input}
-                            />
-                            <TextInput
-                                name={RegisterFormFields.FULL_NAME}
-                                placeholder="Teljes név"
-                                label="Teljes név"
-                                className={classes.input}
-                            />
-                            <TextInput
-                                name={RegisterFormFields.PHONE_NUMBER}
-                                placeholder="Telefonszám"
-                                label="Telefonszám"
-                                className={classes.input}
-                            />
-                            <TextInput
-                                name={RegisterFormFields.PASSWORD}
-                                placeholder="Jelszó"
-                                label="Jelszó"
-                                className={classes.input}
-                                type={"password"}
-                            />
-                            <TextInput
-                                name={RegisterFormFields.PASSWORD_AGAIN}
-                                placeholder="Jelszó mégegyszer"
-                                label="Jelszó mégegyszer"
-                                className={classes.input}
-                                type={"password"}
-                            />
+                <Card className={classes.card}>
+                    <CardContent className={classes.cardContent}>
+                        <FormProvider {...methods}>
+                            <form className={classes.form} onSubmit={methods.handleSubmit(handleRegistration)}>
+                                <TextInput
+                                    name={RegisterFormFields.EMAIL}
+                                    placeholder="Email cím"
+                                    label="Email cím"
+                                    className={classes.input}
+                                />
+                                <TextInput
+                                    name={RegisterFormFields.USERNAME}
+                                    placeholder="Felhasználónév"
+                                    label="Felhasználónév"
+                                    className={classes.input}
+                                />
+                                <TextInput
+                                    name={RegisterFormFields.FULL_NAME}
+                                    placeholder="Teljes név"
+                                    label="Teljes név"
+                                    className={classes.input}
+                                />
+                                <TextInput
+                                    name={RegisterFormFields.PHONE_NUMBER}
+                                    placeholder="Telefonszám"
+                                    label="Telefonszám"
+                                    className={classes.input}
+                                />
+                                <TextInput
+                                    name={RegisterFormFields.PASSWORD}
+                                    placeholder="Jelszó"
+                                    label="Jelszó"
+                                    className={classes.input}
+                                    type={"password"}
+                                />
+                                <TextInput
+                                    name={RegisterFormFields.PASSWORD_AGAIN}
+                                    placeholder="Jelszó mégegyszer"
+                                    label="Jelszó mégegyszer"
+                                    className={classes.input}
+                                    type={"password"}
+                                />
 
-                            <div className={classes.buttonWrapper}>
-                                <Button
-                                    title={"Regisztáció"}
-                                    buttonType={ButtonType.POSITIVE_ACTION}
-                                    className={classes.button}
-                                    type={"submit"}
-                                    isLoading={isRegistrationLoading}
-                                />
-                                <Button
-                                    title={"Bejelentkezés"}
-                                    buttonType={ButtonType.BASIC}
-                                    onClick={navigateToLogin}
-                                />
-                            </div>
-                        </form>
-                    </FormProvider>
-                </CardContent>
-            </Card>
+                                <div className={classes.buttonWrapper}>
+                                    <Button
+                                        title={"Regisztáció"}
+                                        buttonType={ButtonType.POSITIVE_ACTION}
+                                        className={classes.button}
+                                        type={"submit"}
+                                        isLoading={isRegistrationLoading}
+                                    />
+                                    <Button
+                                        title={"Bejelentkezés"}
+                                        buttonType={ButtonType.BASIC}
+                                        onClick={navigateToLogin}
+                                    />
+                                </div>
+                            </form>
+                        </FormProvider>
+                    </CardContent>
+                </Card>
+            </div>
         </div>
     );
 };

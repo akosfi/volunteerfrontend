@@ -1,17 +1,23 @@
 import React, { FC } from "react";
 import { Card, CardContent, makeStyles } from "@material-ui/core";
-import TextInput from "../../common/TextInput";
-import { FormProvider, useForm } from "react-hook-form";
-import Button, { ButtonType } from "../../common/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { LoginFormFields, LoginFormTypes } from "../../../utils/forms/types/login";
-import UserSelectors from "../../../redux/user/selectors";
-import UserActions from "../../../redux/user/actions";
+import { FormProvider, useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+//
+import Button, { ButtonType } from "components/common/Button";
+import TextInput from "components/common/TextInput";
+import { LoginFormFields, LoginFormTypes } from "utils/forms/types/login";
+import UserSelectors from "redux/user/selectors";
+import UserActions from "redux/user/actions";
 
 const useStyles = makeStyles(() => ({
     root: {
-        marginTop: "84px",
+        width: "100%",
+        height: "100vh",
+        background: "#F6F6F6"
+    },
+    container: {
+        paddingTop: "84px",
         display: "flex",
         alignItems: "center",
         flexDirection: "column"
@@ -70,43 +76,45 @@ const LoginPage: FC = () => {
 
     return (
         <div className={classes.root}>
-            <p className={classes.title}>SportLogisztik</p>
+            <div className={classes.container}>
+                <p className={classes.title}>SportLogisztik</p>
 
-            <Card className={classes.card}>
-                <CardContent className={classes.cardContent}>
-                    <FormProvider {...methods}>
-                        <form className={classes.form} onSubmit={methods.handleSubmit(handleLogin)}>
-                            <TextInput
-                                name={LoginFormFields.EMAIL_OR_USERNAME}
-                                placeholder="Email cím vagy felhasználónév"
-                                label="Email cím vagy felhasználónév"
-                                className={classes.input}
-                            />
-                            <TextInput
-                                name={LoginFormFields.PASSWORD}
-                                placeholder="Jelszó"
-                                label="Jelszó"
-                                className={classes.input}
-                                type={"password"}
-                            />
-                            <div className={classes.buttonWrapper}>
-                                <Button
-                                    title={"Bejelentkezés"}
-                                    buttonType={ButtonType.POSITIVE_ACTION}
-                                    className={classes.button}
-                                    type={"submit"}
-                                    isLoading={isLoginLoading}
+                <Card className={classes.card}>
+                    <CardContent className={classes.cardContent}>
+                        <FormProvider {...methods}>
+                            <form className={classes.form} onSubmit={methods.handleSubmit(handleLogin)}>
+                                <TextInput
+                                    name={LoginFormFields.EMAIL_OR_USERNAME}
+                                    placeholder="Email cím vagy felhasználónév"
+                                    label="Email cím vagy felhasználónév"
+                                    className={classes.input}
                                 />
-                                <Button
-                                    title={"Regisztáció"}
-                                    buttonType={ButtonType.BASIC}
-                                    onClick={navigateToRegistration}
+                                <TextInput
+                                    name={LoginFormFields.PASSWORD}
+                                    placeholder="Jelszó"
+                                    label="Jelszó"
+                                    className={classes.input}
+                                    type={"password"}
                                 />
-                            </div>
-                        </form>
-                    </FormProvider>
-                </CardContent>
-            </Card>
+                                <div className={classes.buttonWrapper}>
+                                    <Button
+                                        title={"Bejelentkezés"}
+                                        buttonType={ButtonType.POSITIVE_ACTION}
+                                        className={classes.button}
+                                        type={"submit"}
+                                        isLoading={isLoginLoading}
+                                    />
+                                    <Button
+                                        title={"Regisztáció"}
+                                        buttonType={ButtonType.BASIC}
+                                        onClick={navigateToRegistration}
+                                    />
+                                </div>
+                            </form>
+                        </FormProvider>
+                    </CardContent>
+                </Card>
+            </div>
         </div>
     );
 };

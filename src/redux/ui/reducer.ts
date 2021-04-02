@@ -11,7 +11,7 @@ export type UiState = {
 
 export const initialState: UiState = {
     snackbarQueue: [],
-    isSidebarOpen: false
+    isSidebarOpen: true
 };
 
 //TODO do better solution, maybe redux
