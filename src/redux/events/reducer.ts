@@ -13,6 +13,9 @@ export type EventState = {
         isJoining: boolean;
         error: string;
     };
+    eventEdit: {
+        editedEventId: number | null;
+    };
 };
 
 export const initialState: EventState = {
@@ -24,6 +27,9 @@ export const initialState: EventState = {
         eventId: null,
         isJoining: false,
         error: ""
+    },
+    eventEdit: {
+        editedEventId: null
     }
 };
 
@@ -70,6 +76,12 @@ const reducer: Reducer<EventState> = (state = initialState, action): EventState 
                 draft.eventJoin.eventId = null;
                 draft.eventJoin.isJoining = false;
                 draft.eventJoin.error = error;
+            });
+        }
+        case EventActionConstants.SET_EDITED_EVENT_ID: {
+            return produce(state, draft => {
+                const { eventId } = action.payload;
+                draft.eventEdit.editedEventId = eventId;
             });
         }
         default: {

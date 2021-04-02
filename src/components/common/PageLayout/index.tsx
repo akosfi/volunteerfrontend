@@ -39,7 +39,6 @@ export type Props = {
 const PageLayout: FC<Props> = ({ title, children, tabs, isLoading = false }) => {
     const classes = useStyles();
 
-    //TODO url param?
     const initialTabId = get(tabs, "[0].id", null);
     const [activeTabId, setActiveTabId] = useState(initialTabId);
 

@@ -7,7 +7,9 @@ export enum EventActionConstants {
 
     JOIN_EVENT = "EVENTS/JOIN_EVENT",
     JOIN_EVENT_SUCCESS = "EVENTS/JOIN_EVENT_SUCCESS",
-    JOIN_EVENT_ERROR = "EVENTS/JOIN_EVENT_ERROR"
+    JOIN_EVENT_ERROR = "EVENTS/JOIN_EVENT_ERROR",
+
+    SET_EDITED_EVENT_ID = "EVENTS/SET_EDITED_EVENT_ID"
 }
 
 const loadEventsAction = () => ({
@@ -44,13 +46,19 @@ const joinEventsErrorAction = (error: string) => ({
     payload: { error }
 });
 
+const setEditedEventId = (eventId: number | null) => ({
+    type: EventActionConstants.SET_EDITED_EVENT_ID,
+    payload: { eventId }
+});
+
 const EventActions = {
     loadEventsAction,
     loadEventsSuccessAction,
     loadEventsErrorAction,
     joinEventsAction,
     joinEventsSuccessAction,
-    joinEventsErrorAction
+    joinEventsErrorAction,
+    setEditedEventId
 };
 
 export default EventActions;
