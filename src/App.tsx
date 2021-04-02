@@ -12,6 +12,7 @@ import RegistrationPage from "components/pages/RegistrationPage";
 import AppActions from "redux/app/actions";
 //
 import "assets/styles/global.scss";
+import ComingSoonPage from "./components/pages/ComingSoonPage";
 
 const App: FC = () => {
     const theme = createMuiTheme({
@@ -43,6 +44,8 @@ const App: FC = () => {
                     <Route path="/events/:id" exact children={<EventPage />} />
                     <Route path="/login" exact children={<LoginPage />} />
                     <Route path="/register" exact children={<RegistrationPage />} />
+                    <Route path="/members" exact children={<ComingSoonPage />} />
+                    <Route path="/profile" exact children={<ComingSoonPage />} />
                 </Switch>
             </Router>
         </ThemeProvider>

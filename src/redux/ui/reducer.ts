@@ -13,7 +13,7 @@ export type UiState = {
 
 export const initialState: UiState = {
     snackbarQueue: [],
-    isSidebarOpen: false,
+    isSidebarOpen: true,
     isMobileWindow: get(window, "innerWidth", 0) <= 900
 };
 

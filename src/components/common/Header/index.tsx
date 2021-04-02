@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FC } from "react";
+import { FC, memo, useRef } from "react";
 import { AppBar, makeStyles, Toolbar } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { AccountCircle } from "@material-ui/icons";
@@ -59,6 +59,7 @@ const Header: FC = () => {
 
     const classes = useStyles();
     const { pathname } = useLocation();
+    const appbarRef = useRef<HTMLDivElement>(null);
 
     const excludedPaths = ["/login", "/register"];
 
@@ -68,7 +69,7 @@ const Header: FC = () => {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static" className={classes.appbar}>
+            <AppBar position="static" className={classes.appbar} ref={appbarRef}>
                 <Toolbar className={classes.rootMenu}>
                     <div className={classes.leftMenu}>
                         <MenuIcon onClick={handleToggleSidebar} />
@@ -78,9 +79,9 @@ const Header: FC = () => {
                     </div>
                 </Toolbar>
             </AppBar>
-            <Sidebar />
+            <Sidebar appbarRef={appbarRef} />
         </div>
     );
 };
 
-export default Header;
+export default memo(Header);
