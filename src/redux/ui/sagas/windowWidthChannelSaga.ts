@@ -31,4 +31,4 @@ function* windowWidthChannelSaga() {
     }
 }
 
-export default windowWidthChannelSaga();
+export default windowWidthChannelSaga;
