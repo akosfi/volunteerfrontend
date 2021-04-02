@@ -10,6 +10,8 @@ import { loadEventsAction } from "redux/events/actions";
 import SnackbarQueueHandler from "components/common/SnackbarQueueHandler";
 //
 import "assets/styles/global.scss";
+import LoginPage from "./components/pages/LoginPage";
+import RegistrationPage from "./components/pages/RegistrationPage";
 
 const App: FC = () => {
     const theme = createMuiTheme({
@@ -37,10 +39,10 @@ const App: FC = () => {
                 <SnackbarQueueHandler />
                 <Header />
                 <Switch>
-                    <Route path="/" exact>
-                        <EventsPage />
-                    </Route>
+                    <Route path="/" exact children={<EventsPage />} />
                     <Route path="/events/:id" exact children={<EventPage />} />
+                    <Route path="/login" exact children={<LoginPage />} />
+                    <Route path="/register" exact children={<RegistrationPage />} />
                 </Switch>
             </Router>
         </ThemeProvider>

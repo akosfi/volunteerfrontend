@@ -88,6 +88,8 @@ export type Props = {
     buttonType?: ButtonType;
     buttonSize?: ButtonSize;
     onClick?: (args: any) => void;
+    className?: string;
+    type?: "button" | "submit";
 };
 
 const Button: FC<Props> = ({
@@ -95,7 +97,9 @@ const Button: FC<Props> = ({
     isLoading = false,
     buttonSize = ButtonSize.NORMAL,
     buttonType = ButtonType.PRIMARY,
-    onClick = noop
+    onClick = noop,
+    className = "",
+    type = "button"
 }) => {
     const classes = useStyles();
 
@@ -114,8 +118,8 @@ const Button: FC<Props> = ({
     const circularProgressSize = buttonSize === ButtonSize.NORMAL ? 20 : 25;
 
     return (
-        <div className={classnames(buttonSizeMap[buttonSize], classes.root)}>
-            <MuiButton onClick={onClick} className={classnames(classes.button, buttonTypeMap[buttonType])}>
+        <div className={classnames(buttonSizeMap[buttonSize], classes.root, className)}>
+            <MuiButton onClick={onClick} className={classnames(classes.button, buttonTypeMap[buttonType])} type={type}>
                 <span className={classnames({ [classes.titleHidden]: isLoading })}>{title}</span>
 
                 {isLoading ? (

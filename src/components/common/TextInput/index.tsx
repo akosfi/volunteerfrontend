@@ -6,7 +6,8 @@ import { useFormContext } from "react-hook-form";
 const useStyles = makeStyles(() => ({
     root: {
         display: "inline-flex",
-        flexDirection: "column"
+        flexDirection: "column",
+        width: "100%"
     },
     input: {
         height: "32px",
@@ -37,13 +38,14 @@ const useStyles = makeStyles(() => ({
 
 export type Props = {
     name: string;
-    required?: boolean;
+    type?: "text" | "password";
     label?: string;
     placeholder?: string;
     error?: string;
+    className?: string;
 };
 
-const TextInput: FC<Props> = ({ name, placeholder = "", required = false, label = "", error = "" }) => {
+const TextInput: FC<Props> = ({ name, placeholder = "", label = "", error = "", type = "text", className = "" }) => {
     const classes = useStyles();
     const { register } = useFormContext();
 
@@ -56,7 +58,13 @@ const TextInput: FC<Props> = ({ name, placeholder = "", required = false, label 
                 {label}
             </label>
 
-            <input name={name} className={classes.input} type="text" placeholder={placeholder} ref={register} />
+            <input
+                type={type}
+                name={name}
+                className={classNames(classes.input, className)}
+                placeholder={placeholder}
+                ref={register}
+            />
 
             <span className={classNames(classes.error, { [classes.errorHidden]: !hasError })}>{error}</span>
         </div>

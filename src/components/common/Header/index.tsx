@@ -6,6 +6,7 @@ import Sidebar from "./components/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsSidebarOpenAction } from "../../../redux/ui/actions";
 import { getIsSidebarOpen } from "../../../redux/ui/selectors";
+import { useLocation } from "react-router-dom";
 
 //
 
@@ -52,11 +53,16 @@ const useStyles = makeStyles({
 
 const Header: FC = () => {
     const classes = useStyles();
-    const dispatch = useDispatch();
+    const { pathname } = useLocation();
 
     const isSidebarOpen = useSelector(getIsSidebarOpen);
+    const dispatch = useDispatch();
+
+    const excludedPaths = ["/login", "/register"];
 
     const handleToggleSidebar = () => dispatch(setIsSidebarOpenAction(!isSidebarOpen));
+
+    if (excludedPaths.includes(pathname)) return null;
 
     return (
         <div className={classes.root}>

@@ -1,13 +1,12 @@
 import { put, retry } from "@redux-saga/core/effects";
 import { get } from "lodash";
 //
-import { loadEventsAction, loadEventsErrorAction, loadEventsSuccessAction } from "redux/events/actions";
+import { loadEventsErrorAction, loadEventsSuccessAction } from "redux/events/actions";
 import { fetchEvents } from "mocks";
 import { Event } from "redux/events/types";
 //
 
 function* loadEventsSaga() {
-    yield put(loadEventsAction());
     try {
         //TODO DISABLE MOCK
         //const { data: collections }: AxiosResponse<Collections[]> = yield retry(2, 1500, serverApi.get, "/collections");
