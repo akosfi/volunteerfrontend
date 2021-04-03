@@ -8,8 +8,8 @@ import Button, { ButtonSize, ButtonType } from "components/common/Button";
 import Badge from "components/common/Badge";
 import { StoreState } from "redux/state";
 import EventSelectors from "redux/events/selectors";
-import UiActions from "redux/ui/actions";
 import EllipsedText from "components/common/EllipsedText";
+import EventActions from "redux/events/actions";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -68,7 +68,7 @@ export type Props = {
 const EventListItem: FC<Props> = ({ eventId }) => {
     const event = useSelector((state: StoreState) => EventSelectors.getEventById(state, eventId));
     const dispatch = useDispatch();
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading] = useState(false);
 
     const classes = useStyles();
 
@@ -76,10 +76,7 @@ const EventListItem: FC<Props> = ({ eventId }) => {
 
     const navigateToEvent = () => history.push(`/events/${eventId}`);
 
-    const handleEventJoin = () => {
-        setIsLoading(true);
-        dispatch(UiActions.pushSnackbarToQueueAction("Sikeres jelentkezés!"));
-    };
+    const handleEventJoin = () => dispatch(EventActions.joinEventsAction(eventId));
 
     if (!event) return null;
 

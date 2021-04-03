@@ -99,7 +99,7 @@ const FileInput: FC = () => {
                 className={classNames(classes.fileInputOverlay, { [classes.hidden]: !!fileURL })}
             />
             <div className={classNames(classes.previewImageWrapper, { [classes.hidden]: !fileURL })}>
-                <img className={classes.previewImage} src={fileURL as string} alt={"Preview Image"} />
+                <img className={classes.previewImage} src={fileURL as string} alt={"Image preview."} />
                 <div
                     className={classNames(classes.removeButtonWrapper, { [classes.hidden]: !fileURL })}
                     onClick={handleFileRemove}

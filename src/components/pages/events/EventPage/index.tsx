@@ -24,13 +24,6 @@ const tabs: PageHeaderTabType[] = [
     { id: TabTypes.EDIT, name: "Szerkesztés", content: <EditTab /> }
 ];
 
-const actionButtons: PageHeaderActionButtonType[] = [
-    { id: 1, buttonType: ButtonType.POSITIVE_ACTION, title: "JELENTKEZÉS", tabsOnly: [TabTypes.GENERAL_INFORMATION] },
-    { id: 2, buttonType: ButtonType.BASIC, title: "Törlés", tabsOnly: [TabTypes.EDIT] },
-    { id: 3, buttonType: ButtonType.BASIC, title: "Vázlat mentése", tabsOnly: [TabTypes.EDIT] },
-    { id: 4, buttonType: ButtonType.POSITIVE_ACTION, title: "Mentés", tabsOnly: [TabTypes.EDIT] }
-];
-
 const upperAction: PageHeaderUpperActionType = {
     title: "Események",
     href: "/"
@@ -52,6 +45,21 @@ const EventPage: FC = () => {
             dispatch(EventActions.setEditedEventId(null));
         };
     }, [id]);
+
+    const handleEventJoin = () => dispatch(EventActions.joinEventsAction(eventId));
+
+    const actionButtons: PageHeaderActionButtonType[] = [
+        {
+            id: 1,
+            buttonType: ButtonType.POSITIVE_ACTION,
+            title: "JELENTKEZÉS",
+            tabsOnly: [TabTypes.GENERAL_INFORMATION],
+            onClick: handleEventJoin
+        },
+        { id: 2, buttonType: ButtonType.BASIC, title: "Törlés", tabsOnly: [TabTypes.EDIT] },
+        { id: 3, buttonType: ButtonType.BASIC, title: "Vázlat mentése", tabsOnly: [TabTypes.EDIT] },
+        { id: 4, buttonType: ButtonType.POSITIVE_ACTION, title: "Mentés", tabsOnly: [TabTypes.EDIT] }
+    ];
 
     return (
         <PageLayout

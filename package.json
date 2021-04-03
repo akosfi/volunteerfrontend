@@ -58,6 +58,16 @@
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": ["**/*.ts", "**/*.tsx"],
+        "rules": {
+          "react-hooks/exhaustive-deps": "off",
+          "jsx-a11y/img-redundant-alt": "off"
+
+        }
+      }
     ]
   },
   "browserslist": {

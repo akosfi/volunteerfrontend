@@ -5,8 +5,7 @@ import classNames from "classnames";
 import { get, map, find } from "lodash";
 import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import UiSelectors from "../../../../../../../redux/ui/selectors";
-import UiActions from "../../../../../../../redux/ui/actions";
+import UiActions from "redux/ui/actions";
 
 const useStyles = makeStyles(() => ({
     root: {
