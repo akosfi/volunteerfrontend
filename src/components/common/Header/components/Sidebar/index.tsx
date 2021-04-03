@@ -27,14 +27,14 @@ const defaultSidebarTransitionStyles: { [key: string]: string } = {
     visibility: "visible"
 };
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     root: {
         overflowY: "scroll"
     },
     overlay: {
         width: "100vw",
         zIndex: 1,
-        height: "calc(100vw - 64px)",
+        height: "calc(100vh - 64px)",
         position: "absolute",
         top: "64px",
         left: 0,
@@ -49,15 +49,18 @@ const useStyles = makeStyles({
     "overlay-exited": { ...defaultOverlayTransitionStyles, opacity: 0, visibility: "hidden" },
 
     sidebar: {
-        width: "278px",
-        height: "calc(100vw - 64px)",
+        height: "calc(100vh - 64px)",
         position: "absolute",
         top: "64px",
         left: 0,
         background: "white",
         zIndex: 2,
         visibility: "hidden",
-        transform: "translateX(-100%)"
+        transform: "translateX(-100%)",
+        width: "100vw",
+        [theme.breakpoints.up("sm")]: {
+            width: "278px"
+        }
     },
     "sidebar-entering": defaultSidebarTransitionStyles,
 
@@ -67,7 +70,7 @@ const useStyles = makeStyles({
         transform: "translateX(-100%)"
     },
     "sidebar-exited": { ...defaultSidebarTransitionStyles, transform: "translateX(-100%)", visibility: "hidden" }
-});
+}));
 
 type Props = {
     appbarRef: RefObject<HTMLDivElement>;

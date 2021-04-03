@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { StoreState } from "redux/state";
 import EventSelectors from "redux/events/selectors";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
     root: {
         width: "100%"
     },
@@ -14,16 +14,24 @@ const useStyles = makeStyles(() => ({
         width: "75%",
         margin: "0 auto",
         display: "grid",
-        gridTemplateColumns: "60% 1fr 26%",
-        marginTop: "28px"
+        gridTemplateColumns: "100%",
+        marginTop: "8px",
+        [theme.breakpoints.up("sm")]: {
+            gridTemplateColumns: "60% 1fr 26%",
+            marginTop: "28px"
+        }
     },
     coverWrapper: {
-        height: "364px",
+        paddingTop: "75%",
         width: "100%",
-        marginBottom: "29px",
+        marginBottom: "8px",
         position: "relative",
         overflow: "hidden",
-        borderRadius: "10px"
+        borderRadius: "10px",
+        [theme.breakpoints.up("sm")]: {
+            marginBottom: "29px",
+            paddingTop: "55%"
+        }
     },
     coverImage: {
         width: "100%",
@@ -33,7 +41,10 @@ const useStyles = makeStyles(() => ({
         transform: "translate(-50%, -50%)"
     },
     paragraph: {
-        paddingBottom: "30px"
+        paddingBottom: "16px",
+        [theme.breakpoints.up("sm")]: {
+            paddingBottom: "30px"
+        }
     },
     paragraphTitle: {
         fontSize: "24px",

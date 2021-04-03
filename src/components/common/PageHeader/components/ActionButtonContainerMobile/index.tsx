@@ -12,17 +12,18 @@ const useStyles = makeStyles(() => ({
     root: {
         position: "fixed",
         bottom: 0,
-        background: "red",
+        background: "white",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
         width: "100vw",
-        paddingTop: "16px"
+        paddingTop: "16px",
+        zIndex: 100
     },
     actionButtonWrapper: {
         marginBottom: "16px",
-        width: "80%"
+        width: "75vw"
     }
 }));
 

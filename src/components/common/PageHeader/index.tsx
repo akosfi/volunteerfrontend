@@ -31,7 +31,7 @@ export type PageHeaderUpperActionType = {
     href: string;
 };
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
     root: {
         width: "100%",
         height: "162px",
@@ -54,7 +54,11 @@ const useStyles = makeStyles(() => ({
     },
     title: {
         fontWeight: "bold",
-        fontSize: "40px"
+        fontSize: "24px",
+
+        [theme.breakpoints.up("sm")]: {
+            fontSize: "40px"
+        }
     },
     actionButtons: {
         display: "flex",

@@ -30,7 +30,6 @@ const App: FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        //TODO INIT APP HANDLER OR SMTH
         dispatch(AppActions.initializeAppAction());
     }, []);
 

@@ -4,6 +4,9 @@ import { makeStyles } from "@material-ui/core";
 import classNames from "classnames";
 import { get, map, find } from "lodash";
 import { useHistory, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import UiSelectors from "../../../../../../../redux/ui/selectors";
+import UiActions from "../../../../../../../redux/ui/actions";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -70,6 +73,8 @@ const SidebarContent: FC = () => {
     const { pathname } = useLocation();
     const history = useHistory();
 
+    const dispatch = useDispatch();
+
     const [activeListItemId, setActiveListItemId] = useState(get(listItems, "[0]", null));
 
     useEffect(() => {
@@ -78,7 +83,10 @@ const SidebarContent: FC = () => {
         setActiveListItemId(listItemId);
     }, [pathname]);
 
-    const navigateToUrl = (url: string) => history.push(url);
+    const handleListItemSelect = (url: string) => {
+        dispatch(UiActions.setIsSidebarOpenAction(false));
+        history.push(url);
+    };
 
     const classes = useStyles();
 
@@ -106,7 +114,7 @@ const SidebarContent: FC = () => {
                             className={classNames(classes.listItem, {
                                 [classes.listItemActive]: activeListItemId === listItem.id
                             })}
-                            onClick={() => navigateToUrl(listItem.href)}
+                            onClick={() => handleListItemSelect(listItem.href)}
                         >
                             <span>{listItem.title}</span>
                         </div>
