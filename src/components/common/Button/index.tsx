@@ -37,6 +37,9 @@ const useStyles = makeStyles(() => ({
         padding: "0 32px",
         textTransform: "none"
     },
+    fullWidth: {
+        width: "100%"
+    },
     titleHidden: {
         opacity: 0
     },
@@ -91,6 +94,7 @@ export type Props = {
     onClick?: (args: any) => void;
     className?: string;
     type?: "button" | "submit";
+    fullWidth?: boolean;
 };
 
 const Button: FC<Props> = ({
@@ -100,7 +104,8 @@ const Button: FC<Props> = ({
     buttonType = ButtonType.PRIMARY,
     onClick = noop,
     className = "",
-    type = "button"
+    type = "button",
+    fullWidth = false
 }) => {
     const classes = useStyles();
 
@@ -119,8 +124,19 @@ const Button: FC<Props> = ({
     const circularProgressSize = buttonSize === ButtonSize.NORMAL ? 20 : 25;
 
     return (
-        <div className={classnames(buttonSizeMap[buttonSize], classes.root, className)}>
-            <MuiButton onClick={onClick} className={classnames(classes.button, buttonTypeMap[buttonType])} type={type}>
+        <div
+            className={classnames(
+                buttonSizeMap[buttonSize],
+                classes.root,
+                { [classes.fullWidth]: fullWidth },
+                className
+            )}
+        >
+            <MuiButton
+                onClick={onClick}
+                className={classnames(classes.button, buttonTypeMap[buttonType], { [classes.fullWidth]: fullWidth })}
+                type={type}
+            >
                 <span className={classnames({ [classes.titleHidden]: isLoading })}>{title}</span>
 
                 {isLoading ? (

@@ -5,6 +5,10 @@ import classNames from "classnames";
 import { map } from "lodash";
 import Button, { ButtonSize, ButtonType } from "../Button";
 import PageHeaderUpperAction from "./components/PageHeaderUpperAction";
+import ActionButtonContainerDesktop from "./components/ActionButtonContainerDesktop";
+import ActionButtonContainerMobile from "./components/ActionButtonContainerMobile";
+import { useSelector } from "react-redux";
+import UiSelectors from "../../../redux/ui/selectors";
 
 export type PageHeaderTabType = {
     id: string;
@@ -104,20 +108,11 @@ const PageHeader: FC<Props> = ({ title, children, isLoading = false, actionButto
 
                 <div className={classNames(classes.row, classes.actionButtons)}>
                     <span className={classes.title}>{title}</span>
-                    <div className={classes.actionButtons}>
-                        {map(actionButtons, button => (
-                            <div className={classes.actionButtonWrapper}>
-                                <Button
-                                    title={button.title}
-                                    buttonType={button.buttonType}
-                                    buttonSize={ButtonSize.BIG}
-                                />
-                            </div>
-                        ))}
-                    </div>
+                    <ActionButtonContainerDesktop actionButtons={actionButtons} />
                 </div>
                 <div className={classes.row}>{children?.tabButtons}</div>
             </div>
+            <ActionButtonContainerMobile actionButtons={actionButtons} />
         </div>
     );
 };
