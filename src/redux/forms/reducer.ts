@@ -7,11 +7,11 @@ import { FormActionConstants } from "redux/forms/actions";
 import { sanitizeFormField } from "redux/forms/utils";
 
 export type FormState = {
-    rootForm: FormField;
+    formRoot: FormField;
 };
 
 export const initialState: FormState = {
-    rootForm: { value: "", defaultValue: "", children: {}, error: "", isDirty: false }
+    formRoot: { value: "", defaultValue: "", children: {}, error: "", isDirty: false }
 };
 
 const reducer: Reducer<FormState> = (state = initialState, action): FormState => {
@@ -19,10 +19,10 @@ const reducer: Reducer<FormState> = (state = initialState, action): FormState =>
         case FormActionConstants.SET_FIELD_VALUE: {
             return produce(state, draft => {
                 const { path, value } = action.payload;
-                const isValidPath = !!get(draft.rootForm, `children.${path}`, null);
+                const isValidPath = !!get(draft.formRoot, `children.${path}`, null);
                 if (isValidPath) {
-                    set(draft.rootForm, `children.${path}.value`, value);
-                    set(draft.rootForm, `children.${path}.isDirty`, true);
+                    set(draft.formRoot, `children.${path}.value`, value);
+                    set(draft.formRoot, `children.${path}.isDirty`, true);
                 } else {
                     console.error("TRIED TO SET INVALID FIELD VALUE.");
                 }
@@ -31,9 +31,9 @@ const reducer: Reducer<FormState> = (state = initialState, action): FormState =>
         case FormActionConstants.SET_FIELD_ERROR: {
             return produce(state, draft => {
                 const { path, error } = action.payload;
-                const isValidPath = !!get(draft.rootForm, path, null);
+                const isValidPath = !!get(draft.formRoot, path, null);
                 if (isValidPath) {
-                    set(draft.rootForm, `${path}.error`, error);
+                    set(draft.formRoot, `${path}.error`, error);
                 } else {
                     console.error("TRIED TO SET INVALID FIELD ERROR.");
                 }
@@ -43,19 +43,24 @@ const reducer: Reducer<FormState> = (state = initialState, action): FormState =>
             return produce(state, draft => {
                 const { path, fields } = action.payload;
 
-                forEach(keys(fields), fieldKey => (fields[fieldKey] = sanitizeFormField(fields[fieldKey])));
+                const draftFields = { ...fields };
+                forEach(
+                    keys(draftFields),
+                    fieldKey => (draftFields[fieldKey] = sanitizeFormField(draftFields[fieldKey]))
+                );
                 const formField: FormField = sanitizeFormField({ value: "", defaultValue: "" });
-                formField.children = fields;
+                formField.children = draftFields;
 
-                set(draft.rootForm, `children.${path}`, formField);
+                unset(draft.formRoot, `children.${path}`);
+                set(draft.formRoot, `children.${path}`, formField);
             });
         }
         case FormActionConstants.REMOVE_FORM: {
             return produce(state, draft => {
                 const { path } = action.payload;
-                const isValidPath = !!get(draft.rootForm, `children.${path}`, null);
+                const isValidPath = !!get(draft.formRoot, `children.${path}`, null);
                 if (isValidPath) {
-                    unset(draft.rootForm, `children.${path}`);
+                    unset(draft.formRoot, `children.${path}`);
                 } else {
                     console.error("TRIED TO UNSET INVALID FORM FIELD.");
                 }

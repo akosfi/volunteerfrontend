@@ -1,5 +1,3 @@
-import { LoginFormTypes } from "utils/forms/types/login";
-import { RegisterFormTypes } from "utils/forms/types/register";
 import { User } from "redux/user/types";
 
 export enum UserActionConstants {
@@ -12,9 +10,8 @@ export enum UserActionConstants {
     REGISTER_USER_ERROR = "USER/REGISTER_USER_ERROR"
 }
 
-const loginUserAction = (formData: LoginFormTypes) => ({
-    type: UserActionConstants.LOGIN_USER,
-    payload: { formData }
+const loginUserAction = () => ({
+    type: UserActionConstants.LOGIN_USER
 });
 
 const loginUserSuccessAction = (user: User) => ({
@@ -29,9 +26,8 @@ const loginUserErrorAction = (error: string) => ({
     }
 });
 
-const registerUserAction = (formData: RegisterFormTypes) => ({
-    type: UserActionConstants.REGISTER_USER,
-    payload: { formData }
+const registerUserAction = () => ({
+    type: UserActionConstants.REGISTER_USER
 });
 
 //TODO TYPE
