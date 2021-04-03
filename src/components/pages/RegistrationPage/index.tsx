@@ -1,15 +1,19 @@
 import * as React from "react";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Card, CardContent, makeStyles } from "@material-ui/core";
-import { FormProvider, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 //
 import TextInput from "components/common/TextInput";
 import Button, { ButtonType } from "components/common/Button";
 import UserSelectors from "redux/user/selectors";
-import UserActions from "redux/user/actions";
-import { RegisterFormFields, RegisterFormTypes } from "utils/forms/types/register";
+import {
+    formPath,
+    getRegistrationFormFieldPath as getFieldPath,
+    RegistrationFormFieldNames,
+    RegistrationFormFields
+} from "components/pages/RegistrationPage/form";
+import FormActions from "redux/forms/actions";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -65,13 +69,18 @@ const RegistrationPage: FC = () => {
     const classes = useStyles();
 
     const isRegistrationLoading = useSelector(UserSelectors.getIsRegistrationLoading);
+
     const dispatch = useDispatch();
 
-    const methods = useForm<RegisterFormTypes>();
+    useEffect(() => {
+        dispatch(FormActions.addFormAction(formPath, RegistrationFormFields));
+
+        return () => {
+            dispatch(FormActions.removeFormAction(formPath));
+        };
+    }, []);
 
     const router = useHistory();
-
-    const handleRegistration = (formData: RegisterFormTypes) => dispatch(UserActions.registerUserAction(formData));
 
     const navigateToLogin = () => router.push("/login");
 
@@ -82,63 +91,61 @@ const RegistrationPage: FC = () => {
 
                 <Card className={classes.card}>
                     <CardContent className={classes.cardContent}>
-                        <FormProvider {...methods}>
-                            <form className={classes.form} onSubmit={methods.handleSubmit(handleRegistration)}>
-                                <TextInput
-                                    name={RegisterFormFields.EMAIL}
-                                    placeholder="Email cím"
-                                    label="Email cím"
-                                    className={classes.input}
-                                />
-                                <TextInput
-                                    name={RegisterFormFields.USERNAME}
-                                    placeholder="Felhasználónév"
-                                    label="Felhasználónév"
-                                    className={classes.input}
-                                />
-                                <TextInput
-                                    name={RegisterFormFields.FULL_NAME}
-                                    placeholder="Teljes név"
-                                    label="Teljes név"
-                                    className={classes.input}
-                                />
-                                <TextInput
-                                    name={RegisterFormFields.PHONE_NUMBER}
-                                    placeholder="Telefonszám"
-                                    label="Telefonszám"
-                                    className={classes.input}
-                                />
-                                <TextInput
-                                    name={RegisterFormFields.PASSWORD}
-                                    placeholder="Jelszó"
-                                    label="Jelszó"
-                                    className={classes.input}
-                                    type={"password"}
-                                />
-                                <TextInput
-                                    name={RegisterFormFields.PASSWORD_AGAIN}
-                                    placeholder="Jelszó mégegyszer"
-                                    label="Jelszó mégegyszer"
-                                    className={classes.input}
-                                    type={"password"}
-                                />
+                        <form className={classes.form}>
+                            <TextInput
+                                placeholder="Email cím"
+                                label="Email cím"
+                                className={classes.input}
+                                path={getFieldPath(RegistrationFormFieldNames.EMAIL)}
+                            />
+                            <TextInput
+                                placeholder="Felhasználónév"
+                                label="Felhasználónév"
+                                className={classes.input}
+                                path={getFieldPath(RegistrationFormFieldNames.USERNAME)}
+                            />
+                            <TextInput
+                                placeholder="Teljes név"
+                                label="Teljes név"
+                                className={classes.input}
+                                path={getFieldPath(RegistrationFormFieldNames.FULL_NAME)}
+                            />
+                            <TextInput
+                                placeholder="Telefonszám"
+                                label="Telefonszám"
+                                className={classes.input}
+                                path={getFieldPath(RegistrationFormFieldNames.PHONE_NUMBER)}
+                            />
+                            <TextInput
+                                placeholder="Jelszó"
+                                label="Jelszó"
+                                className={classes.input}
+                                path={getFieldPath(RegistrationFormFieldNames.PASSWORD)}
+                                type={"password"}
+                            />
+                            <TextInput
+                                placeholder="Jelszó mégegyszer"
+                                label="Jelszó mégegyszer"
+                                className={classes.input}
+                                type={"password"}
+                                path={getFieldPath(RegistrationFormFieldNames.PASSWORD_AGAIN)}
+                            />
 
-                                <div className={classes.buttonWrapper}>
-                                    <Button
-                                        title={"Regisztáció"}
-                                        buttonType={ButtonType.POSITIVE_ACTION}
-                                        className={classes.button}
-                                        type={"submit"}
-                                        isLoading={isRegistrationLoading}
-                                    />
-                                    <Button
-                                        title={"Bejelentkezés"}
-                                        buttonType={ButtonType.BASIC}
-                                        onClick={navigateToLogin}
-                                    />
-                                </div>
-                            </form>
-                        </FormProvider>
+                            <div className={classes.buttonWrapper}>
+                                <Button
+                                    title={"Regisztáció"}
+                                    buttonType={ButtonType.POSITIVE_ACTION}
+                                    className={classes.button}
+                                    type={"submit"}
+                                    isLoading={isRegistrationLoading}
+                                />
+                                <Button
+                                    title={"Bejelentkezés"}
+                                    buttonType={ButtonType.BASIC}
+                                    onClick={navigateToLogin}
+                                />
+                            </div>
+                        </form>
                     </CardContent>
                 </Card>
             </div>
