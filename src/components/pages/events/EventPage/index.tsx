@@ -3,14 +3,14 @@ import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 //
-import EventDetails from "components/events/EventDetails";
 import { StoreState } from "redux/state";
 import EventSelectors from "redux/events/selectors";
 import PageLayout from "components/common/PageLayout";
 import { PageHeaderActionButtonType, PageHeaderTabType, PageHeaderUpperActionType } from "components/common/PageHeader";
 import { ButtonType } from "components/common/Button";
 import EventActions from "redux/events/actions";
-import EventEdit from "components/events/EventEdit";
+import DetailsTab from "components/pages/events/EventPage/components/tabs/DetailsTab";
+import EditTab from "components/pages/events/EventPage/components/tabs/EditTab";
 
 enum TabTypes {
     GENERAL_INFORMATION = "EVENT/GENERAL_INFORMATION",
@@ -20,8 +20,8 @@ enum TabTypes {
 }
 
 const tabs: PageHeaderTabType[] = [
-    { id: TabTypes.GENERAL_INFORMATION, name: "Részletek", content: <EventDetails /> },
-    { id: TabTypes.EDIT, name: "Szerkesztés", content: <EventEdit /> }
+    { id: TabTypes.GENERAL_INFORMATION, name: "Részletek", content: <DetailsTab /> },
+    { id: TabTypes.EDIT, name: "Szerkesztés", content: <EditTab /> }
 ];
 
 const actionButtons: PageHeaderActionButtonType[] = [
