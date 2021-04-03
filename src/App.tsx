@@ -10,9 +10,10 @@ import SnackbarQueueHandler from "components/common/SnackbarQueueHandler";
 import LoginPage from "components/pages/LoginPage";
 import RegistrationPage from "components/pages/RegistrationPage";
 import AppActions from "redux/app/actions";
+import ComingSoonPage from "components/pages/ComingSoonPage";
+import NewEventPage from "components/pages/events/NewEventPage";
 //
 import "assets/styles/global.scss";
-import ComingSoonPage from "./components/pages/ComingSoonPage";
 
 const App: FC = () => {
     const theme = createMuiTheme({
@@ -41,6 +42,7 @@ const App: FC = () => {
                 <Switch>
                     <Route path="/" exact children={<EventsPage />} />
                     <Route path="/events/:id" exact children={<EventPage />} />
+                    <Route path="/events/new" exact children={<NewEventPage />} />
                     <Route path="/login" exact children={<LoginPage />} />
                     <Route path="/register" exact children={<RegistrationPage />} />
                     <Route path="/members" exact children={<ComingSoonPage />} />
