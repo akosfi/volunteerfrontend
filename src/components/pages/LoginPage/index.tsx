@@ -14,6 +14,8 @@ import {
     LoginFormFieldNames,
     LoginFormFields
 } from "components/pages/LoginPage/form";
+import UserActions from "../../../redux/user/actions";
+import UiActions from "../../../redux/ui/actions";
 
 const useStyles = makeStyles(() => ({
     root: {

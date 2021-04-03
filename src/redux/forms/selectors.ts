@@ -6,14 +6,16 @@ const getState = (state: StoreState) => state.form;
 
 const getRootForm = (state: StoreState) => getState(state).formRoot;
 
-const getFieldValue = (state: StoreState, path: string) => get(getRootForm(state), `${path}.value`, null);
+const getFieldValue = (state: StoreState, path: string) => get(getRootForm(state), `children.${path}.value`, null);
 
-const getFieldError = (state: StoreState, path: string) => get(getRootForm(state), `${path}.error`, null);
+const getFieldError = (state: StoreState, path: string) => get(getRootForm(state), `children.${path}.error`, null);
 
-const getFieldIsDirty = (state: StoreState, path: string) => get(getRootForm(state), `${path}.isDirty`, null);
+const getFieldIsDirty = (state: StoreState, path: string) => get(getRootForm(state), `children.${path}.isDirty`, null);
 
-const getIsFormFieldExists = (state: StoreState, path: string) => get(getRootForm(state), `${path}`, null);
+const getIsFormFieldExists = (state: StoreState, path: string) => get(getRootForm(state), `children.${path}`, null);
 
-const FormSelectors = { getFieldValue, getFieldError, getFieldIsDirty, getIsFormFieldExists };
+const getFormField = (state: StoreState, path: string) => get(getRootForm(state), `children.${path}`, null);
+
+const FormSelectors = { getFieldValue, getFieldError, getFieldIsDirty, getIsFormFieldExists, getFormField };
 
 export default FormSelectors;

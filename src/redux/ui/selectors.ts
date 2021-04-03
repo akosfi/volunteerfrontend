@@ -12,11 +12,14 @@ export const getIsSidebarOpen = (state: StoreState) => getState(state).isSidebar
 
 export const getIsMobileWindow = (state: StoreState): boolean => getState(state).isMobileWindow;
 
+export const getSystemError = (state: StoreState) => getState(state).systemError;
+
 const UiSelectors = {
     getSnackBars,
     getNextSnackbarInQueue,
     getIsSidebarOpen,
-    getIsMobileWindow
+    getIsMobileWindow,
+    getSystemError
 };
 
 export default UiSelectors;

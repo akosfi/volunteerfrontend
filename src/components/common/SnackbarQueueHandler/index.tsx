@@ -25,7 +25,7 @@ const SnackbarQueueHandler: FC = () => {
 
     return (
         <>
-            <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "center" }} open={true} key={currentSnackbar.id}>
+            <Snackbar anchorOrigin={{ vertical: "top", horizontal: "center" }} open={true} key={currentSnackbar.id}>
                 <MuiAlert elevation={6} variant="filled" severity={currentSnackbar.severity}>
                     {currentSnackbar.text}
                 </MuiAlert>

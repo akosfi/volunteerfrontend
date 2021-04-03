@@ -9,12 +9,14 @@ export type UiState = {
     snackbarQueue: SnackbarRedux[];
     isSidebarOpen: boolean;
     isMobileWindow: boolean;
+    systemError: string;
 };
 
 export const initialState: UiState = {
     snackbarQueue: [],
     isSidebarOpen: false,
-    isMobileWindow: get(window, "innerWidth", 0) <= 900
+    isMobileWindow: get(window, "innerWidth", 0) <= 900,
+    systemError: ""
 };
 
 //TODO do better solution, maybe redux
@@ -44,6 +46,12 @@ const reducer: Reducer<UiState> = (state = initialState, action): UiState => {
             return produce(state, draft => {
                 const { isMobileWindow } = action.payload;
                 draft.isMobileWindow = isMobileWindow;
+            });
+        }
+        case UiActionConstants.SET_SYSTEM_ERROR: {
+            return produce(state, draft => {
+                const { error } = action.payload;
+                draft.systemError = error;
             });
         }
         default: {

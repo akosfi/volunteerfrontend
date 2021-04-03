@@ -4,7 +4,9 @@ export enum UiActionConstants {
 
     SET_IS_SIDEBAR_OPEN = "UI/SET_IS_SIDEBAR_OPEN",
 
-    SET_IS_MOBILE_WINDOW = "UI/SET_IS_MOBILE_WINDOW"
+    SET_IS_MOBILE_WINDOW = "UI/SET_IS_MOBILE_WINDOW",
+
+    SET_SYSTEM_ERROR = "UI/SET_SYSTEM_ERROR"
 }
 
 const popSnackbarFromQueueAction = () => ({
@@ -33,11 +35,19 @@ const setIsMobileWindowAction = (isMobileWindow: boolean) => ({
     }
 });
 
+const setSystemError = (error: string = "Unexpected error has occurred. Please refresh the page.") => ({
+    type: UiActionConstants.SET_SYSTEM_ERROR,
+    payload: {
+        error
+    }
+});
+
 const UiActions = {
     popSnackbarFromQueueAction,
     pushSnackbarToQueueAction,
     setIsSidebarOpenAction,
-    setIsMobileWindowAction
+    setIsMobileWindowAction,
+    setSystemError
 };
 
 export default UiActions;

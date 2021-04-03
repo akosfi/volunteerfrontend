@@ -12,6 +12,7 @@ import RegistrationPage from "components/pages/RegistrationPage";
 import AppActions from "redux/app/actions";
 import ComingSoonPage from "components/pages/ComingSoonPage";
 import NewEventPage from "components/pages/events/NewEventPage";
+import SystemErrorAlert from "components/common/SystemErrorAlert";
 //
 import "assets/styles/global.scss";
 
@@ -39,6 +40,7 @@ const App: FC = () => {
             <Router>
                 <SnackbarQueueHandler />
                 <Header />
+                <SystemErrorAlert />
                 <Switch>
                     <Route path="/" exact children={<EventsPage />} />
                     <Route path="/events/new" exact children={<NewEventPage />} />

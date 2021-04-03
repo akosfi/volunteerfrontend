@@ -47,27 +47,17 @@ export type Props = {
     placeholder?: string;
     error?: string;
     className?: string;
-    path?: string;
+    path: string;
 };
 
-const TextInput: FC<Props> = ({
-    placeholder = "",
-    label = "",
-    type = "text",
-    className = "",
-    //TODO REMOVE
-    path = ""
-}) => {
+const TextInput: FC<Props> = ({ path, placeholder = "", label = "", type = "text", className = "" }) => {
     const classes = useStyles();
 
-    const hasLabel = !!label;
-
     const value = useSelector((state: StoreState) => FormSelectors.getFieldValue(state, path));
-
     const error = useSelector((state: StoreState) => FormSelectors.getFieldError(state, path));
     const dispatch = useDispatch();
 
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const onValueChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const newValue = get(e, "target.value", null);
 
         if (!!newValue) {
@@ -76,6 +66,7 @@ const TextInput: FC<Props> = ({
     };
 
     const hasError = !!error;
+    const hasLabel = !!label;
 
     return (
         <div className={classes.root}>
@@ -85,7 +76,7 @@ const TextInput: FC<Props> = ({
                 type={type}
                 className={classNames(classes.input, className)}
                 placeholder={placeholder}
-                onChange={onChangeHandler}
+                onChange={onValueChangeHandler}
                 value={value}
             />
 
