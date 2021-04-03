@@ -8,6 +8,8 @@ import PageHeader, {
     PageHeaderUpperActionType
 } from "components/common/PageHeader";
 import PageHeaderTab from "components/common/PageHeader/components/PageHeaderTab";
+import { useSelector } from "react-redux";
+import UiSelectors from "redux/ui/selectors";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -34,6 +36,8 @@ export type Props = {
 const PageLayout: FC<Props> = ({ title, tabs, isLoading = false, actionButtons, upperAction }) => {
     const classes = useStyles();
 
+    const isMobile = useSelector(UiSelectors.getIsMobileWindow);
+
     const initialTabId = get(tabs, "[0].id", null);
     const [activeTabId, setActiveTabId] = useState(initialTabId);
 
@@ -45,18 +49,21 @@ const PageLayout: FC<Props> = ({ title, tabs, isLoading = false, actionButtons, 
         null
     );
 
-    const enabledActionButton = filter(
+    const enabledActionButtons = filter(
         actionButtons,
         actionButton =>
             !actionButton.tabsOnly || (!!actionButton.tabsOnly && !!actionButton.tabsOnly.includes(activeTabId))
     );
+
+    const numberOfActionButtons = enabledActionButtons?.length || 0;
+    const extraPaddingOnBottom = isMobile && numberOfActionButtons > 0 ? numberOfActionButtons * (36 + 16) + 16 : 0;
 
     return (
         <>
             <PageHeader
                 title={title}
                 isLoading={isLoading}
-                actionButtons={enabledActionButton}
+                actionButtons={enabledActionButtons}
                 upperAction={upperAction}
             >
                 {{
@@ -65,7 +72,7 @@ const PageLayout: FC<Props> = ({ title, tabs, isLoading = false, actionButtons, 
                     ))
                 }}
             </PageHeader>
-            <div className={classes.root}>
+            <div className={classes.root} style={{ paddingBottom: `${extraPaddingOnBottom}px` }}>
                 {isLoading ? (
                     <div className={classes.loadingWrapper}>
                         <CircularProgress />
