@@ -14,7 +14,9 @@ import EventEdit from "components/events/EventEdit";
 
 enum TabTypes {
     GENERAL_INFORMATION = "EVENT/GENERAL_INFORMATION",
-    EDIT = "EVENT/EDIT"
+    EDIT = "EVENT/EDIT",
+    MEMBERS = "EVENT/MEMBERS",
+    PLUSZ_TAB = "EVENT/PLUSZ_TAB"
 }
 
 const tabs: PageHeaderTabType[] = [

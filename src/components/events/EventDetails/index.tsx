@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { StoreState } from "redux/state";
 import EventSelectors from "redux/events/selectors";
+import Badge from "components/common/Badge";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -74,7 +75,7 @@ const EventDetails: FC = () => {
                     </div>
                     <div className={classes.paragraph}>
                         <p className={classes.paragraphTitle}>Részletek</p>
-                        <div className={classes.paragraph}>{event.details}</div>
+                        <div className={classes.paragraphContent}>{event.details}</div>
                     </div>
                 </div>
                 <div />
@@ -96,7 +97,9 @@ const EventDetails: FC = () => {
 
                     <div className={classes.paragraph}>
                         <p className={classes.paragraphTitle}>Kategória</p>
-                        <div className={classes.paragraphContent}>{event.category}</div>
+                        <div className={classes.paragraphContent}>
+                            <Badge title={event.category} />
+                        </div>
                     </div>
                 </div>
             </div>{" "}

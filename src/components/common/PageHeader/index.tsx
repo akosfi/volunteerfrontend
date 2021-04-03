@@ -69,7 +69,14 @@ const useStyles = makeStyles(theme => ({
         marginLeft: "20px"
     },
     tabButtons: {
-        display: "flex"
+        overflowX: "scroll",
+        overflowY: "hidden",
+        width: "75vw",
+        "&::-webkit-scrollbar": {
+            width: 0,
+            height: 0,
+            background: "transparent"
+        }
     },
     loadingWrapper: {
         width: "100%",
@@ -114,7 +121,7 @@ const PageHeader: FC<Props> = ({ title, children, isLoading = false, actionButto
                     <span className={classes.title}>{title}</span>
                     <ActionButtonContainerDesktop actionButtons={actionButtons} />
                 </div>
-                <div className={classes.row}>{children?.tabButtons}</div>
+                <div className={classNames(classes.row, classes.tabButtons)}>{children?.tabButtons}</div>
             </div>
             <ActionButtonContainerMobile actionButtons={actionButtons} />
         </div>
