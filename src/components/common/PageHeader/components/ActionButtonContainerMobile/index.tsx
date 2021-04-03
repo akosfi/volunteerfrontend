@@ -2,7 +2,7 @@ import * as React from "react";
 import { FC } from "react";
 import { makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import { map } from "lodash";
+import { map, noop } from "lodash";
 //
 import { PageHeaderActionButtonType } from "components/common/PageHeader/index";
 import Button, { ButtonSize } from "components/common/Button";
@@ -41,7 +41,13 @@ const ActionButtonContainerMobile: FC<Props> = ({ actionButtons }) => {
         <div className={classes.root}>
             {map(actionButtons, button => (
                 <div className={classes.actionButtonWrapper}>
-                    <Button title={button.title} buttonType={button.buttonType} buttonSize={ButtonSize.BIG} fullWidth />
+                    <Button
+                        title={button.title}
+                        buttonType={button.buttonType}
+                        buttonSize={ButtonSize.BIG}
+                        fullWidth
+                        onClick={button.onClick || noop}
+                    />
                 </div>
             ))}
         </div>

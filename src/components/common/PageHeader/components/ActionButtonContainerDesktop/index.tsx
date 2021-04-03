@@ -1,12 +1,12 @@
 import * as React from "react";
 import { FC } from "react";
 import { makeStyles } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import { map, noop } from "lodash";
 //
-import { map } from "lodash";
 import { PageHeaderActionButtonType } from "components/common/PageHeader/index";
 import Button, { ButtonSize } from "components/common/Button";
-import { useSelector } from "react-redux";
-import UiSelectors from "../../../../../redux/ui/selectors";
+import UiSelectors from "redux/ui/selectors";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -33,7 +33,12 @@ const ActionButtonContainerDesktop: FC<Props> = ({ actionButtons }) => {
         <div className={classes.root}>
             {map(actionButtons, button => (
                 <div className={classes.actionButtonWrapper}>
-                    <Button title={button.title} buttonType={button.buttonType} buttonSize={ButtonSize.BIG} />
+                    <Button
+                        title={button.title}
+                        buttonType={button.buttonType}
+                        buttonSize={ButtonSize.BIG}
+                        onClick={button.onClick || noop}
+                    />
                 </div>
             ))}
         </div>

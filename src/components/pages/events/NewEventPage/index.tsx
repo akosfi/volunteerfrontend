@@ -1,10 +1,7 @@
 import * as React from "react";
 import { FC, memo, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 //
-import { StoreState } from "redux/state";
-import EventSelectors from "redux/events/selectors";
 import PageLayout from "components/common/PageLayout";
 import { PageHeaderActionButtonType, PageHeaderTabType, PageHeaderUpperActionType } from "components/common/PageHeader";
 import { ButtonType } from "components/common/Button";
@@ -17,11 +14,6 @@ enum TabTypes {
 
 const tabs: PageHeaderTabType[] = [{ id: TabTypes.EDIT, name: "Szerkesztés", content: <EditTab /> }];
 
-const actionButtons: PageHeaderActionButtonType[] = [
-    { id: 1, buttonType: ButtonType.BASIC, title: "Vázlat mentése" },
-    { id: 2, buttonType: ButtonType.POSITIVE_ACTION, title: "MENTÉS" }
-];
-
 const upperAction: PageHeaderUpperActionType = {
     title: "Események",
     href: "/"
@@ -33,6 +25,11 @@ const NewEventPage: FC = () => {
     useEffect(() => {
         dispatch(EventActions.setEditedEventId(-1));
     }, []);
+
+    const actionButtons: PageHeaderActionButtonType[] = [
+        { id: 1, buttonType: ButtonType.BASIC, title: "Vázlat mentése" },
+        { id: 2, buttonType: ButtonType.POSITIVE_ACTION, title: "MENTÉS" }
+    ];
 
     return (
         <PageLayout

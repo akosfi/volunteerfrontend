@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FC, useEffect } from "react";
+import { FC, memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 //
@@ -14,19 +14,21 @@ import EditTab from "components/pages/events/EventPage/components/tabs/EditTab";
 
 enum TabTypes {
     GENERAL_INFORMATION = "EVENT/GENERAL_INFORMATION",
-    EDIT = "EVENT/EDIT",
     MEMBERS = "EVENT/MEMBERS",
-    PLUSZ_TAB = "EVENT/PLUSZ_TAB"
+    EDIT = "EVENT/EDIT"
 }
 
 const tabs: PageHeaderTabType[] = [
     { id: TabTypes.GENERAL_INFORMATION, name: "Részletek", content: <DetailsTab /> },
+    { id: TabTypes.MEMBERS, name: "Jelentkezők", content: <EditTab /> },
     { id: TabTypes.EDIT, name: "Szerkesztés", content: <EditTab /> }
 ];
 
 const actionButtons: PageHeaderActionButtonType[] = [
-    { id: 1, buttonType: ButtonType.POSITIVE_ACTION, title: "JELENTKEZÉS" },
-    { id: 2, buttonType: ButtonType.POSITIVE_ACTION, title: "MENTÉS", tabsOnly: [TabTypes.EDIT] }
+    { id: 1, buttonType: ButtonType.POSITIVE_ACTION, title: "JELENTKEZÉS", tabsOnly: [TabTypes.GENERAL_INFORMATION] },
+    { id: 2, buttonType: ButtonType.BASIC, title: "Törlés", tabsOnly: [TabTypes.EDIT] },
+    { id: 3, buttonType: ButtonType.BASIC, title: "Vázlat mentése", tabsOnly: [TabTypes.EDIT] },
+    { id: 4, buttonType: ButtonType.POSITIVE_ACTION, title: "Mentés", tabsOnly: [TabTypes.EDIT] }
 ];
 
 const upperAction: PageHeaderUpperActionType = {
@@ -62,4 +64,4 @@ const EventPage: FC = () => {
     );
 };
 
-export default EventPage;
+export default memo(EventPage);

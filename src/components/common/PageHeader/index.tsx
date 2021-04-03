@@ -2,13 +2,11 @@ import * as React from "react";
 import { FC, ReactNode } from "react";
 import { CircularProgress, makeStyles } from "@material-ui/core";
 import classNames from "classnames";
-import { map } from "lodash";
-import Button, { ButtonSize, ButtonType } from "../Button";
-import PageHeaderUpperAction from "./components/PageHeaderUpperAction";
-import ActionButtonContainerDesktop from "./components/ActionButtonContainerDesktop";
-import ActionButtonContainerMobile from "./components/ActionButtonContainerMobile";
-import { useSelector } from "react-redux";
-import UiSelectors from "../../../redux/ui/selectors";
+//
+import { ButtonType } from "components/common/Button";
+import PageHeaderUpperAction from "components/common/PageHeader/components/PageHeaderUpperAction";
+import ActionButtonContainerDesktop from "components/common/PageHeader/components/ActionButtonContainerDesktop";
+import ActionButtonContainerMobile from "components/common/PageHeader/components/ActionButtonContainerMobile";
 
 export type PageHeaderTabType = {
     id: string;
@@ -24,6 +22,7 @@ export type PageHeaderActionButtonType = {
     tabsOnly?: string[];
     buttonType: ButtonType;
     disabled?: boolean;
+    onClick?: (args: any) => void;
 };
 
 export type PageHeaderUpperActionType = {

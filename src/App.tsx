@@ -41,8 +41,8 @@ const App: FC = () => {
                 <Header />
                 <Switch>
                     <Route path="/" exact children={<EventsPage />} />
-                    <Route path="/events/:id" exact children={<EventPage />} />
                     <Route path="/events/new" exact children={<NewEventPage />} />
+                    <Route path="/events/:id" exact children={<EventPage />} />
                     <Route path="/login" exact children={<LoginPage />} />
                     <Route path="/register" exact children={<RegistrationPage />} />
                     <Route path="/members" exact children={<ComingSoonPage />} />
