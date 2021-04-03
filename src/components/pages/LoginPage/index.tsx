@@ -1,15 +1,19 @@
 import * as React from "react";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Card, CardContent, makeStyles } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { FormProvider, useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 //
 import Button, { ButtonType } from "components/common/Button";
 import TextInput from "components/common/TextInput";
-import { LoginFormFields, LoginFormTypes } from "utils/forms/types/login";
 import UserSelectors from "redux/user/selectors";
-import UserActions from "redux/user/actions";
+import FormActions from "redux/forms/actions";
+import {
+    formPath,
+    getLoginFormFieldPath as getFieldPath,
+    LoginFormFieldNames,
+    LoginFormFields
+} from "components/pages/LoginPage/form";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -65,13 +69,18 @@ const LoginPage: FC = () => {
     const classes = useStyles();
 
     const isLoginLoading = useSelector(UserSelectors.getIsLoginLoading);
+
     const dispatch = useDispatch();
 
-    const methods = useForm<LoginFormTypes>();
+    useEffect(() => {
+        dispatch(FormActions.addFormAction(formPath, LoginFormFields));
+
+        return () => {
+            dispatch(FormActions.removeFormAction(formPath));
+        };
+    }, []);
 
     const router = useHistory();
-
-    const handleLogin = (formData: LoginFormTypes) => dispatch(UserActions.loginUserAction(formData));
 
     const navigateToRegistration = () => router.push("/register");
 
@@ -82,37 +91,35 @@ const LoginPage: FC = () => {
 
                 <Card className={classes.card}>
                     <CardContent className={classes.cardContent}>
-                        <FormProvider {...methods}>
-                            <form className={classes.form} onSubmit={methods.handleSubmit(handleLogin)}>
-                                <TextInput
-                                    name={LoginFormFields.EMAIL_OR_USERNAME}
-                                    placeholder="Email cím vagy felhasználónév"
-                                    label="Email cím vagy felhasználónév"
-                                    className={classes.input}
+                        <form className={classes.form}>
+                            <TextInput
+                                placeholder="Email cím vagy felhasználónév"
+                                label="Email cím vagy felhasználónév"
+                                className={classes.input}
+                                path={getFieldPath(LoginFormFieldNames.EMAIL_OR_USERNAME)}
+                            />
+                            <TextInput
+                                placeholder="Jelszó"
+                                label="Jelszó"
+                                className={classes.input}
+                                type={"password"}
+                                path={getFieldPath(LoginFormFieldNames.PASSWORD)}
+                            />
+                            <div className={classes.buttonWrapper}>
+                                <Button
+                                    title={"Bejelentkezés"}
+                                    buttonType={ButtonType.POSITIVE_ACTION}
+                                    className={classes.button}
+                                    type={"submit"}
+                                    isLoading={isLoginLoading}
                                 />
-                                <TextInput
-                                    name={LoginFormFields.PASSWORD}
-                                    placeholder="Jelszó"
-                                    label="Jelszó"
-                                    className={classes.input}
-                                    type={"password"}
+                                <Button
+                                    title={"Regisztáció"}
+                                    buttonType={ButtonType.BASIC}
+                                    onClick={navigateToRegistration}
                                 />
-                                <div className={classes.buttonWrapper}>
-                                    <Button
-                                        title={"Bejelentkezés"}
-                                        buttonType={ButtonType.POSITIVE_ACTION}
-                                        className={classes.button}
-                                        type={"submit"}
-                                        isLoading={isLoginLoading}
-                                    />
-                                    <Button
-                                        title={"Regisztáció"}
-                                        buttonType={ButtonType.BASIC}
-                                        onClick={navigateToRegistration}
-                                    />
-                                </div>
-                            </form>
-                        </FormProvider>
+                            </div>
+                        </form>
                     </CardContent>
                 </Card>
             </div>
