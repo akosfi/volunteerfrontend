@@ -3,6 +3,7 @@ import { UiState, initialState as initialUiState } from "redux/ui/reducer";
 import { UserState, initialState as initialUserState } from "redux/user/reducer";
 import { AppState, initialState as initialAppState } from "redux/app/reducer";
 import { FormState, initialState as initialFormState } from "redux/forms/reducer";
+import { ListState, initialState as initialListState } from "redux/list/reducer";
 
 export type StoreState = {
     event: EventState;
@@ -10,6 +11,7 @@ export type StoreState = {
     user: UserState;
     app: AppState;
     form: FormState;
+    list: ListState;
 };
 
 const initialState: StoreState = {
@@ -17,7 +19,8 @@ const initialState: StoreState = {
     ui: initialUiState,
     user: initialUserState,
     app: initialAppState,
-    form: initialFormState
+    form: initialFormState,
+    list: initialListState
 };
 
 export default initialState;
