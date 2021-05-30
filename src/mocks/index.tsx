@@ -89,6 +89,18 @@ const events: Event[] = [
 
 export const fetchEvents = () => new Promise(resolve => setTimeout(() => resolve(events), 1000));
 
-const members: Member[] = [{ id: 0, email: "acs.dezso@gmail.com", name: "Ács Dezső", phoneNumber: "+378373737" }];
+const members: Member[] = [
+    { id: 0, email: "acs.dezso@gmail.com", name: "Ács Dezső", phoneNumber: "+378373737" },
+    { id: 1, email: "acs.dezso@gmail.com", name: "Ács Dezső", phoneNumber: "+378373737" },
+    { id: 2, email: "acs.dezso@gmail.com", name: "Ács Dezső", phoneNumber: "+378373737" },
+    { id: 3, email: "acs.dezso@gmail.com", name: "Ács Dezső", phoneNumber: "+378373737" },
+    { id: 4, email: "acs.dezso@gmail.com", name: "Ács Dezső", phoneNumber: "+378373737" },
+    { id: 5, email: "acs.dezso@gmail.com", name: "Ács Dezső", phoneNumber: "+378373737" },
+    { id: 6, email: "acs.dezso@gmail.com", name: "Ács Dezső", phoneNumber: "+378373737" },
+    { id: 7, email: "acs.dezso@gmail.com", name: "Ács Dezső", phoneNumber: "+378373737" },
+    { id: 8, email: "acs.dezso@gmail.com", name: "Ács Dezső", phoneNumber: "+378373737" },
+    { id: 9, email: "acs.dezso@gmail.com", name: "Ács Dezső", phoneNumber: "+378373737" },
+    { id: 10, email: "acs.dezso@gmail.com", name: "Ács Dezső", phoneNumber: "+378373737" }
+];
 
 export const fetchMembers = () => new Promise(resolve => setTimeout(() => resolve(members), 1000));

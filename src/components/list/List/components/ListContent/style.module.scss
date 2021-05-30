@@ -1,0 +1,19 @@
+.ListContent {
+  height: calc(100vh - 64px - 124px);
+  width: 75%;
+  margin: 0 auto;
+
+  &__content {
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+    &::-webkit-scrollbar {
+      width: 0;  /* Remove scrollbar space */
+      background: transparent;  /* Optional: just make scrollbar invisible */
+    }
+  }
+
+}

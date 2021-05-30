@@ -5,12 +5,11 @@ export enum CellType {
 
 export type Cell = {
     data: string;
-    type: CellType;
 };
 
 export type Row = {
     id: number;
-    cells: Cell[];
+    cells: { [cellKey: string]: Cell };
 };
 
 export type Pagination = {

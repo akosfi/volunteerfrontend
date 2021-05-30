@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { initialState } from "redux/events/state";
 import { Event, Member } from "redux/events/types";
+import { RawDataToRowDataTransformer } from "components/pages/events/EventPage/components/tabs/MembersTab/config/list";
 
 const eventSlice = createSlice({
     name: "EVENT",
@@ -35,7 +36,7 @@ const eventSlice = createSlice({
         setEditedEventId: (state, action: PayloadAction<{ eventId: number | null }>) => {
             state.edit.editedEventId = action.payload.eventId;
         },
-        loadEventMembersRequest: state => {
+        loadEventMembersRequest: (state, action: PayloadAction<{ transformer: RawDataToRowDataTransformer }>) => {
             state.members.data.members = [];
             state.members.isLoading = true;
         },
