@@ -9,3 +9,10 @@ export type Event = {
     category: string;
     coverUrl: string;
 };
+
+export type Member = {
+    id: number;
+    name: string;
+    email: string;
+    phoneNumber: string;
+};

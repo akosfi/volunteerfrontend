@@ -1,4 +1,4 @@
-import { Event } from "redux/events/types";
+import { Event, Member } from "redux/events/types";
 
 const events: Event[] = [
     {
@@ -88,3 +88,7 @@ const events: Event[] = [
 ];
 
 export const fetchEvents = () => new Promise(resolve => setTimeout(() => resolve(events), 1000));
+
+const members: Member[] = [{ id: 0, email: "acs.dezso@gmail.com", name: "Ács Dezső", phoneNumber: "+378373737" }];
+
+export const fetchMembers = () => new Promise(resolve => setTimeout(() => resolve(members), 1000));

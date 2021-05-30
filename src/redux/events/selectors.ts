@@ -14,12 +14,21 @@ const getEditedEventId = (state: StoreState) => getState(state).eventEdit.edited
 
 const getIsEventsLoading = (state: StoreState) => getState(state).isLoading;
 
+const getMembers = (state: StoreState) => getState(state).members.data.members;
+
+const getIsMembersLoading = (state: StoreState) => getState(state).members.isLoading;
+
+const getMembersError = (state: StoreState) => getState(state).members.error;
+
 const EventSelectors = {
     getEvents,
     getEventIds,
     getEventById,
     getIsEventsLoading,
-    getEditedEventId
+    getEditedEventId,
+    getMembers,
+    getIsMembersLoading,
+    getMembersError
 };
 
 export default EventSelectors;

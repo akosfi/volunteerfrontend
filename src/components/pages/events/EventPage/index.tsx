@@ -11,6 +11,7 @@ import { ButtonType } from "components/common/Button";
 import EventActions from "redux/events/actions";
 import DetailsTab from "components/pages/events/EventPage/components/tabs/DetailsTab";
 import EditTab from "components/pages/events/EventPage/components/tabs/EditTab";
+import MembersTab from "components/pages/events/EventPage/components/tabs/MembersTab";
 
 enum TabTypes {
     GENERAL_INFORMATION = "EVENT/GENERAL_INFORMATION",
@@ -20,7 +21,7 @@ enum TabTypes {
 
 const tabs: PageHeaderTabType[] = [
     { id: TabTypes.GENERAL_INFORMATION, name: "Részletek", content: <DetailsTab /> },
-    { id: TabTypes.MEMBERS, name: "Jelentkezők", content: <EditTab /> },
+    { id: TabTypes.MEMBERS, name: "Jelentkezők", content: <MembersTab /> },
     { id: TabTypes.EDIT, name: "Szerkesztés", content: <EditTab /> }
 ];
 

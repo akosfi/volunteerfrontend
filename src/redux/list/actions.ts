@@ -1,15 +1,15 @@
 import { Pagination, Row } from "./types";
 
 export enum ListActionConstants {
-    SET_LIST_ROWS,
-    SET_LIST_IS_LOADING,
-    SET_LIST_PAGINATION,
-    SET_SELECTED_ROW_IDS,
+    SET_LIST_ROWS = "LIST/SET_LIST_ROWS",
+    SET_LIST_IS_LOADING = "LIST/SET_LIST_IS_LOADING",
+    SET_LIST_PAGINATION = "LIST/SET_LIST_PAGINATION",
+    SET_SELECTED_ROW_IDS = "LIST/SET_SELECTED_ROW_IDS",
 
-    CLEAR_LIST_DATA
+    CLEAR_LIST_DATA = "LIST/CLEAR_LIST_DATA"
 }
 
-const setListDataAction = (rows: Row[]) => ({
+const setListRowsAction = (rows: Row[]) => ({
     type: ListActionConstants.SET_LIST_ROWS,
     payload: {
         rows
@@ -42,7 +42,7 @@ const clearListData = () => ({
 });
 
 const ListActions = {
-    setListDataAction,
+    setListRowsAction,
     setListIsLoading,
     setListPagination,
     setSelectedRowIds,

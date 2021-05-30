@@ -1,4 +1,4 @@
-import { Event } from "redux/events/types";
+import { Event, Member } from "redux/events/types";
 
 export enum EventActionConstants {
     LOAD_EVENTS = "EVENTS/LOAD_EVENTS",
@@ -9,7 +9,11 @@ export enum EventActionConstants {
     JOIN_EVENT_SUCCESS = "EVENTS/JOIN_EVENT_SUCCESS",
     JOIN_EVENT_ERROR = "EVENTS/JOIN_EVENT_ERROR",
 
-    SET_EDITED_EVENT_ID = "EVENTS/SET_EDITED_EVENT_ID"
+    SET_EDITED_EVENT_ID = "EVENTS/SET_EDITED_EVENT_ID",
+
+    LOAD_EVENT_MEMBERS = "EVENTS/LOAD_EVENT_MEMBERS",
+    LOAD_EVENT_MEMBERS_SUCCESS = "EVENTS/LOAD_EVENT_MEMBERS_SUCCESS",
+    LOAD_EVENT_MEMBERS_ERROR = "EVENTS/LOAD_EVENT_MEMBERS_ERROR"
 }
 
 const loadEventsAction = () => ({
@@ -51,6 +55,24 @@ const setEditedEventId = (eventId: number | null) => ({
     payload: { eventId }
 });
 
+const loadEventMembersAction = () => ({
+    type: EventActionConstants.LOAD_EVENT_MEMBERS
+});
+
+const loadEventMembersSuccessAction = (members: Member[]) => ({
+    type: EventActionConstants.LOAD_EVENT_MEMBERS_SUCCESS,
+    payload: {
+        members
+    }
+});
+
+const loadEventMembersErrorAction = (error: string) => ({
+    type: EventActionConstants.LOAD_EVENTS_ERROR,
+    payload: {
+        error
+    }
+});
+
 const EventActions = {
     loadEventsAction,
     loadEventsSuccessAction,
@@ -58,7 +80,10 @@ const EventActions = {
     joinEventsAction,
     joinEventsSuccessAction,
     joinEventsErrorAction,
-    setEditedEventId
+    setEditedEventId,
+    loadEventMembersAction,
+    loadEventMembersSuccessAction,
+    loadEventMembersErrorAction
 };
 
 export default EventActions;

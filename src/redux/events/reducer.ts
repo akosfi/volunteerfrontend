@@ -2,7 +2,7 @@ import { Reducer } from "redux";
 import { produce } from "immer";
 //
 import { EventActionConstants } from "redux/events/actions";
-import { Event } from "redux/events/types";
+import { Event, Member } from "redux/events/types";
 
 export type EventState = {
     events: Event[];
@@ -16,6 +16,13 @@ export type EventState = {
     };
     eventEdit: {
         editedEventId: number | null;
+    };
+    members: {
+        isLoading: boolean;
+        error: string;
+        data: {
+            members: Member[];
+        };
     };
 };
 
@@ -31,6 +38,13 @@ export const initialState: EventState = {
     },
     eventEdit: {
         editedEventId: null
+    },
+    members: {
+        isLoading: false,
+        error: "",
+        data: {
+            members: []
+        }
     }
 };
 
@@ -83,6 +97,27 @@ const reducer: Reducer<EventState> = (state = initialState, action): EventState 
             return produce(state, draft => {
                 const { eventId } = action.payload;
                 draft.eventEdit.editedEventId = eventId;
+            });
+        }
+
+        case EventActionConstants.LOAD_EVENT_MEMBERS: {
+            return produce(state, draft => {
+                draft.members.isLoading = true;
+                draft.members.data.members = [];
+            });
+        }
+        case EventActionConstants.LOAD_EVENT_MEMBERS_SUCCESS: {
+            return produce(state, draft => {
+                const { members } = action.payload;
+                draft.members.isLoading = false;
+                draft.members.data.members = members;
+            });
+        }
+        case EventActionConstants.LOAD_EVENT_MEMBERS_ERROR: {
+            return produce(state, draft => {
+                const { error } = action.payload;
+                draft.members.isLoading = false;
+                draft.members.error = error;
             });
         }
         default: {
