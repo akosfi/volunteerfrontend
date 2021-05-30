@@ -1,5 +1,7 @@
+export type SnackbarSeverity = "error" | "info" | "success" | "warning";
+
 export type SnackbarRedux = {
     text: string;
-    severity: "error" | "info" | "success" | "warning";
+    severity: SnackbarSeverity;
     id: number;
 };

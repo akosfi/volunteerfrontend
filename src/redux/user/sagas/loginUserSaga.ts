@@ -4,7 +4,7 @@ import { get } from "lodash";
 import { formPath, LoginFormFieldNames } from "components/pages/LoginPage/form";
 import FormSelectors from "redux/forms/selectors";
 import serverApi from "utils/serverApi";
-import UiActions from "redux/ui/actions";
+import { uiActions } from "redux/ui/slice";
 //
 
 function* loginUserSaga() {
@@ -32,7 +32,7 @@ function* loginUserSaga() {
     } catch (e) {
         console.log(e);
         const error = get(e, "data.message", "Failed to load events!");
-        yield put(UiActions.pushSnackbarToQueueAction(error, "error"));
+        yield put(uiActions.pushSnackbarToQueue({ snackbarText: error, snackbarSeverity: "error" }));
     }
 }
 export default loginUserSaga;
