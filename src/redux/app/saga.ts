@@ -1,10 +1,10 @@
-import { takeLeading } from "redux-saga/effects";
+import { all, takeLeading } from "redux-saga/effects";
 //
-import { AppActionConstants } from "redux/app/actions";
+import { appActions } from "redux/app/slice";
 import initializeAppSaga from "redux/app/sagas/initializeAppSaga";
 
-function* eventSaga() {
-    yield takeLeading(AppActionConstants.INITIALIZE_APP, initializeAppSaga);
+function* appSaga() {
+    yield all([takeLeading(appActions.setIsAppInitialized.type, initializeAppSaga)]);
 }
 
-export default eventSaga;
+export default appSaga;

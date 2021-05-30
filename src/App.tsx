@@ -9,7 +9,7 @@ import EventPage from "components/pages/events/EventPage";
 import SnackbarQueueHandler from "components/common/SnackbarQueueHandler";
 import LoginPage from "components/pages/LoginPage";
 import RegistrationPage from "components/pages/RegistrationPage";
-import AppActions from "redux/app/actions";
+import { appActions } from "redux/app/slice";
 import ComingSoonPage from "components/pages/ComingSoonPage";
 import NewEventPage from "components/pages/events/NewEventPage";
 import SystemErrorAlert from "components/common/SystemErrorAlert";
@@ -32,7 +32,7 @@ const App: FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(AppActions.initializeAppAction());
+        dispatch(appActions.setIsAppInitialized({ isAppInitialized: true }));
     }, []);
 
     return (

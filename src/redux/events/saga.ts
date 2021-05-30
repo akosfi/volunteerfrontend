@@ -1,14 +1,16 @@
-import { takeLeading, takeLatest } from "redux-saga/effects";
+import { takeLeading, takeLatest, all } from "redux-saga/effects";
 //
-import { EventActionConstants } from "redux/events/actions";
-import loadEventsSaga from "redux/events/sagas/loadEventsSaga";
-import joinEventSaga from "redux/events/sagas/joinEventSaga";
-import loadEventMembersSaga from "redux/events/sagas/loadEventMembersSaga";
+import { eventActions } from "redux/events/slice";
+import loadEventsRequestSaga from "redux/events/sagas/loadEventsRequestSaga";
+import joinEventRequestSaga from "redux/events/sagas/joinEventRequestSaga";
+import loadEventMembersRequestSaga from "redux/events/sagas/loadEventMembersRequestSaga";
 
 function* eventSaga() {
-    yield takeLatest(EventActionConstants.LOAD_EVENTS, loadEventsSaga);
-    yield takeLatest(EventActionConstants.LOAD_EVENT_MEMBERS, loadEventMembersSaga);
-    yield takeLeading(EventActionConstants.JOIN_EVENT, joinEventSaga);
+    yield all([
+        takeLatest(eventActions.loadEventsRequest.type, loadEventsRequestSaga),
+        takeLatest(eventActions.loadEventMembersRequest.type, loadEventMembersRequestSaga),
+        takeLeading(eventActions.joinEventRequest.type, joinEventRequestSaga)
+    ]);
 }
 
 export default eventSaga;

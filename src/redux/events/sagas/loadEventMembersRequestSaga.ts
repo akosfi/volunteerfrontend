@@ -1,29 +1,26 @@
 import { put, retry } from "@redux-saga/core/effects";
 import { get } from "lodash";
 //
-import EventActions from "redux/events/actions";
+import { eventActions } from "redux/events/slice";
 import { fetchMembers } from "mocks";
 import { Member } from "redux/events/types";
-import { Row } from "../../list/types";
+import { Row } from "redux/list/types";
 import transformMembersToListRows from "./helpers/transformMembersToListRows";
-import ListActions from "../../list/actions";
+import ListActions from "redux/list/actions";
 //
 
-function* loadEventMembersSaga() {
+function* loadEventMembersRequestSaga() {
     try {
-        //TODO DISABLE MOCK
-        //const { data: collections }: AxiosResponse<Collections[]> = yield retry(2, 1500, serverApi.get, "/collections");
         const members: Member[] = yield retry(2, 1500, fetchMembers);
 
         const listRows: Row[] = transformMembersToListRows(members);
 
         yield put(ListActions.setListRowsAction(listRows));
-
-        yield put(EventActions.loadEventMembersSuccessAction(members));
+        yield put(eventActions.loadEventMembersSuccess({ members }));
     } catch (e) {
         console.log(e);
         const error = get(e, "data.message", "Failed to load members!");
-        yield put(EventActions.loadEventMembersErrorAction(error));
+        yield put(eventActions.loadEventMembersFailure({ error }));
     }
 }
-export default loadEventMembersSaga;
+export default loadEventMembersRequestSaga;
