@@ -7,8 +7,10 @@ import { Row } from "redux/list/types";
 import TextCell from "components/list/List/components/ListContent/components/Row/components/TextCell";
 //
 import css from "components/pages/events/EventPage/components/tabs/MembersTab/style.module.scss";
+import ImageWithCheckbox from "../../../../../../../list/List/components/ListContent/components/Row/components/ImageWithCheckbox";
 
 enum CellKey {
+    AVATAR_WITH_CHECKBOX = "avatarWithCheckbox",
     NAME = "name",
     EMAIL = "email",
     PHONE = "phone"
@@ -30,6 +32,9 @@ const createMemberListConfig = (): ListConfig => {
                 (member): Row => ({
                     id: member.id,
                     cells: {
+                        [CellKey.AVATAR_WITH_CHECKBOX]: {
+                            data: "temp_url"
+                        },
                         [CellKey.NAME]: {
                             data: member.name
                         },
@@ -43,6 +48,9 @@ const createMemberListConfig = (): ListConfig => {
                 })
             ),
         components: {
+            [CellKey.AVATAR_WITH_CHECKBOX]: memo(({ value }) => {
+                return null;
+            }),
             [CellKey.NAME]: memo(({ value }) => <TextCell value={value} className={css["name-cell"]} />),
             [CellKey.EMAIL]: memo(({ value }) => <TextCell value={value} className={css["email-cell"]} />),
             [CellKey.PHONE]: memo(({ value }) => <TextCell value={value} className={css["phone-cell"]} />)

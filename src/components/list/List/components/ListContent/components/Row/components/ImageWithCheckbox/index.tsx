@@ -6,7 +6,7 @@ import classNames from "classnames";
 import css from "./style.module.scss";
 
 type Props = {
-    cellData: Cell;
+    value: string;
     className: string;
     contentClassName: string;
     isActive: boolean;
