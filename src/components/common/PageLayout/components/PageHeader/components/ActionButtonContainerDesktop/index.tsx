@@ -4,26 +4,18 @@ import { makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { map, noop } from "lodash";
 //
-import { PageHeaderActionButtonType } from "components/common/PageHeader/index";
+import { PageHeaderActionButtonType } from "components/common/PageLayout/components/PageHeader/index";
 import Button, { ButtonSize } from "components/common/Button";
 import UiSelectors from "redux/ui/selectors";
 
 const useStyles = makeStyles(() => ({
     root: {
-        position: "fixed",
-        bottom: 0,
-        background: "white",
         display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        width: "100vw",
-        paddingTop: "16px",
-        zIndex: 100
+        flexDirection: "row",
+        justifyContent: "space-between"
     },
     actionButtonWrapper: {
-        marginBottom: "16px",
-        width: "75vw"
+        marginLeft: "20px"
     }
 }));
 
@@ -31,12 +23,12 @@ export type Props = {
     actionButtons?: PageHeaderActionButtonType[];
 };
 
-const ActionButtonContainerMobile: FC<Props> = ({ actionButtons }) => {
+const ActionButtonContainerDesktop: FC<Props> = ({ actionButtons }) => {
     const isMobile = useSelector(UiSelectors.getIsMobileWindow);
 
     const classes = useStyles();
 
-    if (!isMobile) return null;
+    if (isMobile) return null;
     return (
         <div className={classes.root}>
             {map(actionButtons, button => (
@@ -45,7 +37,6 @@ const ActionButtonContainerMobile: FC<Props> = ({ actionButtons }) => {
                         title={button.title}
                         buttonType={button.buttonType}
                         buttonSize={ButtonSize.BIG}
-                        fullWidth
                         onClick={button.onClick || noop}
                     />
                 </div>
@@ -54,4 +45,4 @@ const ActionButtonContainerMobile: FC<Props> = ({ actionButtons }) => {
     );
 };
 
-export default ActionButtonContainerMobile;
+export default ActionButtonContainerDesktop;

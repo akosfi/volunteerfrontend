@@ -3,7 +3,11 @@ import { FC, memo, useEffect } from "react";
 import { useDispatch } from "react-redux";
 //
 import PageLayout from "components/common/PageLayout";
-import { PageHeaderActionButtonType, PageHeaderTabType, PageHeaderUpperActionType } from "components/common/PageHeader";
+import {
+    PageHeaderActionButtonType,
+    PageHeaderTabType,
+    PageHeaderUpperActionType
+} from "components/common/PageLayout/components/PageHeader";
 import { ButtonType } from "components/common/Button";
 import { eventActions } from "redux/events/slice";
 import EditTab from "components/pages/events/EventPage/components/tabs/EditTab";

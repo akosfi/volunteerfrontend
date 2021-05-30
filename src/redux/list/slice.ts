@@ -25,14 +25,6 @@ const listSlice = createSlice({
     }
 });
 
-/*
-
-        case ListActionConstants.CLEAR_LIST_DATA: {
-            return initialState;
-        }
-*
-* */
-
 export const { actions: listActions, reducer: listReducer } = listSlice;
 export type { ListState } from "redux/list/state";
 export { initialState } from "redux/list/state";

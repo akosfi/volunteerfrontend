@@ -6,8 +6,8 @@ import PageHeader, {
     PageHeaderActionButtonType,
     PageHeaderTabType,
     PageHeaderUpperActionType
-} from "components/common/PageHeader";
-import PageHeaderTab from "components/common/PageHeader/components/PageHeaderTab";
+} from "components/common/PageLayout/components/PageHeader";
+import PageHeaderTab from "components/common/PageLayout/components/PageHeader/components/PageHeaderTab";
 import { useSelector } from "react-redux";
 import UiSelectors from "redux/ui/selectors";
 

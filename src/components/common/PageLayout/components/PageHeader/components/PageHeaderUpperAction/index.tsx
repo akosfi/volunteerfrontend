@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
     },
     title: {
         color: "#989898",
-        fontSize: "22px"
+        fontSize: "16px"
     }
 }));
 

@@ -6,7 +6,11 @@ import { useParams } from "react-router-dom";
 import { StoreState } from "redux/state";
 import EventSelectors from "redux/events/selectors";
 import PageLayout from "components/common/PageLayout";
-import { PageHeaderActionButtonType, PageHeaderTabType, PageHeaderUpperActionType } from "components/common/PageHeader";
+import {
+    PageHeaderActionButtonType,
+    PageHeaderTabType,
+    PageHeaderUpperActionType
+} from "components/common/PageLayout/components/PageHeader";
 import { ButtonType } from "components/common/Button";
 import { eventActions } from "redux/events/slice";
 import DetailsTab from "components/pages/events/EventPage/components/tabs/DetailsTab";
