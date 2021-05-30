@@ -32,7 +32,7 @@ const eventSlice = createSlice({
             state.join.isJoining = false;
             state.join.error = action.payload.error;
         },
-        setEditedEventId: (state, action: PayloadAction<{ eventId: number }>) => {
+        setEditedEventId: (state, action: PayloadAction<{ eventId: number | null }>) => {
             state.edit.editedEventId = action.payload.eventId;
         },
         loadEventMembersRequest: state => {

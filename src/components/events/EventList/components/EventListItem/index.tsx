@@ -9,7 +9,7 @@ import Badge from "components/common/Badge";
 import { StoreState } from "redux/state";
 import EventSelectors from "redux/events/selectors";
 import EllipsedText from "components/common/EllipsedText";
-import EventActions from "redux/events/actions";
+import { eventActions } from "redux/events/slice";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -76,7 +76,7 @@ const EventListItem: FC<Props> = ({ eventId }) => {
 
     const navigateToEvent = () => history.push(`/events/${eventId}`);
 
-    const handleEventJoin = () => dispatch(EventActions.joinEventsAction(eventId));
+    const handleEventJoin = () => dispatch(eventActions.joinEventRequest({ eventId }));
 
     if (!event) return null;
 

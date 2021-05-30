@@ -1,9 +1,9 @@
 import { put } from "@redux-saga/core/effects";
 //
-import EventActions from "redux/events/actions";
+import { eventActions } from "redux/events/slice";
 //
 
 function* initializeAppSaga() {
-    yield put(EventActions.loadEventsAction());
+    yield put(eventActions.loadEventsRequest());
 }
 export default initializeAppSaga;

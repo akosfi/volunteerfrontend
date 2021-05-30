@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import PageLayout from "components/common/PageLayout";
 import { PageHeaderActionButtonType, PageHeaderTabType, PageHeaderUpperActionType } from "components/common/PageHeader";
 import { ButtonType } from "components/common/Button";
-import EventActions from "redux/events/actions";
+import { eventActions } from "redux/events/slice";
 import EditTab from "components/pages/events/EventPage/components/tabs/EditTab";
 
 enum TabTypes {
@@ -23,7 +23,7 @@ const NewEventPage: FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(EventActions.setEditedEventId(-1));
+        dispatch(eventActions.setEditedEventId({ eventId: -1 }));
     }, []);
 
     const actionButtons: PageHeaderActionButtonType[] = [

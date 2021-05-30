@@ -8,9 +8,8 @@ import { useLocation } from "react-router-dom";
 import ClearIcon from "@material-ui/icons/Clear";
 //
 import Sidebar from "./components/Sidebar";
-import UiActions from "redux/ui/actions";
+import { uiActions } from "redux/ui/slice";
 import UiSelectors from "redux/ui/selectors";
-
 //
 
 const useStyles = makeStyles({
@@ -76,7 +75,7 @@ const Header: FC = () => {
 
     const excludedPaths = ["/login", "/register"];
 
-    const handleToggleSidebar = () => dispatch(UiActions.setIsSidebarOpenAction(!isSidebarOpen));
+    const handleToggleSidebar = () => dispatch(uiActions.setIsSidebarOpen({ isSidebarOpen: !isSidebarOpen }));
 
     if (excludedPaths.includes(pathname)) return null;
 

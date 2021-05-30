@@ -2,7 +2,7 @@ import { put } from "@redux-saga/core/effects";
 import { get } from "lodash";
 //
 import { eventActions } from "redux/events/slice";
-import UiActions from "redux/ui/actions";
+import { uiActions } from "redux/ui/slice";
 //
 
 function* joinEventRequestSaga({ payload: { eventId } }: ReturnType<typeof eventActions.joinEventRequest>) {
@@ -11,7 +11,7 @@ function* joinEventRequestSaga({ payload: { eventId } }: ReturnType<typeof event
     } catch (e) {
         console.log(e);
         const error = get(e, "data.message", "Failed to join event!");
-        yield put(UiActions.pushSnackbarToQueueAction(error, "error"));
+        yield put(uiActions.pushSnackbarToQueue({ snackbarText: error, snackbarSeverity: "error" }));
         yield put(eventActions.joinEventFailure({ error }));
     }
 }

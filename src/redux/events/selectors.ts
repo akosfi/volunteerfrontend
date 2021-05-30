@@ -10,7 +10,7 @@ const getEventIds = (state: StoreState) => map(getEvents(state), ({ id }) => id)
 
 const getEventById = (state: StoreState, id: number) => find(getEvents(state), ({ id: _id }) => _id === id);
 
-const getEditedEventId = (state: StoreState) => getState(state).eventEdit.editedEventId;
+const getEditedEventId = (state: StoreState) => getState(state).edit.editedEventId;
 
 const getIsEventsLoading = (state: StoreState) => getState(state).isLoading;
 

@@ -5,7 +5,8 @@ import classNames from "classnames";
 import { get, map, find } from "lodash";
 import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import UiActions from "redux/ui/actions";
+//
+import { uiActions } from "redux/ui/slice";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -83,7 +84,7 @@ const SidebarContent: FC = () => {
     }, [pathname]);
 
     const handleListItemSelect = (url: string) => {
-        dispatch(UiActions.setIsSidebarOpenAction(false));
+        dispatch(uiActions.setIsSidebarOpen({ isSidebarOpen: false }));
         history.push(url);
     };
 

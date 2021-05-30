@@ -6,7 +6,7 @@ import { fetchMembers } from "mocks";
 import { Member } from "redux/events/types";
 import { Row } from "redux/list/types";
 import transformMembersToListRows from "./helpers/transformMembersToListRows";
-import ListActions from "redux/list/actions";
+import { listActions } from "redux/list/slice";
 //
 
 function* loadEventMembersRequestSaga() {
@@ -15,7 +15,7 @@ function* loadEventMembersRequestSaga() {
 
         const listRows: Row[] = transformMembersToListRows(members);
 
-        yield put(ListActions.setListRowsAction(listRows));
+        yield put(listActions.setListRows({ rows: listRows }));
         yield put(eventActions.loadEventMembersSuccess({ members }));
     } catch (e) {
         console.log(e);

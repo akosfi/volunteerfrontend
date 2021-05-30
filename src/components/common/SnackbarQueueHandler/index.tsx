@@ -5,7 +5,7 @@ import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 //
 import UiSelectors from "redux/ui/selectors";
-import UiActions from "redux/ui/actions";
+import { uiActions } from "redux/ui/slice";
 import { SnackbarRedux } from "redux/ui/types";
 
 const SnackbarQueueHandler: FC = () => {
@@ -17,7 +17,7 @@ const SnackbarQueueHandler: FC = () => {
     useEffect(() => {
         if (nextSnackbarInQueue?.id !== currentSnackbar?.id) {
             setCurrentSnackbar(nextSnackbarInQueue);
-            setTimeout(() => dispatch(UiActions.popSnackbarFromQueueAction()), 5000);
+            setTimeout(() => dispatch(uiActions.popSnackbarFromQueue()), 5000);
         }
     }, [nextSnackbarInQueue]);
 

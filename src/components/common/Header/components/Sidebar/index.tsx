@@ -10,7 +10,7 @@ import { getIsSidebarOpen } from "redux/ui/selectors";
 import SidebarContent from "components/common/Header/components/Sidebar/components/SidebarContent";
 import usePrevious from "utils/hooks/usePrevious";
 import useOnClickOutside from "utils/hooks/useOnClickOutside";
-import UiActions from "redux/ui/actions";
+import { uiActions } from "redux/ui/slice";
 //
 
 const transitionDurationInMs = 200;
@@ -100,7 +100,7 @@ const Sidebar: FC<Props> = ({ appbarRef }) => {
         };*/
     }, [isSideBarOpen]);
 
-    const closeSidebar = () => dispatch(UiActions.setIsSidebarOpenAction(false));
+    const closeSidebar = () => dispatch(uiActions.setIsSidebarOpen({ isSidebarOpen: false }));
 
     useOnClickOutside([sidebarRef, appbarRef], closeSidebar, isSideBarOpen);
 

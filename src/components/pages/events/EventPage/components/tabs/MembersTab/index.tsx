@@ -2,13 +2,13 @@ import * as React from "react";
 import { FC, memo, useEffect } from "react";
 import { useDispatch } from "react-redux";
 //
-import EventActions from "redux/events/actions";
+import { eventActions } from "redux/events/slice";
 
 const MembersTab: FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(EventActions.loadEventMembersAction());
+        dispatch(eventActions.loadEventMembersRequest());
     }, []);
 
     return <div>asd</div>;

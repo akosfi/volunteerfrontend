@@ -8,7 +8,7 @@ import EventSelectors from "redux/events/selectors";
 import PageLayout from "components/common/PageLayout";
 import { PageHeaderActionButtonType, PageHeaderTabType, PageHeaderUpperActionType } from "components/common/PageHeader";
 import { ButtonType } from "components/common/Button";
-import EventActions from "redux/events/actions";
+import { eventActions } from "redux/events/slice";
 import DetailsTab from "components/pages/events/EventPage/components/tabs/DetailsTab";
 import EditTab from "components/pages/events/EventPage/components/tabs/EditTab";
 import MembersTab from "components/pages/events/EventPage/components/tabs/MembersTab";
@@ -40,14 +40,14 @@ const EventPage: FC = () => {
     //
 
     useEffect(() => {
-        dispatch(EventActions.setEditedEventId(eventId));
+        dispatch(eventActions.setEditedEventId({ eventId }));
 
         return () => {
-            dispatch(EventActions.setEditedEventId(null));
+            dispatch(eventActions.setEditedEventId({ eventId: null }));
         };
     }, [id]);
 
-    const handleEventJoin = () => dispatch(EventActions.joinEventsAction(eventId));
+    const handleEventJoin = () => dispatch(eventActions.joinEventRequest({ eventId }));
 
     const actionButtons: PageHeaderActionButtonType[] = [
         {
