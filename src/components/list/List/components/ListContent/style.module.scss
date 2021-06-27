@@ -2,6 +2,11 @@
   height: calc(100vh - 64px - 124px);
   width: 75%;
   margin: 0 auto;
+  position: relative;
+
+  border: 1px solid #DDDDDD;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
 
   &__content {
     overflow-y: scroll;

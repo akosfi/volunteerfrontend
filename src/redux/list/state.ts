@@ -5,13 +5,11 @@ export type ListState = {
     selectedRowIds: number[];
     isLoading: boolean;
     pagination: Pagination;
-    hoveredRowId: number | null;
 };
 
 export const initialState: ListState = {
     rows: [],
     selectedRowIds: [],
     isLoading: false,
-    pagination: { allPageCount: 0, currentPage: 0, limit: 0 },
-    hoveredRowId: null
+    pagination: { allPageCount: 0, currentPage: 0, limit: 0 }
 };

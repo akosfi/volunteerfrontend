@@ -6,6 +6,7 @@ import React from "react";
 import { ListConfig } from "components/pages/events/EventPage/components/tabs/MembersTab/config/list";
 import ListSelectors from "redux/list/selectors";
 import Row from "components/list/List/components/ListContent/components/Row";
+import Pagination from "components/list/List/components/ListContent/components/Pagination";
 //
 import css from "./style.module.scss";
 
@@ -22,6 +23,7 @@ const ListContent: FC<Props> = ({ config }) => {
                     <Row row={row} config={config} key={index} />
                 ))}
             </div>
+            <Pagination />
         </div>
     );
 };

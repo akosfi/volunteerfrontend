@@ -3,6 +3,10 @@
   height: 58px;
   border-top: 1px solid #DDDDDD;
 
+  &:nth-child(1) {
+    border-top: none;
+  }
+
   &__content {
     display: flex;
     flex-direction: row;
@@ -10,7 +14,7 @@
     width: 100%;
   }
   
-  &:hover {
+  &-is-highlighted, &:hover {
     background: #F0F0F0;
   }
 }

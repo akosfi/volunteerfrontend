@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { filter } from "lodash";
 //
 import { initialState } from "redux/list/state";
 import { Pagination, Row } from "redux/list/types";
@@ -16,11 +17,14 @@ const listSlice = createSlice({
         setListPagination: (state, action: PayloadAction<{ pagination: Pagination }>) => {
             state.pagination = action.payload.pagination;
         },
+        setSelectedRowId: (state, action: PayloadAction<{ selectedRowId: number }>) => {
+            state.selectedRowIds = [...state.selectedRowIds, action.payload.selectedRowId];
+        },
+        setDeselectedRowId: (state, action: PayloadAction<{ selectedRowId: number }>) => {
+            state.selectedRowIds = filter(state.selectedRowIds, id => id !== action.payload.selectedRowId);
+        },
         setSelectedRowIds: (state, action: PayloadAction<{ selectedRowIds: number[] }>) => {
             state.selectedRowIds = action.payload.selectedRowIds;
-        },
-        setHoveredRowId: (state, action: PayloadAction<{ hoveredRowId: number | null }>) => {
-            state.hoveredRowId = action.payload.hoveredRowId;
         },
         clearListData: state => {
             state = initialState;

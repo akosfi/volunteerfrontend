@@ -8,6 +8,9 @@ import TextCell from "components/list/List/components/ListContent/components/Row
 //
 import css from "components/pages/events/EventPage/components/tabs/MembersTab/style.module.scss";
 import ImageWithCheckbox from "../../../../../../../list/List/components/ListContent/components/Row/components/ImageWithCheckbox";
+import { listActions } from "../../../../../../../../redux/list/slice";
+import { useDispatch, useSelector } from "react-redux";
+import ListSelectors from "../../../../../../../../redux/list/selectors";
 
 enum CellKey {
     AVATAR_WITH_CHECKBOX = "avatarWithCheckbox",
@@ -21,7 +24,7 @@ export type RawDataToRowDataTransformer = (...data: any) => Row[];
 //TODO MOVE THIS ELSEWHERE
 export type ListConfig = {
     rawDataToRowDataTransformer: RawDataToRowDataTransformer;
-    components: { [cellKey: string]: FC<{ value?: any }> };
+    components: { [cellKey: string]: FC<{ value?: any; rowId: number }> };
 };
 
 const createMemberListConfig = (): ListConfig => {
@@ -48,8 +51,22 @@ const createMemberListConfig = (): ListConfig => {
                 })
             ),
         components: {
-            [CellKey.AVATAR_WITH_CHECKBOX]: memo(({ value }) => {
-                return null;
+            [CellKey.AVATAR_WITH_CHECKBOX]: memo(({ value, rowId }) => {
+                const isSelected = useSelector(ListSelectors.getIsRowSelected(rowId));
+                const dispatch = useDispatch();
+
+                const createSetIsSelected = (rowId: number) => () =>
+                    isSelected
+                        ? dispatch(listActions.setDeselectedRowId({ selectedRowId: rowId }))
+                        : dispatch(listActions.setSelectedRowId({ selectedRowId: rowId }));
+
+                return (
+                    <ImageWithCheckbox
+                        value={value}
+                        isSelected={isSelected}
+                        toggleIsSelected={createSetIsSelected(rowId)}
+                    />
+                );
             }),
             [CellKey.NAME]: memo(({ value }) => <TextCell value={value} className={css["name-cell"]} />),
             [CellKey.EMAIL]: memo(({ value }) => <TextCell value={value} className={css["email-cell"]} />),
