@@ -12,6 +12,7 @@ function* loadEventMembersRequestSaga({
     payload: { transformer }
 }: ReturnType<typeof eventActions.loadEventMembersRequest>) {
     try {
+        yield put(listActions.clearListData());
         const members: Member[] = yield retry(2, 1500, fetchMembers);
 
         const listRows: Row[] = transformer(members);

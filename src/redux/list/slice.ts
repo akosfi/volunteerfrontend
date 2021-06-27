@@ -26,9 +26,7 @@ const listSlice = createSlice({
         setSelectedRowIds: (state, action: PayloadAction<{ selectedRowIds: number[] }>) => {
             state.selectedRowIds = action.payload.selectedRowIds;
         },
-        clearListData: state => {
-            state = initialState;
-        }
+        clearListData: () => ({ ...initialState })
     }
 });
 
