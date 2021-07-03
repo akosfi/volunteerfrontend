@@ -4,9 +4,9 @@ import { CircularProgress, makeStyles } from "@material-ui/core";
 import classNames from "classnames";
 //
 import { ButtonType } from "components/common/Button";
-import PageHeaderUpperAction from "components/common/PageHeader/components/PageHeaderUpperAction";
-import ActionButtonContainerDesktop from "components/common/PageHeader/components/ActionButtonContainerDesktop";
-import ActionButtonContainerMobile from "components/common/PageHeader/components/ActionButtonContainerMobile";
+import PageHeaderUpperAction from "components/common/PageLayout/components/PageHeader/components/PageHeaderUpperAction";
+import ActionButtonContainerDesktop from "components/common/PageLayout/components/PageHeader/components/ActionButtonContainerDesktop";
+import ActionButtonContainerMobile from "components/common/PageLayout/components/PageHeader/components/ActionButtonContainerMobile";
 
 export type PageHeaderTabType = {
     id: string;
@@ -33,7 +33,7 @@ export type PageHeaderUpperActionType = {
 const useStyles = makeStyles(theme => ({
     root: {
         width: "100%",
-        height: "162px",
+        height: "124px",
         background: "#F6F6F6"
     },
     hasTopMargin: {
@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
         flexDirection: "column"
     },
     row: {
-        flex: "0 0 54px",
+        flex: "0 0 41px",
         display: "flex",
         alignItems: "center"
     },
@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: "24px",
 
         [theme.breakpoints.up("sm")]: {
-            fontSize: "40px"
+            fontSize: "26px"
         }
     },
     actionButtons: {

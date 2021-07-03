@@ -1,0 +1,26 @@
+.ListContent {
+  //full height - nav bar - modal header - list header - 1px-1px border top bottom
+  height: calc(100vh - 64px - 124px - 60px - 2px);
+  width: 75%;
+  margin: 0 auto;
+  position: relative;
+  background-color: white;
+  border: 1px solid #DDDDDD;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+
+  &__content {
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    //full height - pagination height
+    height: calc(100% - 44px);
+
+    &::-webkit-scrollbar {
+      width: 0;  /* Remove scrollbar space */
+      background: transparent;  /* Optional: just make scrollbar invisible */
+    }
+  }
+
+}

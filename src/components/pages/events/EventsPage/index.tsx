@@ -2,7 +2,7 @@ import * as React from "react";
 import { FC, memo } from "react";
 //
 import { ButtonType } from "components/common/Button";
-import { PageHeaderActionButtonType, PageHeaderTabType } from "components/common/PageHeader";
+import { PageHeaderActionButtonType, PageHeaderTabType } from "components/common/PageLayout/components/PageHeader";
 import PageLayout from "components/common/PageLayout";
 import AllEventTab from "components/pages/events/EventsPage/components/tabs/AllEventTab";
 import useNavigation from "utils/hooks/useNavigation";

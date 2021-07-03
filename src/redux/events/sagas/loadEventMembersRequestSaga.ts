@@ -5,15 +5,17 @@ import { eventActions } from "redux/events/slice";
 import { fetchMembers } from "mocks";
 import { Member } from "redux/events/types";
 import { Row } from "redux/list/types";
-import transformMembersToListRows from "./helpers/transformMembersToListRows";
 import { listActions } from "redux/list/slice";
 //
 
-function* loadEventMembersRequestSaga() {
+function* loadEventMembersRequestSaga({
+    payload: { transformer }
+}: ReturnType<typeof eventActions.loadEventMembersRequest>) {
     try {
+        yield put(listActions.clearListData());
         const members: Member[] = yield retry(2, 1500, fetchMembers);
 
-        const listRows: Row[] = transformMembersToListRows(members);
+        const listRows: Row[] = transformer(members);
 
         yield put(listActions.setListRows({ rows: listRows }));
         yield put(eventActions.loadEventMembersSuccess({ members }));
