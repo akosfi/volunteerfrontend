@@ -4,6 +4,7 @@ import { get } from "lodash";
 import { makeStyles } from "@material-ui/core";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
+//
 import FormSelectors from "redux/forms/selectors";
 import { StoreState } from "redux/state";
 import FormActions from "redux/forms/actions";
@@ -15,18 +16,24 @@ const useStyles = makeStyles(() => ({
         width: "100%"
     },
     input: {
-        height: "32px",
-        fontSize: "12px",
+        height: "36px",
+        fontSize: "14px",
         borderRadius: "3px",
-        border: "0.6px solid #C4C4C4",
+        border: "1px solid #C4C4C4",
         paddingLeft: "12px",
+        boxSizing: "border-box",
         "&::placeholder": {
             color: "#989898"
+        },
+        "&:focus": {
+            border: "2px solid #6C99F1",
+            paddingLeft: "11px"
         }
     },
     label: {
-        fontSize: "12px",
-        color: "#989898"
+        fontSize: "14px",
+        color: "#989898",
+        paddingBottom: "2px"
     },
     labelHidden: {
         display: "none"

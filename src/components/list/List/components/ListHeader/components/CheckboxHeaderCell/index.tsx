@@ -1,7 +1,7 @@
 import React from "react";
 import { FC, memo } from "react";
 import classNames from "classnames";
-import { Checkbox } from "@material-ui/core";
+import Checkbox from "@material-ui/core/Checkbox";
 //
 
 //
@@ -12,13 +12,24 @@ type Props = {
     toggleIsSelected: () => void;
     contentClassName?: string;
     className?: string;
+    indeterminateChecked?: boolean;
 };
 
-const CheckboxHeaderCell: FC<Props> = ({ className = "", contentClassName = "", isSelected }) => {
+const CheckboxHeaderCell: FC<Props> = ({
+    className = "",
+    contentClassName = "",
+    isSelected,
+    toggleIsSelected,
+    indeterminateChecked = false
+}) => {
     return (
         <div className={classNames(css["CheckboxHeaderCell"], className)}>
             <div className={classNames(css["CheckboxHeaderCell__content"], contentClassName)}>
-                <Checkbox checked={isSelected} onClick={() => ""} />
+                <Checkbox
+                    checked={isSelected && !indeterminateChecked}
+                    onClick={toggleIsSelected}
+                    indeterminate={isSelected && indeterminateChecked}
+                />
             </div>
         </div>
     );
