@@ -15,6 +15,7 @@ import NewEventPage from "components/pages/events/NewEventPage";
 import SystemErrorAlert from "components/common/SystemErrorAlert";
 //
 import "assets/styles/global.scss";
+import ProfilePage from "./components/pages/ProfilePage";
 
 const App: FC = () => {
     const theme = createMuiTheme({
@@ -48,7 +49,7 @@ const App: FC = () => {
                     <Route path="/login" exact children={<LoginPage />} />
                     <Route path="/register" exact children={<RegistrationPage />} />
                     <Route path="/members" exact children={<ComingSoonPage />} />
-                    <Route path="/profile" exact children={<ComingSoonPage />} />
+                    <Route path="/profile" exact children={<ProfilePage />} />
                 </Switch>
             </Router>
         </ThemeProvider>

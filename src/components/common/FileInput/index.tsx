@@ -1,10 +1,11 @@
 import * as React from "react";
-import { ChangeEvent, FC, memo, useRef, useState } from "react";
+import { FC, memo } from "react";
 import { makeStyles } from "@material-ui/core";
-import { get } from "lodash";
 import classNames from "classnames";
 import ClearIcon from "@material-ui/icons/Clear";
 import AddIcon from "@material-ui/icons/Add";
+//
+import useFileInput from "lib/hooks/useFileInput";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -70,26 +71,10 @@ const useStyles = makeStyles(() => ({
 }));
 
 const FileInput: FC = () => {
-    const [fileURL, setFileURL] = useState<string | null>(null);
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
-
-    const handleFileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const file = get(e, "target.files[0]", null);
-
-        if (!file) return;
-
-        const url = URL.createObjectURL(file);
-        setFileURL(url);
-    };
-
-    const handleFileRemove = () => {
-        if (fileInputRef?.current) {
-            fileInputRef.current.value = "";
-            setFileURL(null);
-        }
-    };
-
     const classes = useStyles();
+
+    const { fileURL, fileInputRef, handleFileInputChange, handleFileRemove } = useFileInput();
+
     return (
         <div className={classes.root}>
             <input
