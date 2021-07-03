@@ -2,22 +2,24 @@ import * as React from "react";
 import { FC } from "react";
 import { makeStyles } from "@material-ui/core";
 //
-import { PageHeaderActionButtonType, PageHeaderTabType } from "../../common/PageLayout/components/PageHeader";
-import EditTab from "../events/EventPage/components/tabs/EditTab";
-import PageLayout from "../../common/PageLayout";
-import { ButtonType } from "../../common/Button";
+import { PageHeaderActionButtonType, PageHeaderTabType } from "components/common/PageLayout/components/PageHeader";
+import PageLayout from "components/common/PageLayout";
+import { ButtonType } from "components/common/Button";
+import EditTab from "components/pages/ProfilePage/components/tabs/EditTab";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
     root: {
-        width: "100%",
-        height: "100vh",
-        background: "#F6F6F6"
+        width: "100%"
     },
     container: {
-        paddingTop: "84px",
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column"
+        width: "75%",
+        margin: "0 auto",
+        display: "grid",
+        gridTemplateColumns: "100%",
+        marginTop: "28px",
+        [theme.breakpoints.up("sm")]: {
+            gridTemplateColumns: "55% 1fr 33%"
+        }
     },
     title: {
         fontSize: "30px",
