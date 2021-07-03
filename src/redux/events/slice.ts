@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { initialState } from "redux/events/state";
 import { Event, Member } from "redux/events/types";
-import { RawDataToRowDataTransformer } from "components/pages/events/EventPage/components/tabs/MembersTab/config/list";
+import { RawDataToRowDataTransformer } from "components/list/List/types";
 
 const eventSlice = createSlice({
     name: "EVENT",

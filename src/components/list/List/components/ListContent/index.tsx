@@ -3,7 +3,7 @@ import { map } from "lodash";
 import { useSelector } from "react-redux";
 import React from "react";
 //
-import { ListConfig } from "components/pages/events/EventPage/components/tabs/MembersTab/config/list";
+import { ListConfig } from "components/list/List/types";
 import ListSelectors from "redux/list/selectors";
 import Row from "components/list/List/components/ListContent/components/Row";
 import Pagination from "components/list/List/components/ListContent/components/Pagination";

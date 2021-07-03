@@ -26,6 +26,9 @@ const listSlice = createSlice({
         setSelectedRowIds: (state, action: PayloadAction<{ selectedRowIds: number[] }>) => {
             state.selectedRowIds = action.payload.selectedRowIds;
         },
+        setHoveredRowId: (state, action: PayloadAction<{ hoveredRowId: number | null }>) => {
+            state.hoveredRowId = action.payload.hoveredRowId;
+        },
         clearListData: () => ({ ...initialState })
     }
 });

@@ -1,0 +1,14 @@
+.ListHeader {
+  width: 75%;
+  margin: 0 auto;
+  position: relative;
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+
+}
