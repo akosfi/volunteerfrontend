@@ -21,6 +21,7 @@ const useStyles = makeStyles(() => ({
         borderRadius: "3px",
         border: "1px solid #C4C4C4",
         paddingLeft: "12px",
+        paddingTop: "9px",
         boxSizing: "border-box",
         "&::placeholder": {
             color: "#989898"
@@ -45,11 +46,15 @@ const useStyles = makeStyles(() => ({
     },
     errorHidden: {
         display: "none"
+    },
+    inputFixed: {
+        height: "20px",
+        background: "#6C99F1",
+        marginRight: "8px"
     }
 }));
 
 export type Props = {
-    type?: "text" | "password";
     label?: string;
     placeholder?: string;
     error?: string;
@@ -57,14 +62,14 @@ export type Props = {
     path: string;
 };
 
-const TextInput: FC<Props> = ({ path, placeholder = "", label = "", type = "text", className = "" }) => {
+const SeparatedValueTextField: FC<Props> = ({ path, placeholder = "", label = "", className = "" }) => {
     const classes = useStyles();
 
     const value = useSelector((state: StoreState) => FormSelectors.getFieldValue(state, path));
     const error = useSelector((state: StoreState) => FormSelectors.getFieldError(state, path));
     const dispatch = useDispatch();
 
-    const onValueChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const onValueChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const newValue = get(e, "target.value", null);
 
         if (!!newValue) {
@@ -79,17 +84,20 @@ const TextInput: FC<Props> = ({ path, placeholder = "", label = "", type = "text
         <div className={classes.root}>
             <label className={classNames(classes.label, { [classes.labelHidden]: !hasLabel })}>{label}</label>
 
-            <input
-                type={type}
-                className={classNames(classes.input, className)}
+            <div className={classNames(classes.input, className)}>
+                <span>asd</span>
+                <span>asd</span>
+                <span>asd</span>
+            </div>
+            {/*<textarea
                 placeholder={placeholder}
                 onChange={onValueChangeHandler}
                 value={value}
-            />
+            />*/}
 
             <span className={classNames(classes.error, { [classes.errorHidden]: !hasError })}>{error}</span>
         </div>
     );
 };
 
-export default TextInput;
+export default SeparatedValueTextField;

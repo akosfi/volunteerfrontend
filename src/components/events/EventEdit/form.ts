@@ -1,6 +1,6 @@
 import { FormFieldList } from "redux/forms/types";
 
-export const formPath = "EVENT_EDITPage";
+export const formPath = "EVENT_EDIT";
 
 export enum EventEditFormFieldNames {
     NAME = "EVENT_EDIT/NAME",

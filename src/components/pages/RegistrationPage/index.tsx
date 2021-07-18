@@ -13,7 +13,7 @@ import {
     RegistrationFormFieldNames,
     RegistrationFormFields
 } from "components/pages/RegistrationPage/form";
-import FormActions from "redux/forms/actions";
+import { formActions } from "redux/forms/slice";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -73,10 +73,10 @@ const RegistrationPage: FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(FormActions.addFormAction(formPath, RegistrationFormFields));
+        dispatch(formActions.addForm({ path: formPath, fields: RegistrationFormFields }));
 
         return () => {
-            dispatch(FormActions.removeFormAction(formPath));
+            dispatch(formActions.removeForm({ path: formPath }));
         };
     }, []);
 
