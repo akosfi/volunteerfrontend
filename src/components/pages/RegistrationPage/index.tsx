@@ -14,7 +14,9 @@ import {
 } from "components/pages/RegistrationPage/form";
 import { formActions } from "redux/forms/slice";
 import { userActions } from "redux/user/slice";
-import CustomTextInput from "components/common/CustomTextInput";
+import CustomTextInput from "components/common/inputs/CustomTextInput";
+import CustomDateInput from "components/common/inputs/CustomDateInput";
+import CustomCheckboxInput from "../../common/inputs/CustomCheckboxInput";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -35,7 +37,8 @@ const useStyles = makeStyles(() => ({
     },
     card: {
         marginTop: "40px",
-        width: "414px",
+        maxWidth: "614px",
+        width: "100%",
         paddingTop: "64px"
     },
     form: {
@@ -135,7 +138,7 @@ const RegistrationPage: FC = () => {
                                 path={getFieldPath(RegistrationFormFieldNames.PASSWORD)}
                                 type={"password"}
                             />
-                            <CustomTextInput
+                            <CustomDateInput
                                 placeholder="Születési idő"
                                 label="Születési idő"
                                 className={classes.input}
@@ -146,6 +149,10 @@ const RegistrationPage: FC = () => {
                                 label="Város"
                                 className={classes.input}
                                 path={getFieldPath(RegistrationFormFieldNames.CITY)}
+                            />
+                            <CustomCheckboxInput
+                                path={getFieldPath(RegistrationFormFieldNames.TERMS_ACCEPTED)}
+                                title={"Elfogadom a felhasználási feltételeket és az adatkezelési tájékoztatót."}
                             />
 
                             <div className={classes.buttonWrapper}>

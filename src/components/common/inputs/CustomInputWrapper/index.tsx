@@ -6,7 +6,7 @@ import { StoreState } from "redux/state";
 import FormSelectors from "redux/forms/selectors";
 import { formActions } from "redux/forms/slice";
 
-type Render = (value: string, onChange: (e: ChangeEvent<HTMLInputElement>) => void, error?: string) => ReactNode;
+type Render = (value: string, onChange: (value: string) => void, error?: string) => ReactNode;
 
 type Props = {
     path: string;
@@ -18,13 +18,7 @@ const CustomInputWrapper: FC<Props> = ({ path, render }) => {
     const error = useSelector((state: StoreState) => FormSelectors.getFieldError(state, path));
     const dispatch = useDispatch();
 
-    const onValueChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        const newValue = get(e, "target.value", null);
-
-        if (!!newValue) {
-            dispatch(formActions.setFieldValue({ path, value: newValue }));
-        }
-    };
+    const onValueChangeHandler = (value: string) => dispatch(formActions.setFieldValue({ path, value }));
 
     return <>{render(value, onValueChangeHandler, error)}</>;
 };

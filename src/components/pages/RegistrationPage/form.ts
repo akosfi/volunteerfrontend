@@ -10,7 +10,8 @@ export enum RegistrationFormFieldNames {
     PASSWORD = "REGISTRATION/PASSWORD",
     PHONE_NUMBER = "REGISTRATION/PHONE_NUMBER",
     DATE_OF_BIRTH = "REGISTRATION/DATE_OF_BIRTH",
-    CITY = "REGISTRATION/CITY"
+    CITY = "REGISTRATION/CITY",
+    TERMS_ACCEPTED = "REGISTRATION/TERMS_ACCEPTED"
 }
 
 export const RegistrationFormFields: FormFieldList = {
@@ -21,7 +22,8 @@ export const RegistrationFormFields: FormFieldList = {
     [RegistrationFormFieldNames.PASSWORD]: { value: "", defaultValue: "" },
     [RegistrationFormFieldNames.PHONE_NUMBER]: { value: "", defaultValue: "" },
     [RegistrationFormFieldNames.DATE_OF_BIRTH]: { value: "", defaultValue: "" },
-    [RegistrationFormFieldNames.CITY]: { value: "", defaultValue: "" }
+    [RegistrationFormFieldNames.CITY]: { value: "", defaultValue: "" },
+    [RegistrationFormFieldNames.TERMS_ACCEPTED]: { value: "false", defaultValue: "false" }
 };
 
 export const getRegistrationFormFieldPath = (fieldName: RegistrationFormFieldNames) =>

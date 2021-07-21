@@ -1,6 +1,8 @@
 import * as React from "react";
-import { FC } from "react";
+import { ChangeEvent, FC } from "react";
 import { makeStyles, TextField } from "@material-ui/core";
+import { get } from "lodash";
+import classNames from "classnames";
 //
 import CustomInputWrapper from "components/common/inputs/CustomInputWrapper";
 
@@ -30,12 +32,15 @@ const CustomTextInput: FC<Props> = ({ path, placeholder = "", label = "", type =
                 <TextField
                     label={label}
                     value={value}
-                    onChange={onValueChangeHandler}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                        const value = get(e, "target.value", null);
+                        onValueChangeHandler(value);
+                    }}
                     variant="outlined"
                     hiddenLabel={!label}
                     error={!!error}
                     helperText={error}
-                    className={classes.root}
+                    className={classNames(classes.root, className)}
                     type={type}
                     InputLabelProps={{ shrink: true }}
                     placeholder={placeholder}

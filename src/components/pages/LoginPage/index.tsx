@@ -1,11 +1,10 @@
 import * as React from "react";
-import { FC, useEffect } from "react";
+import { ChangeEvent, FC, useEffect } from "react";
 import { Card, CardContent, makeStyles } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 //
-import Button, { ButtonType } from "components/common/Button";
-import TextInput from "components/common/TextInput";
+import Button, { ButtonSize, ButtonType } from "components/common/Button";
 import UserSelectors from "redux/user/selectors";
 import {
     formPath,
@@ -14,6 +13,8 @@ import {
     LoginFormFields
 } from "components/pages/LoginPage/form";
 import { formActions } from "redux/forms/slice";
+import CustomTextInput from "../../common/inputs/CustomTextInput";
+import { userActions } from "../../../redux/user/slice";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -82,7 +83,12 @@ const LoginPage: FC = () => {
 
     const router = useHistory();
 
-    const navigateToRegistration = () => router.push("/register");
+    const handleRegistrationButtonClick = () => router.push("/register");
+
+    const handleLoginButtonClick = (e: ChangeEvent) => {
+        e.preventDefault();
+        dispatch(userActions.loginUserRequest());
+    };
 
     return (
         <div className={classes.root}>
@@ -92,13 +98,13 @@ const LoginPage: FC = () => {
                 <Card className={classes.card}>
                     <CardContent className={classes.cardContent}>
                         <form className={classes.form}>
-                            <TextInput
+                            <CustomTextInput
                                 placeholder="Email cím vagy felhasználónév"
                                 label="Email cím vagy felhasználónév"
                                 className={classes.input}
                                 path={getFieldPath(LoginFormFieldNames.EMAIL_OR_USERNAME)}
                             />
-                            <TextInput
+                            <CustomTextInput
                                 placeholder="Jelszó"
                                 label="Jelszó"
                                 className={classes.input}
@@ -109,14 +115,17 @@ const LoginPage: FC = () => {
                                 <Button
                                     title={"Bejelentkezés"}
                                     buttonType={ButtonType.POSITIVE_ACTION}
+                                    buttonSize={ButtonSize.BIG}
                                     className={classes.button}
                                     type={"submit"}
                                     isLoading={isLoginLoading}
+                                    onClick={handleLoginButtonClick}
                                 />
                                 <Button
                                     title={"Regisztáció"}
                                     buttonType={ButtonType.BASIC}
-                                    onClick={navigateToRegistration}
+                                    buttonSize={ButtonSize.BIG}
+                                    onClick={handleRegistrationButtonClick}
                                 />
                             </div>
                         </form>
