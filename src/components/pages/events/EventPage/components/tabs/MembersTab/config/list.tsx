@@ -1,6 +1,6 @@
 import React from "react";
 import { memo } from "react";
-import { map, keys } from "lodash";
+import { map } from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 //
 import { Member } from "redux/events/types";

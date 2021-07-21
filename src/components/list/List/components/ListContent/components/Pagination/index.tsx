@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ChangeEvent, FC, SyntheticEvent, useState } from "react";
+import { FC, useState } from "react";
 import { map, get } from "lodash";
 import { makeStyles, MenuItem, Select } from "@material-ui/core";
 
