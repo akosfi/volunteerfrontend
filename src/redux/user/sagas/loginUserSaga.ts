@@ -3,7 +3,7 @@ import { get } from "lodash";
 //
 import { formPath, LoginFormFieldNames } from "components/pages/LoginPage/form";
 import FormSelectors from "redux/forms/selectors";
-import serverApi from "utils/serverApi";
+import serverApi from "utils/api";
 import { uiActions } from "redux/ui/slice";
 //
 

@@ -1,49 +1,43 @@
-import { put, retry, select } from "@redux-saga/core/effects";
 import { get } from "lodash";
+import { call, put, select } from "typed-redux-saga";
 //
 import { formPath, RegistrationFormFieldNames } from "components/pages/RegistrationPage/form";
 import FormSelectors from "redux/forms/selectors";
-import serverApi from "utils/serverApi";
+import serverApi from "utils/api";
 import { uiActions } from "redux/ui/slice";
 import { UserRegistrationRequestPayload } from "types/api/user";
+import { createFormFieldValueParser } from "redux/forms/utils";
+import { userActions } from "../slice";
 //
 
 function* registerUserSaga() {
     try {
         const field = yield select(FormSelectors.getFormField, formPath);
         if (!field) {
-            console.log("FIELD NOT FOUND");
-            //DO more appropritae error handling
+            uiActions.pushSnackbarToQueue({
+                snackbarText: "System error. Please refresh your page.",
+                snackbarSeverity: "error"
+            });
         }
 
-        const {
-            children: {
-                [RegistrationFormFieldNames.USERNAME]: userName,
-                [RegistrationFormFieldNames.PASSWORD]: password,
-                [RegistrationFormFieldNames.FIRST_NAME]: firstName,
-                [RegistrationFormFieldNames.LAST_NAME]: lastName,
-                [RegistrationFormFieldNames.PHONE_NUMBER]: phoneNumber,
-                [RegistrationFormFieldNames.EMAIL]: email,
-                [RegistrationFormFieldNames.DATE_OF_BIRTH]: dateOfBirth,
-                [RegistrationFormFieldNames.CITY]: city
-            }
-        } = field;
+        const getFieldValue = createFormFieldValueParser(field);
 
         const userRegistrationRequestPayload: UserRegistrationRequestPayload = {
-            userName,
-            password,
-            firstName,
-            lastName,
-            phoneNumber,
-            email,
-            dateOfBirth,
-            city
+            userName: getFieldValue(RegistrationFormFieldNames.USERNAME),
+            password: getFieldValue(RegistrationFormFieldNames.PASSWORD),
+            firstName: getFieldValue(RegistrationFormFieldNames.FIRST_NAME),
+            lastName: getFieldValue(RegistrationFormFieldNames.LAST_NAME),
+            phoneNumber: getFieldValue(RegistrationFormFieldNames.PHONE_NUMBER),
+            email: getFieldValue(RegistrationFormFieldNames.EMAIL),
+            dateOfBirth: getFieldValue(RegistrationFormFieldNames.DATE_OF_BIRTH),
+            city: getFieldValue(RegistrationFormFieldNames.CITY)
         };
 
-        yield retry(2, 1500, serverApi.post, "/account/register", userRegistrationRequestPayload);
+        yield call(serverApi.post, "/account/register", userRegistrationRequestPayload);
     } catch (e) {
         console.log(e);
-        const error = get(e, "data.message", "Failed to load events!");
+        const error = get(e, "data.message", "Failed to register!");
+        yield put(userActions.registerUserError({ error: "Failed to register!" }));
         yield put(uiActions.pushSnackbarToQueue({ snackbarText: error, snackbarSeverity: "error" }));
     }
 }

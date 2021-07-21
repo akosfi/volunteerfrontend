@@ -1,11 +1,10 @@
 import * as React from "react";
-import { FC, useEffect } from "react";
+import { ChangeEvent, FC, useEffect } from "react";
 import { Card, CardContent, makeStyles } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 //
-import TextInput from "components/common/TextInput";
-import Button, { ButtonType } from "components/common/Button";
+import Button, { ButtonSize, ButtonType } from "components/common/Button";
 import UserSelectors from "redux/user/selectors";
 import {
     formPath,
@@ -15,11 +14,12 @@ import {
 } from "components/pages/RegistrationPage/form";
 import { formActions } from "redux/forms/slice";
 import { userActions } from "redux/user/slice";
+import CustomTextInput from "components/common/CustomTextInput";
 
 const useStyles = makeStyles(() => ({
     root: {
         width: "100%",
-        height: "100vh",
+        minHeight: "100vh",
         background: "#F6F6F6"
     },
     container: {
@@ -85,7 +85,10 @@ const RegistrationPage: FC = () => {
 
     const handleLoginButtonClick = () => router.push("/login");
 
-    const handleRegistrationButtonClick = () => dispatch(userActions.registerUserRequest());
+    const handleRegistrationButtonClick = (e: ChangeEvent) => {
+        e.preventDefault();
+        dispatch(userActions.registerUserRequest());
+    };
 
     return (
         <div className={classes.root}>
@@ -95,50 +98,50 @@ const RegistrationPage: FC = () => {
                 <Card className={classes.card}>
                     <CardContent className={classes.cardContent}>
                         <form className={classes.form}>
-                            <TextInput
+                            <CustomTextInput
                                 placeholder="Email cím"
                                 label="Email cím"
                                 className={classes.input}
                                 path={getFieldPath(RegistrationFormFieldNames.EMAIL)}
                             />
-                            <TextInput
+                            <CustomTextInput
                                 placeholder="Felhasználónév"
                                 label="Felhasználónév"
                                 className={classes.input}
                                 path={getFieldPath(RegistrationFormFieldNames.USERNAME)}
                             />
-                            <TextInput
+                            <CustomTextInput
                                 placeholder="Vezetéknév"
                                 label="Vezetéknév"
                                 className={classes.input}
                                 path={getFieldPath(RegistrationFormFieldNames.LAST_NAME)}
                             />
-                            <TextInput
+                            <CustomTextInput
                                 placeholder="Keresztnév"
                                 label="Keresztnév"
                                 className={classes.input}
                                 path={getFieldPath(RegistrationFormFieldNames.FIRST_NAME)}
                             />
-                            <TextInput
+                            <CustomTextInput
                                 placeholder="Telefonszám"
                                 label="Telefonszám"
                                 className={classes.input}
                                 path={getFieldPath(RegistrationFormFieldNames.PHONE_NUMBER)}
                             />
-                            <TextInput
+                            <CustomTextInput
                                 placeholder="Jelszó"
                                 label="Jelszó"
                                 className={classes.input}
                                 path={getFieldPath(RegistrationFormFieldNames.PASSWORD)}
                                 type={"password"}
                             />
-                            <TextInput
+                            <CustomTextInput
                                 placeholder="Születési idő"
                                 label="Születési idő"
                                 className={classes.input}
                                 path={getFieldPath(RegistrationFormFieldNames.DATE_OF_BIRTH)}
                             />
-                            <TextInput
+                            <CustomTextInput
                                 placeholder="Város"
                                 label="Város"
                                 className={classes.input}
@@ -150,6 +153,7 @@ const RegistrationPage: FC = () => {
                                     title={"Regisztáció"}
                                     buttonType={ButtonType.POSITIVE_ACTION}
                                     className={classes.button}
+                                    buttonSize={ButtonSize.BIG}
                                     type={"submit"}
                                     isLoading={isRegistrationLoading}
                                     onClick={handleRegistrationButtonClick}
@@ -158,6 +162,7 @@ const RegistrationPage: FC = () => {
                                     title={"Bejelentkezés"}
                                     buttonType={ButtonType.BASIC}
                                     onClick={handleLoginButtonClick}
+                                    buttonSize={ButtonSize.BIG}
                                 />
                             </div>
                         </form>
