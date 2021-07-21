@@ -1,14 +1,40 @@
 import { get } from "lodash";
 import { call, put, select } from "typed-redux-saga";
 //
-import { formPath, RegistrationFormFieldNames } from "components/pages/RegistrationPage/form";
+import {
+    formPath,
+    RegistrationFormFieldNames,
+    getRegistrationFormFieldPath as getFieldPath
+} from "components/pages/RegistrationPage/form";
 import FormSelectors from "redux/forms/selectors";
 import serverApi from "utils/api";
 import { uiActions } from "redux/ui/slice";
 import { UserRegistrationRequestPayload } from "types/api/user";
 import { createFormFieldValueParser } from "redux/forms/utils";
-import { userActions } from "../slice";
+import { userActions } from "redux/user/slice";
+import { formActions } from "redux/forms/slice";
+import handleResponseValidationErrors from "../../forms/sagas/helpers/handleResponseValidationErrors";
 //
+
+function* parseValidationErrors(e: any) {
+    const errors = get(e, "response.data.errors");
+
+    if (!errors) return;
+
+    const transformedErrors = {
+        [getFieldPath(RegistrationFormFieldNames.EMAIL)]: get(errors, "email[0]", ""),
+        [getFieldPath(RegistrationFormFieldNames.FIRST_NAME)]: get(errors, "firstName[0]", ""),
+        [RegistrationFormFieldNames.LAST_NAME]: get(errors, "lastName[0]", ""),
+        [RegistrationFormFieldNames.CITY]: get(errors, "city[0]", ""),
+        [RegistrationFormFieldNames.PHONE_NUMBER]: get(errors, "phoneNumber[0]", ""),
+        [RegistrationFormFieldNames.TERMS_ACCEPTED]: get(errors, "termsAccepted[0]", ""),
+        [RegistrationFormFieldNames.USERNAME]: get(errors, "userName[0]", ""),
+        [getFieldPath(RegistrationFormFieldNames.DATE_OF_BIRTH)]: get(errors, "dateOfBirth[0]", ""),
+        [RegistrationFormFieldNames.PASSWORD]: get(errors, "password[0]", "")
+    };
+
+    yield put(formActions.setFieldErrorBulk(transformedErrors));
+}
 
 function* registerUserSaga() {
     try {
@@ -37,6 +63,7 @@ function* registerUserSaga() {
     } catch (e) {
         console.log(e);
         const error = get(e, "data.message", "Failed to register!");
+        yield call(handleResponseValidationErrors, e, [], getFieldPath);
         yield put(userActions.registerUserError({ error: "Failed to register!" }));
         yield put(uiActions.pushSnackbarToQueue({ snackbarText: error, snackbarSeverity: "error" }));
     }

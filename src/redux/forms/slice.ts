@@ -28,6 +28,16 @@ const formSlice = createSlice({
                 console.error("TRIED TO SET INVALID FIELD ERROR.");
             }
         },
+        setFieldErrorBulk: (state, action: PayloadAction<{ [path: string]: string }>) => {
+            forEach(action.payload, (error, path) => {
+                const isValidPath = !!get(state.formRoot, `children.${path}`, null);
+                if (isValidPath) {
+                    set(state.formRoot, `children.${path}.error`, error);
+                } else {
+                    console.error("TRIED TO SET INVALID FIELD ERROR.");
+                }
+            });
+        },
         addForm: (state, action: PayloadAction<{ path: string; fields: FormFieldList }>) => {
             const { path, fields } = action.payload;
 
