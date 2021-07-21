@@ -1,13 +1,12 @@
-import { ChangeEvent, FC, ReactNode } from "react";
+import React, { ChangeEvent, FC, ReactNode } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { get } from "lodash";
 //
 import { StoreState } from "redux/state";
 import FormSelectors from "redux/forms/selectors";
 import { formActions } from "redux/forms/slice";
-import React from "react";
 
-type Render = (value: string, onChange: Function, error?: string) => ReactNode;
+type Render = (value: string, onChange: (e: ChangeEvent<HTMLInputElement>) => void, error?: string) => ReactNode;
 
 type Props = {
     path: string;
@@ -27,9 +26,7 @@ const CustomInputWrapper: FC<Props> = ({ path, render }) => {
         }
     };
 
-    const renderedInput = render(value, onValueChangeHandler, error);
-
-    return <div>{renderedInput}</div>;
+    return <>{render(value, onValueChangeHandler, error)}</>;
 };
 
 export default CustomInputWrapper;
