@@ -14,6 +14,7 @@ import {
     RegistrationFormFields
 } from "components/pages/RegistrationPage/form";
 import FormActions from "redux/forms/actions";
+import { userActions } from "../../../redux/user/slice";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -73,6 +74,7 @@ const RegistrationPage: FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        //TODO CLEAR REGISTRATION STATE
         dispatch(FormActions.addFormAction(formPath, RegistrationFormFields));
 
         return () => {
@@ -82,7 +84,9 @@ const RegistrationPage: FC = () => {
 
     const router = useHistory();
 
-    const navigateToLogin = () => router.push("/login");
+    const handleLoginButtonClick = () => router.push("/login");
+
+    const handleRegistrationButtonClick = () => dispatch(userActions.registerUserRequest());
 
     return (
         <div className={classes.root}>
@@ -105,10 +109,16 @@ const RegistrationPage: FC = () => {
                                 path={getFieldPath(RegistrationFormFieldNames.USERNAME)}
                             />
                             <TextInput
-                                placeholder="Teljes név"
-                                label="Teljes név"
+                                placeholder="Vezetéknév"
+                                label="Vezetéknév"
                                 className={classes.input}
-                                path={getFieldPath(RegistrationFormFieldNames.FULL_NAME)}
+                                path={getFieldPath(RegistrationFormFieldNames.LAST_NAME)}
+                            />
+                            <TextInput
+                                placeholder="Keresztnév"
+                                label="Keresztnév"
+                                className={classes.input}
+                                path={getFieldPath(RegistrationFormFieldNames.FIRST_NAME)}
                             />
                             <TextInput
                                 placeholder="Telefonszám"
@@ -124,11 +134,16 @@ const RegistrationPage: FC = () => {
                                 type={"password"}
                             />
                             <TextInput
-                                placeholder="Jelszó mégegyszer"
-                                label="Jelszó mégegyszer"
+                                placeholder="Születési idő"
+                                label="Születési idő"
                                 className={classes.input}
-                                type={"password"}
-                                path={getFieldPath(RegistrationFormFieldNames.PASSWORD_AGAIN)}
+                                path={getFieldPath(RegistrationFormFieldNames.DATE_OF_BIRTH)}
+                            />
+                            <TextInput
+                                placeholder="Város"
+                                label="Város"
+                                className={classes.input}
+                                path={getFieldPath(RegistrationFormFieldNames.CITY)}
                             />
 
                             <div className={classes.buttonWrapper}>
@@ -138,11 +153,12 @@ const RegistrationPage: FC = () => {
                                     className={classes.button}
                                     type={"submit"}
                                     isLoading={isRegistrationLoading}
+                                    onClick={handleRegistrationButtonClick}
                                 />
                                 <Button
                                     title={"Bejelentkezés"}
                                     buttonType={ButtonType.BASIC}
-                                    onClick={navigateToLogin}
+                                    onClick={handleLoginButtonClick}
                                 />
                             </div>
                         </form>

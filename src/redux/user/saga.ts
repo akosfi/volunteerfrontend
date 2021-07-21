@@ -1,10 +1,12 @@
 import { takeLeading } from "redux-saga/effects";
 //
 import loginUserSaga from "redux/user/sagas/loginUserSaga";
-import { UserActionConstants } from "redux/user/actions";
+import { userActions } from "redux/user/slice";
+import registerUserSaga from "redux/user/sagas/registerUserSaga";
 
 function* userSaga() {
-    yield takeLeading(UserActionConstants.LOGIN_USER, loginUserSaga);
+    yield takeLeading(userActions.loginUserRequest.type, loginUserSaga);
+    yield takeLeading(userActions.registerUserRequest.type, registerUserSaga);
 }
 
 export default userSaga;
