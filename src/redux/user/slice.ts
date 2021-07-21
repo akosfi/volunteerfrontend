@@ -36,6 +36,6 @@ const userSlice = createSlice({
     }
 });
 
-export const { actions: uiActions, reducer: uiReducer } = userSlice;
+export const { actions: userActions, reducer: userReducer } = userSlice;
 export type { UserState } from "redux/user/state";
 export { initialState } from "redux/user/state";

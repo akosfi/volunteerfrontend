@@ -6,13 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import EventSelectors from "redux/events/selectors";
 import TextInput from "components/common/TextInput";
 import FileInput from "components/common/FileInput";
-import FormActions from "redux/forms/actions";
+import { formActions } from "redux/forms/slice";
 import {
     EventEditFormFieldNames,
     EventEditFormFields,
     formPath,
     getEventEditFormFieldPath as getFieldPath
 } from "components/events/EventEdit/form";
+import SeparatedValueTextField from "components/common/SeparatedValueTextField";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -57,10 +58,10 @@ const EventEdit: FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(FormActions.addFormAction(formPath, EventEditFormFields));
+        dispatch(formActions.addForm({ path: formPath, fields: EventEditFormFields }));
 
         return () => {
-            dispatch(FormActions.removeFormAction(formPath));
+            dispatch(formActions.removeForm({ path: formPath }));
         };
     }, []);
 
@@ -72,6 +73,12 @@ const EventEdit: FC = () => {
                 <div className={classes.generalInformationWrapper}>
                     <p className={classes.sectionTitle}>Általános információk</p>
                     <form className={classes.form}>
+                        <SeparatedValueTextField
+                            path={getFieldPath(EventEditFormFieldNames.NAME)}
+                            placeholder="Név"
+                            label="Név"
+                            className={classes.input}
+                        />
                         <div className={classes.doubleInputWrapper}>
                             <TextInput
                                 path={getFieldPath(EventEditFormFieldNames.NAME)}

@@ -1,11 +1,10 @@
 import * as React from "react";
-import { FC, useEffect } from "react";
+import { ChangeEvent, FC, useEffect } from "react";
 import { Card, CardContent, makeStyles } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 //
-import TextInput from "components/common/TextInput";
-import Button, { ButtonType } from "components/common/Button";
+import Button, { ButtonSize, ButtonType } from "components/common/Button";
 import UserSelectors from "redux/user/selectors";
 import {
     formPath,
@@ -13,12 +12,14 @@ import {
     RegistrationFormFieldNames,
     RegistrationFormFields
 } from "components/pages/RegistrationPage/form";
-import FormActions from "redux/forms/actions";
+import { formActions } from "redux/forms/slice";
+import { userActions } from "redux/user/slice";
+import CustomTextInput from "components/common/CustomTextInput";
 
 const useStyles = makeStyles(() => ({
     root: {
         width: "100%",
-        height: "100vh",
+        minHeight: "100vh",
         background: "#F6F6F6"
     },
     container: {
@@ -73,16 +74,21 @@ const RegistrationPage: FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(FormActions.addFormAction(formPath, RegistrationFormFields));
+        dispatch(formActions.addForm({ path: formPath, fields: RegistrationFormFields }));
 
         return () => {
-            dispatch(FormActions.removeFormAction(formPath));
+            dispatch(formActions.removeForm({ path: formPath }));
         };
     }, []);
 
     const router = useHistory();
 
-    const navigateToLogin = () => router.push("/login");
+    const handleLoginButtonClick = () => router.push("/login");
+
+    const handleRegistrationButtonClick = (e: ChangeEvent) => {
+        e.preventDefault();
+        dispatch(userActions.registerUserRequest());
+    };
 
     return (
         <div className={classes.root}>
@@ -92,43 +98,54 @@ const RegistrationPage: FC = () => {
                 <Card className={classes.card}>
                     <CardContent className={classes.cardContent}>
                         <form className={classes.form}>
-                            <TextInput
+                            <CustomTextInput
                                 placeholder="Email cím"
                                 label="Email cím"
                                 className={classes.input}
                                 path={getFieldPath(RegistrationFormFieldNames.EMAIL)}
                             />
-                            <TextInput
+                            <CustomTextInput
                                 placeholder="Felhasználónév"
                                 label="Felhasználónév"
                                 className={classes.input}
                                 path={getFieldPath(RegistrationFormFieldNames.USERNAME)}
                             />
-                            <TextInput
-                                placeholder="Teljes név"
-                                label="Teljes név"
+                            <CustomTextInput
+                                placeholder="Vezetéknév"
+                                label="Vezetéknév"
                                 className={classes.input}
-                                path={getFieldPath(RegistrationFormFieldNames.FULL_NAME)}
+                                path={getFieldPath(RegistrationFormFieldNames.LAST_NAME)}
                             />
-                            <TextInput
+                            <CustomTextInput
+                                placeholder="Keresztnév"
+                                label="Keresztnév"
+                                className={classes.input}
+                                path={getFieldPath(RegistrationFormFieldNames.FIRST_NAME)}
+                            />
+                            <CustomTextInput
                                 placeholder="Telefonszám"
                                 label="Telefonszám"
                                 className={classes.input}
                                 path={getFieldPath(RegistrationFormFieldNames.PHONE_NUMBER)}
                             />
-                            <TextInput
+                            <CustomTextInput
                                 placeholder="Jelszó"
                                 label="Jelszó"
                                 className={classes.input}
                                 path={getFieldPath(RegistrationFormFieldNames.PASSWORD)}
                                 type={"password"}
                             />
-                            <TextInput
-                                placeholder="Jelszó mégegyszer"
-                                label="Jelszó mégegyszer"
+                            <CustomTextInput
+                                placeholder="Születési idő"
+                                label="Születési idő"
                                 className={classes.input}
-                                type={"password"}
-                                path={getFieldPath(RegistrationFormFieldNames.PASSWORD_AGAIN)}
+                                path={getFieldPath(RegistrationFormFieldNames.DATE_OF_BIRTH)}
+                            />
+                            <CustomTextInput
+                                placeholder="Város"
+                                label="Város"
+                                className={classes.input}
+                                path={getFieldPath(RegistrationFormFieldNames.CITY)}
                             />
 
                             <div className={classes.buttonWrapper}>
@@ -136,13 +153,16 @@ const RegistrationPage: FC = () => {
                                     title={"Regisztáció"}
                                     buttonType={ButtonType.POSITIVE_ACTION}
                                     className={classes.button}
+                                    buttonSize={ButtonSize.BIG}
                                     type={"submit"}
                                     isLoading={isRegistrationLoading}
+                                    onClick={handleRegistrationButtonClick}
                                 />
                                 <Button
                                     title={"Bejelentkezés"}
                                     buttonType={ButtonType.BASIC}
-                                    onClick={navigateToLogin}
+                                    onClick={handleLoginButtonClick}
+                                    buttonSize={ButtonSize.BIG}
                                 />
                             </div>
                         </form>

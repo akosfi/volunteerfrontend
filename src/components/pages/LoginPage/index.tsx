@@ -7,13 +7,13 @@ import { useHistory } from "react-router-dom";
 import Button, { ButtonType } from "components/common/Button";
 import TextInput from "components/common/TextInput";
 import UserSelectors from "redux/user/selectors";
-import FormActions from "redux/forms/actions";
 import {
     formPath,
     getLoginFormFieldPath as getFieldPath,
     LoginFormFieldNames,
     LoginFormFields
 } from "components/pages/LoginPage/form";
+import { formActions } from "redux/forms/slice";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -73,10 +73,10 @@ const LoginPage: FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(FormActions.addFormAction(formPath, LoginFormFields));
+        dispatch(formActions.addForm({ path: formPath, fields: LoginFormFields }));
 
         return () => {
-            dispatch(FormActions.removeFormAction(formPath));
+            dispatch(formActions.removeForm({ path: formPath }));
         };
     }, []);
 

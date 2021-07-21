@@ -1,6 +1,6 @@
 import { EventState, initialState as initialEventState } from "redux/events/slice";
 import { UiState, initialState as initialUiState } from "redux/ui/slice";
-import { UserState, initialState as initialUserState } from "redux/user/reducer";
+import { UserState, initialState as initialUserState } from "redux/user/slice";
 import { AppState, initialState as initialAppState } from "redux/app/slice";
 import { FormState, initialState as initialFormState } from "redux/forms/slice";
 import { ListState, initialState as initialListState } from "redux/list/slice";
