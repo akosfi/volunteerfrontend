@@ -10,8 +10,8 @@ import {
     formPath,
     getProfileEditFormFieldPath as getFieldPath
 } from "components/pages/ProfilePage/components/tabs/EditTab/form";
-import FormActions from "redux/forms/actions";
 import FileInput from "components/common/FileInput";
+import { formActions } from "redux/forms/slice";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -47,10 +47,10 @@ const EditTab: FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(FormActions.addFormAction(formPath, ProfileEditFormFields));
+        dispatch(formActions.addForm({ path: formPath, fields: ProfileEditFormFields }));
 
         return () => {
-            dispatch(FormActions.removeFormAction(formPath));
+            dispatch(formActions.removeForm({ path: formPath }));
         };
     }, []);
 
