@@ -52,6 +52,7 @@ const EventPage: FC = () => {
     }, [id]);
 
     const handleEventJoin = () => dispatch(eventActions.joinEventRequest({ eventId }));
+    const handleEmailSending = () => dispatch(eventActions.setIsEmailSendingModalOpen({ isOpen: true }));
 
     const actionButtons: PageHeaderActionButtonType[] = [
         {
@@ -63,7 +64,14 @@ const EventPage: FC = () => {
         },
         { id: 2, buttonType: ButtonType.BASIC, title: "Törlés", tabsOnly: [TabTypes.EDIT] },
         { id: 3, buttonType: ButtonType.BASIC, title: "Vázlat mentése", tabsOnly: [TabTypes.EDIT] },
-        { id: 4, buttonType: ButtonType.POSITIVE_ACTION, title: "Mentés", tabsOnly: [TabTypes.EDIT] }
+        { id: 4, buttonType: ButtonType.POSITIVE_ACTION, title: "Mentés", tabsOnly: [TabTypes.EDIT] },
+        {
+            id: 5,
+            buttonType: ButtonType.POSITIVE_ACTION,
+            title: "Email küldés",
+            tabsOnly: [TabTypes.MEMBERS],
+            onClick: handleEmailSending
+        }
     ];
 
     return (

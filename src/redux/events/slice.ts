@@ -47,6 +47,9 @@ const eventSlice = createSlice({
         loadEventMembersFailure: (state, action: PayloadAction<{ error: string }>) => {
             state.members.error = action.payload.error;
             state.members.isLoading = false;
+        },
+        setIsEmailSendingModalOpen: (state, action: PayloadAction<{ isOpen: boolean }>) => {
+            state.emailSending.isModalOpen = action.payload.isOpen;
         }
     }
 });

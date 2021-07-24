@@ -7,6 +7,7 @@ import createMemberListConfig from "components/pages/events/EventPage/components
 import List from "components/list/List";
 //
 import css from "./style.module.scss";
+import EmailSenderModal from "./components/EmailSenderModal";
 
 const MembersTab: FC = () => {
     const config = useMemo(createMemberListConfig, []);
@@ -18,9 +19,12 @@ const MembersTab: FC = () => {
     }, []);
 
     return (
-        <div className={css["MembersTab"]}>
-            <List config={config} />
-        </div>
+        <>
+            <EmailSenderModal />
+            <div className={css["MembersTab"]}>
+                <List config={config} />
+            </div>
+        </>
     );
 };
 

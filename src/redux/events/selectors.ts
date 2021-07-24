@@ -20,6 +20,8 @@ const getIsMembersLoading = (state: StoreState) => getState(state).members.isLoa
 
 const getMembersError = (state: StoreState) => getState(state).members.error;
 
+const getEmailSendingModalIsOpen = (state: StoreState) => getState(state).emailSending.isModalOpen;
+
 const EventSelectors = {
     getEvents,
     getEventIds,
@@ -28,7 +30,8 @@ const EventSelectors = {
     getEditedEventId,
     getMembers,
     getIsMembersLoading,
-    getMembersError
+    getMembersError,
+    getIsEmailSendingModalOpen: getEmailSendingModalIsOpen
 };
 
 export default EventSelectors;
