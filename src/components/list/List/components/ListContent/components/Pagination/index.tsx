@@ -60,6 +60,7 @@ const Pagination: FC = () => {
                             value={pageLimit}
                             onChange={handlePageLimitChange}
                             className={classes.limitSelectorSelect}
+                            MenuProps={{ disableScrollLock: true }}
                         >
                             {map(limitConfig, limit => (
                                 <MenuItem value={limit}>{limit} sor</MenuItem>

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ChangeEvent, FC } from "react";
 import { get } from "lodash";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, TextField } from "@material-ui/core";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 //
@@ -16,7 +16,9 @@ const useStyles = makeStyles(() => ({
         width: "100%"
     },
     input: {
-        height: "36px",
+        display: "flex",
+        flexWrap: "wrap",
+        width: "100%",
         fontSize: "14px",
         borderRadius: "3px",
         border: "1px solid #C4C4C4",
@@ -47,10 +49,16 @@ const useStyles = makeStyles(() => ({
     errorHidden: {
         display: "none"
     },
-    inputFixed: {
+    fixedValue: {
         height: "20px",
         background: "#6C99F1",
-        marginRight: "8px"
+        marginRight: "8px",
+        color: "white",
+        borderRadius: "30%",
+        padding: "6px"
+    },
+    inputField: {
+        minWidth: "60px"
     }
 }));
 
@@ -85,15 +93,18 @@ const SeparatedValueTextField: FC<Props> = ({ path, placeholder = "", label = ""
             <label className={classNames(classes.label, { [classes.labelHidden]: !hasLabel })}>{label}</label>
 
             <div className={classNames(classes.input, className)}>
-                <span>asd</span>
-                <span>asd</span>
-                <span>asd</span>
+                {[
+                    "akos@akos.com",
+                    "akos2@akos.com",
+                    "akos3@akos.com",
+                    "akos@akos.com",
+                    "akos2@akos.com",
+                    "akos3@akos.com"
+                ].map(value => (
+                    <span className={classes.fixedValue}>{value}</span>
+                ))}
+                <TextField className={classes.inputField} fullWidth />
             </div>
-            {/*<textarea
-                placeholder={placeholder}
-                onChange={onValueChangeHandler}
-                value={value}
-            />*/}
 
             <span className={classNames(classes.error, { [classes.errorHidden]: !hasError })}>{error}</span>
         </div>

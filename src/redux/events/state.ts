@@ -20,6 +20,11 @@ export type EventState = {
             members: Member[];
         };
     };
+    emailSending: {
+        isLoading: boolean;
+        error: string;
+        isModalOpen: boolean;
+    };
 };
 
 export const initialState: EventState = {
@@ -41,5 +46,10 @@ export const initialState: EventState = {
         data: {
             members: []
         }
+    },
+    emailSending: {
+        isLoading: false,
+        error: "",
+        isModalOpen: false
     }
 };
